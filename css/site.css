@@ -583,3 +583,5 @@ a.overlay-card--upload:hover{transform:translateY(-4px);box-shadow:0 30px 60px -
 .btn-ghost--light:hover{border-color:#fff;color:#fff}
 .card.form h2{margin-bottom:6px}
 .card--navy h2,.card--navy h3{color:#fff}
+body.menu-open::before{content:"";position:fixed;inset:0;z-index:30;background:rgba(16,25,63,.38);animation:fadeIn .3s var(--ease)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
