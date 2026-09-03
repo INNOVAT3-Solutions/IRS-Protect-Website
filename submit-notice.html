@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="title_notice">Submit an IRS notice | IRS Protect</title>
+<meta name="description" content="IRS Protect members: upload your IRS notice or letter and the Best Vision Accounting team will review it and tell you what happens next.">
+<meta name="theme-color" content="#2648B5">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/opt/shield.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IRS Protect">
+<meta property="og:title" content="Submit an IRS notice | IRS Protect">
+<meta property="og:description" content="IRS Protect members: upload your IRS notice or letter and the Best Vision Accounting team will review it and tell you what happens next.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/site.js" defer></script>
+</head>
+<body data-page="notice">
+<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+<header class="site-header">
+  <div class="nav-bar wrap">
+    <a href="index.html" class="nav-brand" aria-label="IRS Protect by Best Vision Accounting — home"><img class="nav-logo" src="assets/opt/best-vision-logo.png" alt="Best Vision Accounting" width="900" height="363"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#how" data-i18n="nav_how">How it works</a>
+      <a href="index.html#plans" data-i18n="nav_plans">Plans</a>
+      <a href="index.html#plus" data-i18n="nav_plus">Protect Plus</a>
+      <a href="index.html#faq" data-i18n="faq_short">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <div role="group" aria-label="Language / Idioma" class="lang-toggle">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en" aria-label="English">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false" lang="es" aria-label="Español">ES</button>
+      </div>
+      <a href="login.html" class="nav-login" data-link="login" data-i18n="login">Log in</a>
+      <a href="enroll.html" class="btn btn-dark nav-cta"><span class="cta-long" data-i18n="cta">Get Protected</span><span class="cta-short" data-i18n="cta_short">Join</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" data-i18n-attr="aria-label:menu_open"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden>
+    <a href="index.html#how" data-i18n="nav_how">How it works</a>
+    <a href="index.html#plans" data-i18n="nav_plans">Plans</a>
+    <a href="index.html#plus" data-i18n="nav_plus">Protect Plus</a>
+    <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
+    <a href="submit-notice.html" data-i18n="submit_notice_link">Submit a notice</a>
+    <a href="login.html" data-link="login" data-i18n="login">Log in</a>
+    <a href="enroll.html" class="btn mobile-cta" data-i18n="cta">Get Protected</a>
+  </nav>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="page-hero-inner wrap">
+    <span class="kicker" data-i18n="notice_kicker">Members</span>
+    <h1 data-i18n="notice_title">Got an IRS letter? Send it to us.</h1>
+    <p class="lead" data-i18n="notice_sub">Upload your notice and the Best Vision Accounting team will review it, determine what the IRS is asking for, and tell you what happens next.</p>
+  </div>
+</section>
+<section class="page-body wrap">
+  <div class="layout-2">
+    <div>
+      <form id="notice-form" class="card form" novalidate data-success="notice-success" enctype="multipart/form-data">
+        <div class="alert form-alert" role="status" hidden></div>
+        <div class="form-grid">
+          <div class="field"><label class="label" for="n-first" data-i18n="first_name">First name</label><input class="input" id="n-first" name="first_name" type="text" autocomplete="given-name" required><span class="error" role="alert"></span></div>
+          <div class="field"><label class="label" for="n-last" data-i18n="last_name">Last name</label><input class="input" id="n-last" name="last_name" type="text" autocomplete="family-name" required><span class="error" role="alert"></span></div>
+          <div class="field"><label class="label" for="n-email" data-i18n="email">Email address</label><input class="input" id="n-email" name="email" type="email" autocomplete="email" inputmode="email" required><span class="error" role="alert"></span></div>
+          <div class="field"><label class="label" for="n-phone" data-i18n="phone">Phone number</label><input class="input" id="n-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required><span class="error" role="alert"></span></div>
+          <div class="field"><label class="label" for="n-member"><span data-i18n="member_id">Member ID</span> <span class="opt" data-i18n="optional">(optional)</span></label><input class="input" id="n-member" name="member_id" type="text" aria-describedby="n-member-hint"><p class="hint" id="n-member-hint" data-i18n="member_id_hint">From your welcome email, if you have it.</p></div>
+          <div class="field"><label class="label" for="n-type" data-i18n="notice_type">Notice or letter number</label><input class="input" id="n-type" name="notice_type" type="text" placeholder="CP2000" aria-describedby="n-type-hint" required><p class="hint" id="n-type-hint" data-i18n="notice_type_hint">Printed in the top corner of the letter, for example CP2000, CP14, or Letter 525.</p><span class="error" role="alert"></span></div>
+          <div class="field"><label class="label" for="n-date" data-i18n="notice_date">Date on the notice</label><input class="input" id="n-date" name="notice_date" type="date" required><span class="error" role="alert"></span></div>
+          <div class="field"><label class="label" for="n-year"><span data-i18n="tax_year">Tax year</span> <span class="opt" data-i18n="optional">(optional)</span></label><input class="input" id="n-year" name="tax_year" type="text" inputmode="numeric" maxlength="4" placeholder="2025"><span class="error" role="alert"></span></div>
+          <div class="field field--full">
+            <span class="label" id="n-files-label" data-i18n="upload_label">Upload your notice</span>
+            <div class="file-drop">
+              <input type="file" id="n-files" name="attachments" multiple accept="image/*,.pdf,application/pdf,.heic,.heif" aria-labelledby="n-files-label" aria-describedby="n-files-hint">
+              <div class="upload-icon" aria-hidden="true">↑</div>
+              <b data-i18n="upload_cta">Tap to choose files or drag them here</b>
+              <span id="n-files-hint" data-i18n="upload_hint">Photos or PDFs, up to 10 MB each. Include every page, front and back.</span>
+            </div>
+            <ul class="file-list" aria-live="polite" hidden></ul>
+            <span class="error" role="alert"></span>
+          </div>
+          <div class="field field--full"><label class="label" for="n-notes"><span data-i18n="notes">Anything else we should know?</span> <span class="opt" data-i18n="optional">(optional)</span></label><textarea class="textarea" id="n-notes" name="notes" placeholder="Deadlines mentioned in the letter, whether you already replied, or anything unusual." data-i18n-attr="placeholder:notes_ph"></textarea></div>
+        </div>
+        <p class="form-foot" data-i18n="privacy_short">We only use your information to set up and service your membership. See our Privacy Policy.</p>
+        <div class="form-actions"><span></span><button type="submit" class="btn btn-primary" data-i18n="notice_btn">Send my notice</button></div>
+      </form>
+      <div id="notice-success" class="card" hidden>
+        <div class="success">
+          <div class="success-icon" aria-hidden="true">✓</div>
+          <h2 data-success-title>Notice received</h2>
+          <p data-success-body></p>
+          <p class="hint" data-success-note hidden></p>
+          <a href="index.html" class="btn btn-ghost" data-i18n="go_home">Back to home</a>
+        </div>
+      </div>
+    </div>
+    <aside class="aside">
+      <div class="card card--navy">
+        <h2 data-i18n="before_send">Before you send</h2>
+        <ul class="list-check">
+          <li><span class="check" aria-hidden="true">✓</span><span data-i18n="before_items.0">Your membership must have been active on the date printed on the notice.</span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span data-i18n="before_items.1">Send every page of the letter, front and back.</span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span data-i18n="before_items.2">Have the tax return for the year in question handy.</span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span data-i18n="before_items.3">Don’t reply to the IRS on your own until we’ve reviewed the notice.</span></li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3 data-i18n="not_member">Not a member yet?</h3>
+        <p data-i18n="f1_body">To qualify, your membership must be active on the date printed on the first IRS notice. A notice dated August 1 isn't covered by a membership that starts August 2, even if you opened the envelope later. Protection starts before the problem does.</p>
+        <a href="enroll.html" class="btn btn-primary" data-i18n="join_now">Get protected today</a>
+      </div>
+    </aside>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-lockup"><img src="assets/opt/shield.png" alt="" width="300" height="300" loading="lazy"><div><b>IRS Protect</b><span data-i18n="foot_price">Membership from $10.99/mo</span></div></a>
+        <div class="foot-lockup"><span data-i18n="a_product_of">A product of</span><img src="assets/opt/best-vision-logo.png" alt="Best Vision Accounting" width="900" height="363" loading="lazy"></div>
+        <p data-i18n="foot_body">IRS problems are unpredictable. Your protection doesn't have to be. Professional tax representation from the Best Vision Accounting team, in place before the letter arrives.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col"><span data-i18n="col_product">Product</span><a href="index.html#how" data-i18n="nav_how">How it works</a><a href="index.html#plans" data-i18n="nav_plans">Plans</a><a href="index.html#plus" data-i18n="nav_plus">Protect Plus</a><a href="index.html#faq" data-i18n="nav_faq">FAQ</a></div>
+        <div class="foot-col"><span data-i18n="col_company">Company</span><a href="contact.html" data-link="company">Best Vision Accounting</a><a href="contact.html" data-i18n="contact">Contact us</a><a href="help.html" data-i18n="help">Help center</a><a href="submit-notice.html" data-i18n="submit_notice_link">Submit a notice</a></div>
+        <div class="foot-col"><span data-i18n="col_legal">Legal</span><a href="membership-agreement.html" data-i18n="agreement">Membership agreement</a><a href="terms.html" data-i18n="terms">Terms of service</a><a href="privacy.html" data-i18n="privacy">Privacy policy</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal" data-i18n="foot_legal">IRS Protect and IRS Protect Plus are membership programs offered by Best Vision Accounting and are not insurance. Benefits consist of professional services and, for Protect Plus, eligible IRS liability assistance, each subject to the terms, eligibility requirements, limitations and exclusions of the membership agreement. Membership must be active and in good standing on the date printed on the first IRS notice relating to a matter. Best Vision Accounting does not guarantee the outcome of any IRS dispute.</p>
+      <div class="footer-meta"><span data-i18n="copyright">© 2026 Best Vision Accounting. All rights reserved.</span><span data-i18n="trademark">IRS Protect is a trademark of Best Vision Accounting.</span></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
