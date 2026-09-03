@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#fff;color:#10193F;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#2648B5;text-decoration:none}a:hover{color:#10193F}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}img{max-width:100%}
+@media (max-width:1120px){.nav-links{gap:22px!important}.nav-login{display:none!important}}
+@media (max-width:900px){.nav-links{display:none!important}.split{grid-template-columns:1fr!important}.hero-grid{grid-template-columns:1fr!important;min-height:auto!important;gap:8px!important;padding-bottom:0!important}.hero-img{order:-1;max-width:460px;margin:0 auto -24px!important}.hero-copy{text-align:center;align-items:center;padding-bottom:44px}.hero-copy p{max-width:560px}.hero-copy>div{justify-content:center}.feature>div:first-child{order:0}.feature>div:last-child{order:1}.feature .overlay-card{position:static!important;width:100%!important;margin:16px 0 0}.section{padding-top:72px!important;padding-bottom:72px!important}.two{grid-template-columns:1fr!important}}
+@media (max-width:640px){.wrap{padding-left:20px!important;padding-right:20px!important}.nav-bar{height:64px!important;gap:8px!important}.nav-logo{height:30px!important}.lang-toggle button{padding:5px 8px!important;font-size:11px!important}.nav-cta{padding:9px 14px!important;font-size:13px!important}.cta-long{display:none!important}.cta-short{display:inline!important}.hero-copy h1{font-size:clamp(30px,8.5vw,40px)!important}.hero-stats{gap:14px 18px!important}.hero-stats>div:nth-child(2),.hero-stats>div:nth-child(4){display:none!important}.card-pad{padding:24px 22px!important;border-radius:22px!important}.trust-top{padding-bottom:0!important}.stat-grid{grid-template-columns:1fr 1fr!important}.plan-card{padding:26px 22px 24px!important;border-radius:24px!important}.plan-head{flex-direction:column-reverse!important;align-items:flex-start!important}.plan-logo{width:104px!important;height:104px!important}.plan-logo img{width:88px!important}.two-tight{grid-template-columns:1fr!important}.cta-card{padding:48px 24px!important;border-radius:24px!important}.cta-card img{height:88px!important;width:88px!important}.foot-cols{grid-template-columns:1fr 1fr!important}.foot-lockup{flex-direction:column!important;align-items:flex-start!important;gap:10px!important}.section{padding-top:56px!important;padding-bottom:56px!important}h2{font-size:clamp(26px,7vw,34px)!important}}
+@media (max-width:420px){.foot-cols{grid-template-columns:1fr!important}.stat-grid{grid-template-columns:1fr!important}}
+@keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes floatB{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(-2deg)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(38,72,181,.45)}100%{box-shadow:0 0 0 12px rgba(38,72,181,0)}}
+@keyframes progress{0%{width:0}60%{width:100%}100%{width:100%}}
+@keyframes slideIn{0%{opacity:0;transform:translateX(24px)}100%{opacity:1;transform:none}}
+
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+[data-reveal="in"]{opacity:1;transform:none}
+.card-hover{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.card-hover:hover{transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(16,25,63,.35)}
+.btn{transition:background .25s,color .25s,transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(16,25,63,.5)}
+.btn:active{transform:translateY(0) scale(.97);transition-duration:.1s}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid rgba(38,72,181,.45);outline-offset:3px}
+
+
+@media (max-width:1120px){.nav-links{gap:20px!important}.nav-login{display:none!important}}@media (max-width:900px){.nav-links{display:none!important}}
+</style>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" rx="32" fill="#2648B5"/><path d="M100 52l42 16v34c0 28-18 44-42 54-24-10-42-26-42-54V68z" fill="#fff"/><path d="M82 104l12 12 26-28" fill="none" stroke="#2648B5" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></template>
+</helmet>
+
+<div style="width:100%;background:#fff">
+
+<!-- NAV -->
+<header style="position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(16,25,63,.08)">
+<div class="nav-bar wrap" style="max-width:1180px;margin:0 auto;padding:0 32px;height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+<a href="#" style="display:flex;align-items:center;white-space:nowrap;color:#10193F;flex:none"><img class="nav-logo" src="assets/opt/best-vision-logo.png" alt="Best Vision Accounting" style="height:52px;width:auto;display:block"></a>
+<nav class="nav-links" style="flex:1;display:flex;align-items:center;justify-content:center;gap:40px;font-size:16px;font-weight:600;letter-spacing:.005em;white-space:nowrap">
+<a href="#how" style="color:#10193F">{{ t.nav_how }}</a>
+<a href="#plans" style="color:#10193F">{{ t.nav_plans }}</a>
+<a href="#plus" style="color:#10193F">{{ t.nav_plus }}</a>
+<a href="#faq" style="color:#10193F">{{ t.faq_short }}</a>
+</nav>
+<div style="display:flex;align-items:center;gap:8px;white-space:nowrap;flex:none">
+<div role="group" aria-label="Language" class="lang-toggle" style="display:flex;padding:3px;border-radius:999px;background:#EEF1FB;border:1px solid rgba(38,72,181,.12);margin-right:4px">
+<button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="padding:6px 10px;border-radius:999px;border:0;cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.04em;background:{{ enBg }};color:{{ enFg }};box-shadow:{{ enShadow }};transition:background .25s,color .25s,box-shadow .25s">EN</button>
+<button onClick="{{ setEs }}" aria-pressed="{{ isEs }}" style="padding:6px 10px;border-radius:999px;border:0;cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.04em;background:{{ esBg }};color:{{ esFg }};box-shadow:{{ esShadow }};transition:background .25s,color .25s,box-shadow .25s">ES</button>
+</div>
+<a href="#" class="nav-login" style="padding:12px 20px;border-radius:999px;font-size:16px;font-weight:700;color:#10193F">{{ t.login }}</a>
+<a href="#plans" class="btn nav-cta" style="padding:13px 24px;border-radius:999px;background:#10193F;color:#fff;font-size:16px;font-weight:700" style-hover="background:#2648B5;color:#fff"><span class="cta-long">{{ t.cta }}</span><span class="cta-short" style="display:none">{{ t.cta_short }}</span></a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section data-screen-label="Hero" style="position:relative;overflow:hidden;background:linear-gradient(180deg,#F6F7FC 0%,#fff 100%);border-bottom:1px solid rgba(16,25,63,.06)">
+<div class="hero-grid wrap" style="max-width:1180px;margin:0 auto;padding:48px 32px 56px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;min-height:min(620px,calc(100vh - 84px))">
+<div class="hero-copy" style="display:flex;flex-direction:column;gap:22px">
+<h1 style="margin:0;font-size:clamp(34px,4.6vw,58px);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance">{{ heroTitle }}</h1>
+<p style="margin:0;font-size:18px;line-height:1.5;color:rgba(16,25,63,.7);max-width:480px;text-wrap:pretty">{{ t.hero_sub }}</p>
+<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+<a href="#plans" class="btn" style="padding:17px 30px;border-radius:999px;background:#2648B5;color:#fff;font-size:17px;font-weight:700;box-shadow:0 10px 24px -12px rgba(38,72,181,.7)" style-hover="background:#10193F;color:#fff">{{ t.cta }}</a>
+<a href="#how" style="display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:#2648B5">{{ t.nav_how }} <span>→</span></a>
+</div>
+<div class="hero-stats" style="display:flex;align-items:center;gap:28px;flex-wrap:wrap;padding-top:6px">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1">$5,000</span><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.6)">{{ t.stat_rep }}</span></div>
+<div style="width:1px;height:36px;background:rgba(16,25,63,.12)"></div>
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1">$10.99<span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.5)">{{ t.per_month }}</span></span><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.6)">{{ t.cancel_anytime }}</span></div>
+<div style="width:1px;height:36px;background:rgba(16,25,63,.12)"></div>
+<div style="display:flex;align-items:center;gap:10px"><img src="assets/opt/best-vision-logo.png" alt="" style="height:30px;width:auto;display:block"><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.6);line-height:1.3">{{ t.hero_backed }}</span></div>
+</div>
+<p style="margin:0;font-size:12px;line-height:1.5;color:rgba(16,25,63,.45)">{{ t.hero_disclaimer }}</p>
+</div>
+<div class="hero-img" style="position:relative;align-self:center;display:flex;justify-content:center;align-items:center;min-width:0;margin:-24px -40px -24px 0">
+<div style="position:absolute;left:50%;top:50%;width:118%;aspect-ratio:1/1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(38,72,181,.2) 0%,rgba(38,72,181,.1) 38%,rgba(38,72,181,.03) 58%,rgba(38,72,181,0) 72%)"></div>
+<img src="assets/opt/hero-person.png" alt="A smiling woman points at an IRS letter while holding an IRS envelope stamped Resolved, with a blue shield behind her" style="position:relative;display:block;width:100%;max-width:640px;height:auto;-webkit-mask-image:radial-gradient(ellipse 78% 74% at 50% 48%,#000 40%,rgba(0,0,0,.85) 56%,rgba(0,0,0,.5) 70%,rgba(0,0,0,.18) 84%,transparent 100%);mask-image:radial-gradient(ellipse 78% 74% at 50% 48%,#000 40%,rgba(0,0,0,.85) 56%,rgba(0,0,0,.5) 70%,rgba(0,0,0,.18) 84%,transparent 100%)">
+</div>
+</div>
+</section>
+
+<!-- TRUST -->
+<section data-reveal class="wrap" style="max-width:1180px;margin:0 auto;padding:40px 32px 88px">
+<div class="trust-card" style="position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,#F1F4FC 100%);border:1px solid rgba(38,72,181,.12);border-radius:32px;box-shadow:0 30px 70px -44px rgba(16,25,63,.35)">
+<div style="position:absolute;left:50%;bottom:-40%;width:90%;aspect-ratio:2/1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(38,72,181,.14),rgba(38,72,181,0) 70%)"></div>
+<div class="split card-pad trust-top" style="position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,4vw,56px);align-items:center;padding:44px 48px 8px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<span style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#2648B5">{{ t.trust_kicker }}</span>
+<img src="assets/opt/best-vision-logo.png" alt="Best Vision Accounting" style="width:100%;max-width:440px;height:auto;display:block">
+<p style="margin:0;font-size:16px;line-height:1.55;color:rgba(16,25,63,.68);max-width:460px;text-wrap:pretty">{{ t.trust_body }}</p>
+</div>
+<div class="stat-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div style="background:#fff;border:1px solid rgba(16,25,63,.08);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:4px"><span style="font-size:22px;font-weight:800;letter-spacing:-.02em;color:#2648B5">$5,000</span><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.6)">{{ t.stat_rep }}</span></div>
+<div style="background:#fff;border:1px solid rgba(16,25,63,.08);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:4px"><span style="font-size:22px;font-weight:800;letter-spacing:-.02em;color:#2648B5">$10.99</span><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.6)">{{ t.stat_month }}</span></div>
+<div style="background:#fff;border:1px solid rgba(16,25,63,.08);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:4px"><span style="font-size:22px;font-weight:800;letter-spacing:-.02em;color:#2648B5">{{ t.stat_anytime }}</span><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.6)">{{ t.stat_cancel }}</span></div>
+<div style="background:#fff;border:1px solid rgba(16,25,63,.08);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:4px"><span style="font-size:22px;font-weight:800;letter-spacing:-.02em;color:#2648B5">{{ t.stat_membership }}</span><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.6)">{{ t.stat_not_ins }}</span></div>
+</div>
+</div>
+<div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:0;padding:28px 24px 0">
+<span style="font-size:13px;font-weight:700;letter-spacing:.1em;color:rgba(16,25,63,.5);text-align:center">{{ t.team_kicker }}</span>
+<img src="assets/opt/best-vision-team.png" alt="The Best Vision Accounting team" style="display:block;width:100%;max-width:1000px;height:auto;margin-top:8px">
+</div>
+</div>
+</section>
+
+<!-- FEATURE 1 -->
+<section id="how" data-screen-label="Before the letter" class="split feature wrap" style="max-width:1180px;margin:0 auto;padding:64px 32px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center">
+<div data-reveal style="display:flex;justify-content:center"><div style="position:relative;width:100%;max-width:560px">
+<div style="position:relative;width:100%;aspect-ratio:1/1;border-radius:40px;border:14px solid #fff;box-shadow:0 0 0 1px rgba(16,25,63,.06),0 34px 70px -30px rgba(16,25,63,.35),0 10px 24px -14px rgba(16,25,63,.18);background:url('assets/opt/irs-envelope.png') center 40%/118% auto no-repeat,linear-gradient(180deg,#EEF1FB 0%,#E2E8F8 100%);overflow:hidden"></div>
+<div class="overlay-card" style="position:absolute;right:-28px;bottom:-28px;width:260px;background:#10193F;color:#fff;border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 60px -20px rgba(16,25,63,.6),0 8px 20px -10px rgba(16,25,63,.3)">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;opacity:.65">{{ t.your_membership }}</span><img src="assets/opt/shield.png" alt="" style="width:26px;height:26px;display:block"></div>
+<span style="font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.15">{{ t.active_since }}</span>
+<div style="height:1px;background:rgba(255,255,255,.12)"></div>
+<span style="display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#86EFAC;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#4ADE80;animation:pulse 1.8s ease-out infinite"></span>{{ t.eligible_note }}</span>
+</div>
+</div></div>
+<div data-reveal style="display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:800;text-wrap:balance">{{ t.f1_title }}</h2>
+<p style="margin:0;font-size:18px;line-height:1.55;color:rgba(16,25,63,.72);text-wrap:pretty">{{ t.f1_body }}</p>
+<a href="#plans" style="display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:#2648B5">{{ t.f1_link }} <span>→</span></a>
+</div>
+</section>
+
+<!-- FEATURE 2 -->
+<section data-screen-label="Send it to us" class="split feature wrap" style="max-width:1180px;margin:0 auto;padding:64px 32px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center">
+<div data-reveal style="display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:800;text-wrap:balance">{{ t.f2_title }}</h2>
+<p style="margin:0;font-size:18px;line-height:1.55;color:rgba(16,25,63,.72);text-wrap:pretty">{{ t.f2_body }}</p>
+<a href="#plans" style="display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:#2648B5">{{ t.f2_link }} <span>→</span></a>
+</div>
+<div data-reveal style="display:flex;justify-content:center"><div style="position:relative;width:100%;max-width:560px">
+<div style="position:relative;width:100%;aspect-ratio:1/1;border-radius:40px;border:14px solid #fff;box-shadow:0 0 0 1px rgba(16,25,63,.06),0 34px 70px -30px rgba(16,25,63,.35),0 10px 24px -14px rgba(16,25,63,.18);background:#E2E8F8 url('assets/couple-laptop.jpg') 62% center/cover no-repeat;overflow:hidden"></div>
+<div class="overlay-card" style="position:absolute;left:-28px;bottom:-28px;width:210px;background:#fff;border-radius:22px;padding:16px;box-shadow:0 24px 60px -18px rgba(16,25,63,.32),0 6px 16px -8px rgba(16,25,63,.12);display:flex;flex-direction:column;gap:12px">
+<span style="font-size:14px;font-weight:800">{{ t.send_notice }}</span>
+<div style="border:1.5px dashed rgba(38,72,181,.35);border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:5px;background:#F6F7FC"><div style="width:34px;height:34px;border-radius:50%;background:#2648B5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800">↑</div><span style="font-size:12.5px;font-weight:700">{{ t.upload_notice }}</span><span style="font-size:11px;color:rgba(16,25,63,.55)">{{ t.photo_pdf }}</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#F6F7FC;border-radius:10px;font-size:12.5px"><span style="font-weight:600">CP2000_notice.pdf</span><span style="color:#1B7F44;font-weight:700">✓</span></div>
+</div>
+</div></div>
+</section>
+
+<!-- FEATURE 3 -->
+<section data-screen-label="We handle it" class="split feature wrap" style="max-width:1180px;margin:0 auto;padding:64px 32px 96px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center">
+<div data-reveal style="display:flex;justify-content:center"><div style="position:relative;width:100%;max-width:560px">
+<div style="position:relative;width:100%;aspect-ratio:1/1;border-radius:40px;border:14px solid #fff;box-shadow:0 0 0 1px rgba(16,25,63,.06),0 34px 70px -30px rgba(16,25,63,.35),0 10px 24px -14px rgba(16,25,63,.18);background:#E2E8F8 url('assets/advisor-review.jpg') 30% center/cover no-repeat;overflow:hidden"></div>
+<div class="overlay-card" style="position:absolute;right:-28px;bottom:-28px;width:236px;background:#fff;border-radius:22px;padding:16px 18px;box-shadow:0 24px 60px -18px rgba(16,25,63,.32),0 6px 16px -8px rgba(16,25,63,.12);display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(16,25,63,.08)"><span style="font-size:14px;font-weight:800">{{ t.notice_cp2000 }}</span><span style="font-size:11px;font-weight:700;color:#2648B5;background:#EEF0FB;padding:4px 10px;border-radius:999px">{{ t.in_progress }}</span></div>
+<sc-for list="{{ timeline }}" as="t" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:24px 1fr;gap:12px;padding:9px 0;align-items:start">
+<div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:{{ t.bg }};color:{{ t.fg }};border:2px solid {{ t.border }};animation:{{ t.anim }}">{{ t.mark }}</div>
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:13px;font-weight:700;opacity:{{ t.op }}">{{ t.title }}</span><span style="font-size:11.5px;color:rgba(16,25,63,.55)">{{ t.sub }}</span></div>
+</div>
+</sc-for>
+</div>
+</div></div>
+<div data-reveal style="display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:800;text-wrap:balance">{{ t.f3_title }}</h2>
+<p style="margin:0;font-size:18px;line-height:1.55;color:rgba(16,25,63,.72);text-wrap:pretty">{{ t.f3_body }}</p>
+<a href="#plans" style="display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:#2648B5">{{ t.cta }} <span>→</span></a>
+</div>
+</section>
+
+<!-- PLANS: Protect vs Plus -->
+<section id="plans" data-screen-label="Plans" style="background:#F6F7FC;border-top:1px solid rgba(16,25,63,.06);border-bottom:1px solid rgba(16,25,63,.06)">
+<div class="section wrap" style="max-width:1180px;margin:0 auto;padding:104px 32px">
+<div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:56px">
+<h2 style="margin:0;font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-.03em;font-weight:800;text-wrap:balance">{{ t.plans_title }}</h2>
+<p style="margin:0;font-size:18px;line-height:1.5;color:rgba(16,25,63,.65);max-width:600px">{{ t.plans_sub }}</p>
+</div>
+<div class="two" data-reveal style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch">
+
+<div class="card-hover plan-card" style="position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,#F4F6FD 100%);border:1px solid rgba(38,72,181,.12);border-radius:32px;padding:40px 40px 36px;display:flex;flex-direction:column;gap:28px;box-shadow:0 30px 70px -40px rgba(16,25,63,.35)">
+<div style="position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,#2648B5,#5B7FE6)"></div>
+<div style="position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(38,72,181,.14),rgba(38,72,181,0) 70%)"></div>
+<div class="plan-head" style="position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<span style="align-self:flex-start;padding:6px 12px;border-radius:999px;background:#EEF1FB;color:#2648B5;font-size:12px;font-weight:700;letter-spacing:.08em">{{ t.essential }}</span>
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1">IRS Protect</span><span style="font-size:15px;color:rgba(16,25,63,.6)">{{ t.protect_tag }}</span></div>
+</div>
+<div class="plan-logo" style="flex:none;width:132px;height:132px;border-radius:26px;background:#fff;border:1px solid rgba(38,72,181,.1);display:flex;align-items:center;justify-content:center;box-shadow:0 18px 40px -22px rgba(16,25,63,.35)"><img src="assets/opt/logo-irs-protect.png" alt="IRS Protect" style="width:112px;height:auto;display:block"></div>
+</div>
+<div style="position:relative;display:flex;align-items:baseline;gap:6px"><span style="font-size:56px;font-weight:800;letter-spacing:-.045em;line-height:1">$10.99</span><span style="font-size:17px;font-weight:600;color:rgba(16,25,63,.5)">{{ t.per_month }}</span></div>
+<div style="height:1px;background:linear-gradient(90deg,rgba(38,72,181,.25),rgba(38,72,181,0))"></div>
+<div style="position:relative;display:flex;flex-direction:column;gap:18px">
+<sc-for list="{{ protectItems }}" as="p" hint-placeholder-count="4">
+<div style="display:flex;gap:14px;align-items:flex-start"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:#2648B5;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">✓</span><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16.5px;font-weight:800">{{ p.title }}</span><span style="font-size:14.5px;line-height:1.5;color:rgba(16,25,63,.62)">{{ p.body }}</span></div></div>
+</sc-for>
+</div>
+<a href="#" class="btn" style="position:relative;margin-top:auto;text-align:center;padding:17px;border-radius:999px;background:#2648B5;color:#fff;font-size:16px;font-weight:700;box-shadow:0 14px 30px -14px rgba(38,72,181,.8)" style-hover="background:#10193F;color:#fff">{{ t.cta }}</a>
+</div>
+
+<div class="card-hover plan-card" style="position:relative;overflow:hidden;background:radial-gradient(120% 90% at 100% 0%,#1E3A8F 0%,#10193F 55%,#0B1233 100%);color:#fff;border:1px solid rgba(201,162,39,.55);border-radius:32px;padding:40px 40px 36px;display:flex;flex-direction:column;gap:28px;box-shadow:0 0 0 1px rgba(201,162,39,.15),0 40px 90px -40px rgba(16,25,63,.7),0 0 80px -30px rgba(201,162,39,.45)">
+<div style="position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,#8C6A12,#E3C25E 45%,#FFF1B8 55%,#C9A227)"></div>
+<div style="position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,.32),rgba(201,162,39,0) 70%)"></div>
+<div style="position:absolute;left:-140px;bottom:-160px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(59,99,214,.35),rgba(59,99,214,0) 70%)"></div>
+<div style="position:absolute;z-index:2;top:22px;right:-38px;transform:rotate(38deg);padding:6px 48px;background:linear-gradient(90deg,#C9A227,#E3C25E);color:#0E1A45;font-size:11px;font-weight:800;letter-spacing:.1em;box-shadow:0 8px 18px -8px rgba(0,0,0,.5)">{{ t.most_protection }}</div>
+<div class="plan-head" style="position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<span style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(201,162,39,.16);border:1px solid rgba(201,162,39,.4);color:#E3C25E;font-size:12px;font-weight:700;letter-spacing:.08em">★ {{ t.premium }}</span>
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1">IRS Protect <span style="color:#E3C25E">Plus</span></span><span style="font-size:15px;color:rgba(255,255,255,.65)">{{ t.plus_tag }}</span></div>
+</div>
+<div class="plan-logo" style="flex:none;width:132px;height:132px;border-radius:26px;background:linear-gradient(180deg,#FFFFFF,#EEF1FB);border:1px solid rgba(201,162,39,.5);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(201,162,39,.12),0 22px 44px -20px rgba(0,0,0,.7)"><img src="assets/opt/logo-irs-protect-plus.png" alt="IRS Protect Plus" style="width:116px;height:auto;display:block"></div>
+</div>
+<div style="position:relative;display:flex;align-items:baseline;gap:6px"><span style="font-size:56px;font-weight:800;letter-spacing:-.045em;line-height:1;background:linear-gradient(90deg,#FFF6D6,#E3C25E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">$19.99</span><span style="font-size:17px;font-weight:600;color:rgba(255,255,255,.55)">{{ t.per_month }}</span></div>
+<div style="height:1px;background:linear-gradient(90deg,rgba(201,162,39,.6),rgba(201,162,39,0))"></div>
+<div style="position:relative;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;margin:-4px -6px 0;border-radius:18px;background:linear-gradient(90deg,rgba(201,162,39,.18),rgba(201,162,39,.04));border:1px solid rgba(201,162,39,.35)"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:linear-gradient(180deg,#E3C25E,#C9A227);color:#10193F;display:inline-flex;align-items:center;justify-content:center;font-size:16px;font-weight:800">+</span><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16.5px;font-weight:800;color:#FFF1B8">{{ t.plus1_t }}</span><span style="font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.72)">{{ t.plus1_b }}</span></div></div>
+<div style="display:flex;gap:14px;align-items:flex-start"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">✓</span><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16.5px;font-weight:800">{{ t.plus2_t }}</span><span style="font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.62)">{{ t.plus2_b }}</span></div></div>
+<div style="display:flex;gap:14px;align-items:flex-start"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">✓</span><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16.5px;font-weight:800">{{ t.plus3_t }}</span><span style="font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.62)">{{ t.plus3_b }}</span></div></div>
+</div>
+<a href="#" class="btn" style="position:relative;margin-top:auto;text-align:center;padding:17px;border-radius:999px;background:linear-gradient(90deg,#C9A227,#E3C25E);color:#0E1A45;font-size:16px;font-weight:800;box-shadow:0 16px 34px -14px rgba(201,162,39,.8)" style-hover="background:#FFF1B8;color:#0E1A45">{{ t.cta_plus }}</a>
+</div>
+
+</div>
+<p style="margin:24px auto 0;text-align:center;font-size:13px;line-height:1.6;color:rgba(16,25,63,.55);max-width:760px">{{ t.plans_note }}</p>
+</div>
+</section>
+
+<!-- PLUS DEEP DIVE -->
+<section id="plus" data-screen-label="Protect Plus" class="section wrap" style="max-width:1180px;margin:0 auto;padding:104px 32px">
+<div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:56px">
+<h2 style="margin:0;font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-.03em;font-weight:800;max-width:780px;text-wrap:balance">{{ t.plus_title }}</h2>
+<p style="margin:0;font-size:18px;line-height:1.5;color:rgba(16,25,63,.65);max-width:640px;text-wrap:pretty">{{ t.plus_sub }}</p>
+</div>
+<div class="two" data-reveal style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+<div class="card-hover card-pad" style="background:#F6F7FC;border:1px solid rgba(16,25,63,.08);border-radius:28px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<div style="font-size:22px;font-weight:800;letter-spacing:-.02em">{{ t.how2000_t }}</div>
+<p style="margin:0;font-size:15.5px;line-height:1.55;color:rgba(16,25,63,.7)">{{ t.how2000_b }}</p>
+<div style="background:#fff;border:1px solid rgba(16,25,63,.1);border-radius:18px;overflow:hidden">
+<div style="display:grid;grid-template-columns:1fr 1fr;padding:14px 20px;font-size:11.5px;font-weight:700;letter-spacing:.06em;color:rgba(16,25,63,.5)"><span>{{ t.table_h1 }}</span><span style="text-align:right">{{ t.table_h2 }}</span></div>
+<sc-for list="{{ liabilityRows }}" as="r" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:1fr 1fr;padding:14px 20px;border-top:1px solid rgba(16,25,63,.06);font-size:17px;font-weight:700"><span>{{ r.owed }}</span><span style="text-align:right;color:#A8861A">{{ r.benefit }}</span></div>
+</sc-for>
+</div>
+</div>
+<div class="card-hover card-pad" style="background:#F6F7FC;border:1px solid rgba(16,25,63,.08);border-radius:28px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<div style="font-size:22px;font-weight:800;letter-spacing:-.02em">{{ t.not2000_t }}</div>
+<p style="margin:0;font-size:15.5px;line-height:1.55;color:rgba(16,25,63,.7)">{{ t.not2000_b }}</p>
+<div class="two-tight" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:14px;line-height:1.5;color:rgba(16,25,63,.8)">
+<sc-for list="{{ plusExclusions }}" as="e" hint-placeholder-count="11">
+<div style="display:flex;gap:10px;align-items:flex-start"><span style="flex:none;margin-top:8px;width:6px;height:6px;border-radius:50%;background:#C9A227"></span>{{ e }}</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<!-- WHAT'S COVERED GRID -->
+<section data-screen-label="Covered" style="background:#F6F7FC;border-top:1px solid rgba(16,25,63,.06);border-bottom:1px solid rgba(16,25,63,.06)">
+<div class="section wrap" style="max-width:1180px;margin:0 auto;padding:104px 32px">
+<h2 style="margin:0 0 48px;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:800;text-align:center">{{ t.covered_title }}</h2>
+<div class="two" data-reveal style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<sc-for list="{{ covered }}" as="c" hint-placeholder-count="4">
+<div class="card-hover" style="background:#fff;border:1px solid rgba(16,25,63,.1);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<div style="width:48px;height:48px;border-radius:14px;background:#EEF0FB;color:#2648B5;display:flex;align-items:center;justify-content:center">{{ c.icon }}</div>
+<div style="font-size:21px;font-weight:800;letter-spacing:-.01em">{{ c.title }}</div>
+<div style="font-size:15.5px;line-height:1.55;color:rgba(16,25,63,.68)">{{ c.body }}</div>
+</div>
+</sc-for>
+</div>
+<p style="margin:24px auto 0;text-align:center;font-size:13px;line-height:1.6;color:rgba(16,25,63,.55);max-width:820px">{{ t.covered_note }}</p>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" data-screen-label="FAQ" class="section wrap" style="max-width:820px;margin:0 auto;padding:104px 32px">
+<h2 style="margin:0 0 40px;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:800;text-align:center">{{ t.faq_title }}</h2>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+<div style="border-bottom:1px solid rgba(16,25,63,.1)">
+<button onClick="{{ f.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;background:transparent;border:0;cursor:pointer;font-family:inherit;text-align:left;font-size:19px;font-weight:700;color:#10193F">{{ f.q }}<span style="flex:none;width:34px;height:34px;border:1px solid rgba(16,25,63,.14);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:20px;color:#2648B5;transition:transform .3s;transform:{{ f.rot }}">+</span></button>
+<sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="padding:0 0 24px;font-size:16px;line-height:1.6;color:rgba(16,25,63,.72);animation:slideIn .4s cubic-bezier(.2,.7,.2,1)">{{ f.a }}</div></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- FINAL CTA -->
+<section data-screen-label="Final CTA" class="wrap" style="max-width:1180px;margin:0 auto;padding:0 32px 104px">
+<div data-reveal class="cta-card" style="background:linear-gradient(180deg,rgba(38,72,181,.62) 0%,rgba(59,99,214,.58) 100%),url('assets/irs-building.jpg') center 30%/cover no-repeat;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:32px;padding:72px 48px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;box-shadow:0 40px 80px -40px rgba(38,72,181,.7)">
+<img src="assets/opt/shield.png" alt="IRS Protect" style="height:120px;width:120px;display:block;filter:drop-shadow(0 0 2px rgba(255,255,255,.9)) drop-shadow(0 18px 30px rgba(10,20,60,.45))">
+<h2 style="margin:0;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.035em;font-weight:800;max-width:760px;text-wrap:balance">{{ t.cta_title }}</h2>
+<p style="margin:0;font-size:18px;color:rgba(255,255,255,.8)">{{ t.cta_sub }}</p>
+<a href="#plans" class="btn" style="padding:18px 34px;border-radius:999px;background:#fff;color:#2648B5;font-size:17px;font-weight:800" style-hover="background:#10193F;color:#fff">{{ t.cta }}</a>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#F6F7FC;border-top:1px solid rgba(16,25,63,.06);color:#10193F">
+<div class="wrap" style="max-width:1180px;margin:0 auto;padding:72px 32px 40px;display:flex;flex-direction:column;gap:48px">
+<div class="split" style="display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,5vw,72px);align-items:start">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;align-items:center;gap:16px"><img src="assets/opt/shield.png" alt="IRS Protect" style="width:72px;height:72px;display:block;filter:drop-shadow(0 8px 18px rgba(16,25,63,.18))"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1">IRS Protect</span><span style="font-size:13px;font-weight:600;color:rgba(16,25,63,.55)">{{ t.foot_price }}</span></div></div>
+<div class="foot-lockup" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:#fff;border:1px solid rgba(16,25,63,.08);border-radius:18px;align-self:flex-start"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:rgba(16,25,63,.5);white-space:nowrap">{{ t.a_product_of }}</span><img src="assets/opt/best-vision-logo.png" alt="Best Vision Accounting" style="height:44px;width:auto;display:block"></div>
+<p style="margin:0;font-size:15px;line-height:1.55;color:rgba(16,25,63,.65);max-width:380px">{{ t.foot_body }}</p>
+</div>
+<div class="foot-cols" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;font-size:15px;font-weight:600">
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:rgba(16,25,63,.5)">{{ t.col_product }}</span><a href="#how" style="color:#10193F">{{ t.nav_how }}</a><a href="#plans" style="color:#10193F">{{ t.nav_plans }}</a><a href="#plus" style="color:#10193F">{{ t.nav_plus }}</a><a href="#faq" style="color:#10193F">{{ t.nav_faq }}</a></div>
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:rgba(16,25,63,.5)">{{ t.col_company }}</span><a href="#" style="color:#10193F">Best Vision Accounting</a><a href="#" style="color:#10193F">{{ t.contact }}</a><a href="#" style="color:#10193F">{{ t.help }}</a></div>
+<div style="display:flex;flex-direction:column;gap:14px"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:rgba(16,25,63,.5)">{{ t.col_legal }}</span><a href="#" style="color:#10193F">{{ t.agreement }}</a><a href="#" style="color:#10193F">{{ t.terms }}</a><a href="#" style="color:#10193F">{{ t.privacy }}</a></div>
+</div>
+</div>
+<div style="border-top:1px solid rgba(16,25,63,.08);padding-top:28px;display:flex;flex-direction:column;gap:18px">
+<p style="margin:0;font-size:12.5px;line-height:1.65;color:rgba(16,25,63,.55);max-width:920px">{{ t.foot_legal }}</p>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:12.5px;font-weight:600;color:rgba(16,25,63,.55)"><span>{{ t.copyright }}</span><span>{{ t.trademark }}</span></div>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroMessage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;complicated&quot;,&quot;tsType&quot;:&quot;'complicated' | 'dontwait'&quot;,&quot;options&quot;:[&quot;complicated&quot;,&quot;dontwait&quot;],&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  static DICT = {
+    en: {
+      nav_how: 'How it works', cta_short: 'Join', nav_plans: 'Plans', nav_plus: 'Protect Plus', nav_faq: 'FAQ', faq_short: 'FAQ', login: 'Log in', cta: 'Get Protected', cta_plus: 'Get Protect Plus',
+      hero: { complicated: "The IRS is complicated. Your protection shouldn't be.", dontwait: "Don't wait for an IRS letter. Be protected before it arrives." },
+      hero_sub: 'Professional help with eligible IRS problems, in place before they become your problem.', hero_backed: 'Backed by Best Vision Accounting',
+      cancel_anytime: 'Cancel anytime.',
+      hero_disclaimer: 'IRS Protect is a membership program and is not insurance. Eligibility, limitations and exclusions apply.',
+      trust_kicker: 'PROFESSIONAL TAX SUPPORT FROM', team_kicker: 'MEET THE TEAM BEHIND YOUR PROTECTION',
+      trust_body: 'Every IRS Protect membership is backed by the Best Vision Accounting team, the same professionals who review your notice, prepare the response, and represent you before the IRS.',
+      stat_rep: 'in professional representation', stat_month: 'per month to start', stat_anytime: 'Anytime', stat_cancel: 'cancellation', stat_membership: 'Membership', stat_not_ins: 'not insurance',
+      your_membership: 'YOUR MEMBERSHIP', active_since: 'Active since Mar 3', eligible_note: 'Notice dated after enrollment. Eligible.',
+      f1_title: "Don't wait for an IRS letter. Be protected before it arrives.",
+      f1_body: "To qualify, your membership must be active on the date printed on the first IRS notice. A notice dated August 1 isn't covered by a membership that starts August 2, even if you opened the envelope later. Protection starts before the problem does.",
+      f1_link: 'Get protected today',
+      f2_title: 'Got a letter from the IRS? Send it to us.',
+      f2_body: "Most people can't tell whether a CP2000, an examination notice, or a collection notice is serious. You don't have to. Provide the notice, the applicable return, and requested documents, and the Best Vision team determines what the IRS is asking for and what happens next.",
+      f2_link: "See what's covered",
+      send_notice: 'Send a notice', upload_notice: 'Upload IRS notice', photo_pdf: 'Photo or PDF',
+      notice_cp2000: 'Notice CP2000', in_progress: 'In progress',
+      timeline: [['Notice and return reviewed', 'Best Vision Accounting'], ['Response to the IRS', 'In progress'], ['Representation and resolution', 'Authorized before the IRS']],
+      f3_title: 'Your accounting team handles the IRS matter.',
+      f3_body: 'Depending on the situation, Best Vision Accounting prepares correspondence, organizes documentation, communicates with the IRS, and provides authorized professional representation. Keep your membership active and in good standing until the matter is resolved.',
+      plans_title: 'Two memberships. One simple difference.',
+      plans_sub: 'Both include professional representation from Best Vision Accounting. Plus adds help if the IRS determines you owe more.',
+      essential: 'ESSENTIAL', protect_tag: 'Professional representation, in place before the letter.', per_month: '/month',
+      protectItems: [['Up to $5,000 in professional representation', 'Professional tax representation services per taxpayer for eligible IRS matters.'], ['Notice and return review', 'We review IRS correspondence, the applicable return, and supporting documents.'], ['Responses and IRS communication', 'Prepared responses and communication with the IRS on your behalf.'], ['Audit and examination help', 'Support during examinations and authorized representation before the IRS.']],
+      most_protection: 'MOST PROTECTION', premium: 'PREMIUM', plus_tag: 'Representation plus help if the IRS says you owe more.',
+      plus1_t: 'Up to $2,000 toward eligible additional federal tax', plus1_b: 'If a qualifying examination, audit, or covered adjustment leaves you owing more, Best Vision may provide up to $2,000 toward that eligible liability.',
+      plus2_t: 'Up to $5,000 in professional representation', plus2_b: 'Everything in IRS Protect is included.',
+      plus3_t: 'Notice review, IRS responses, audit support', plus3_b: 'Handled by the Best Vision Accounting team.',
+      plans_note: 'The $5,000 represents professional services provided by Best Vision Accounting. It is not cash and does not pay your tax bill. Cancel anytime; fees paid during the first 30 days may be refundable if no program benefit has been requested, received, or initiated.',
+      plus_title: 'Get more protection with IRS Protect Plus',
+      plus_sub: "Professional representation is one thing. What if the IRS determines you actually owe more? That's where Plus comes in.",
+      how2000_t: 'How the $2,000 works', how2000_b: 'Examples established in the membership agreement:',
+      table_h1: 'IRS DETERMINES ADDITIONAL ELIGIBLE TAX OF', table_h2: 'PLUS BENEFIT UP TO',
+      not2000_t: 'What the $2,000 does not pay', not2000_b: "It's assistance toward eligible additional federal tax liability from a covered matter, not a general credit toward anything owed. Among other exclusions:",
+      plusExclusions: ['Taxes already owed before membership', 'Tax originally reported as due on your return', 'Pre-existing IRS liabilities', 'Matters from notices dated before enrollment', 'Fraudulent or intentionally false returns', 'Criminal tax matters', 'Estimated tax payments', 'Government filing/processing fees', 'Amounts unrelated to the covered matter', 'Amounts exceeding $2,000', 'Penalties and interest, unless provided in writing'],
+      covered_title: 'What your membership includes',
+      covered: [['Notice & correspondence review', 'Reviewing IRS notices and correspondence, the applicable federal tax return, and supporting documents.'], ['Responses to the IRS', "Preparing responses and communicating with the IRS on the member's behalf."], ['Examinations & audits', 'Helping during an IRS examination or audit, with professional representation before the IRS when authorized.'], ['Collection & resolution matters', 'Assistance with eligible IRS collection or resolution matters.']],
+      covered_note: 'Not covered: fraud, intentional tax evasion, criminal tax investigations, pre-enrollment IRS matters, intentionally false or incomplete returns, intentionally concealed information, and court/Tax Court representation. Best Vision does not guarantee the outcome of an IRS dispute; the IRS determines federal tax liabilities, penalties, interest, credits, and refunds.',
+      faq_title: 'Frequently asked questions',
+      faqs: [
+        ["What's covered?", 'Eligible IRS matters that arise while your membership is active and in good standing, including reviewing notices and returns, preparing responses, communicating with the IRS on your behalf, help during examinations or audits, authorized professional representation, and assistance with eligible collection or resolution matters.'],
+        ["What's not covered?", 'Fraud, intentional tax evasion, criminal tax investigations, pre-enrollment IRS matters, intentionally false or incomplete returns, intentionally concealed information, and court or Tax Court representation. Best Vision Accounting does not guarantee the outcome of an IRS dispute.'],
+        ['Can I sign up after receiving a notice?', "No. Your membership must be active and in good standing on the date printed on the first IRS notice relating to the matter. If a notice is dated August 1 and you enroll August 2, that matter isn't covered, even if you opened the letter later."],
+        ['Does the $5,000 pay my IRS bill?', 'No. The $5,000 represents up to $5,000 in professional tax representation services provided by Best Vision Accounting. It is not cash and does not pay your tax liability.'],
+        ['How does the $2,000 Plus benefit work?', 'If a qualifying IRS examination, audit, or covered adjustment results in additional eligible federal tax owed, Best Vision Accounting may provide up to $2,000 toward that eligible liability. It does not cover pre-existing liabilities, tax originally reported on your return, estimated payments, fees, criminal matters, amounts above $2,000, or generally penalties and interest.'],
+        ['Can I cancel?', "Yes, at any time. Fees paid during the first 30 days may be refundable if you haven't requested, received, or initiated a program benefit. After that, paid fees generally aren't refundable."]
+      ],
+      cta_title: "Don't wait for the letter. Get IRS protection in place today.",
+      cta_sub: 'IRS Protect from $10.99/mo · IRS Protect Plus from $19.99/mo',
+      foot_price: 'Membership from $10.99/mo', a_product_of: 'A PRODUCT OF',
+      foot_body: "IRS problems are unpredictable. Your protection doesn't have to be. Professional tax representation from the Best Vision Accounting team, in place before the letter arrives.",
+      col_product: 'PRODUCT', col_company: 'COMPANY', col_legal: 'LEGAL',
+      contact: 'Contact us', help: 'Help center', agreement: 'Membership agreement', terms: 'Terms of service', privacy: 'Privacy policy',
+      foot_legal: 'IRS Protect and IRS Protect Plus are membership programs offered by Best Vision Accounting and are not insurance. Benefits consist of professional services and, for Protect Plus, eligible IRS liability assistance, each subject to the terms, eligibility requirements, limitations and exclusions of the membership agreement. Membership must be active and in good standing on the date printed on the first IRS notice relating to a matter. Best Vision Accounting does not guarantee the outcome of any IRS dispute.',
+      copyright: '© 2026 Best Vision Accounting. All rights reserved.', trademark: 'IRS Protect is a trademark of Best Vision Accounting.'
+    },
+    es: {
+      nav_how: 'Cómo funciona', cta_short: 'Únete', nav_plans: 'Planes', nav_plus: 'Protect Plus', nav_faq: 'Preguntas frecuentes', faq_short: 'Preguntas', login: 'Iniciar sesión', cta: 'Obtén protección', cta_plus: 'Obtén Protect Plus',
+      hero: { complicated: 'El IRS es complicado. Tu protección no debería serlo.', dontwait: 'No esperes una carta del IRS. Protégete antes de que llegue.' },
+      hero_sub: 'Ayuda profesional con problemas elegibles del IRS, lista antes de que se conviertan en tu problema.', hero_backed: 'Respaldado por Best Vision Accounting',
+      cancel_anytime: 'Cancela cuando quieras.',
+      hero_disclaimer: 'IRS Protect es un programa de membresía y no es un seguro. Aplican requisitos de elegibilidad, limitaciones y exclusiones.',
+      trust_kicker: 'APOYO FISCAL PROFESIONAL DE', team_kicker: 'CONOCE AL EQUIPO DETRÁS DE TU PROTECCIÓN',
+      trust_body: 'Cada membresía de IRS Protect está respaldada por el equipo de Best Vision Accounting: los mismos profesionales que revisan tu aviso, preparan la respuesta y te representan ante el IRS.',
+      stat_rep: 'en representación profesional', stat_month: 'al mes para empezar', stat_anytime: 'Cuando quieras', stat_cancel: 'cancelación', stat_membership: 'Membresía', stat_not_ins: 'no es un seguro',
+      your_membership: 'TU MEMBRESÍA', active_since: 'Activa desde el 3 de marzo', eligible_note: 'Aviso fechado después de la inscripción. Elegible.',
+      f1_title: 'No esperes una carta del IRS. Protégete antes de que llegue.',
+      f1_body: 'Para calificar, tu membresía debe estar activa en la fecha impresa en el primer aviso del IRS. Un aviso fechado el 1 de agosto no está cubierto por una membresía que inicia el 2 de agosto, aunque hayas abierto el sobre después. La protección empieza antes que el problema.',
+      f1_link: 'Protégete hoy',
+      f2_title: '¿Recibiste una carta del IRS? Envíanosla.',
+      f2_body: 'La mayoría de las personas no sabe si un CP2000, un aviso de examen o un aviso de cobro es grave. Tú no tienes que saberlo. Entrega el aviso, la declaración correspondiente y los documentos solicitados, y el equipo de Best Vision determina qué pide el IRS y qué sigue.',
+      f2_link: 'Ver qué está cubierto',
+      send_notice: 'Enviar un aviso', upload_notice: 'Sube el aviso del IRS', photo_pdf: 'Foto o PDF',
+      notice_cp2000: 'Aviso CP2000', in_progress: 'En proceso',
+      timeline: [['Aviso y declaración revisados', 'Best Vision Accounting'], ['Respuesta al IRS', 'En proceso'], ['Representación y resolución', 'Autorizada ante el IRS']],
+      f3_title: 'Tu equipo contable se encarga del asunto con el IRS.',
+      f3_body: 'Según la situación, Best Vision Accounting prepara la correspondencia, organiza la documentación, se comunica con el IRS y brinda representación profesional autorizada. Mantén tu membresía activa y al corriente hasta que el asunto se resuelva.',
+      plans_title: 'Dos membresías. Una diferencia sencilla.',
+      plans_sub: 'Ambas incluyen representación profesional de Best Vision Accounting. Plus agrega ayuda si el IRS determina que debes más.',
+      essential: 'ESENCIAL', protect_tag: 'Representación profesional, lista antes de la carta.', per_month: '/mes',
+      protectItems: [['Hasta $5,000 en representación profesional', 'Servicios de representación fiscal profesional por contribuyente para asuntos elegibles del IRS.'], ['Revisión de avisos y declaraciones', 'Revisamos la correspondencia del IRS, la declaración correspondiente y los documentos de respaldo.'], ['Respuestas y comunicación con el IRS', 'Respuestas preparadas y comunicación con el IRS en tu nombre.'], ['Ayuda en auditorías y exámenes', 'Apoyo durante exámenes y representación autorizada ante el IRS.']],
+      most_protection: 'MÁXIMA PROTECCIÓN', premium: 'PREMIUM', plus_tag: 'Representación más ayuda si el IRS dice que debes más.',
+      plus1_t: 'Hasta $2,000 para impuesto federal adicional elegible', plus1_b: 'Si un examen, auditoría o ajuste cubierto que califique resulta en que debas más, Best Vision puede aportar hasta $2,000 para esa obligación elegible.',
+      plus2_t: 'Hasta $5,000 en representación profesional', plus2_b: 'Todo lo de IRS Protect está incluido.',
+      plus3_t: 'Revisión de avisos, respuestas al IRS y apoyo en auditorías', plus3_b: 'A cargo del equipo de Best Vision Accounting.',
+      plans_note: 'Los $5,000 representan servicios profesionales prestados por Best Vision Accounting. No es efectivo y no paga tu deuda fiscal. Cancela cuando quieras; las cuotas pagadas durante los primeros 30 días pueden ser reembolsables si no se ha solicitado, recibido o iniciado ningún beneficio del programa.',
+      plus_title: 'Más protección con IRS Protect Plus',
+      plus_sub: 'La representación profesional es una cosa. ¿Y si el IRS determina que realmente debes más? Para eso está Plus.',
+      how2000_t: 'Cómo funcionan los $2,000', how2000_b: 'Ejemplos establecidos en el contrato de membresía:',
+      table_h1: 'EL IRS DETERMINA IMPUESTO ADICIONAL ELEGIBLE DE', table_h2: 'BENEFICIO PLUS HASTA',
+      not2000_t: 'Lo que los $2,000 no pagan', not2000_b: 'Es una ayuda para la obligación fiscal federal adicional elegible derivada de un asunto cubierto, no un crédito general para cualquier deuda. Entre otras exclusiones:',
+      plusExclusions: ['Impuestos ya adeudados antes de la membresía', 'Impuesto declarado originalmente como adeudado en tu declaración', 'Obligaciones preexistentes con el IRS', 'Asuntos de avisos fechados antes de la inscripción', 'Declaraciones fraudulentas o intencionalmente falsas', 'Asuntos fiscales penales', 'Pagos de impuestos estimados', 'Tarifas gubernamentales de presentación o trámite', 'Montos no relacionados con el asunto cubierto', 'Montos que excedan $2,000', 'Multas e intereses, salvo que se indique por escrito'],
+      covered_title: 'Qué incluye tu membresía',
+      covered: [['Revisión de avisos y correspondencia', 'Revisión de avisos y correspondencia del IRS, la declaración federal correspondiente y los documentos de respaldo.'], ['Respuestas al IRS', 'Preparación de respuestas y comunicación con el IRS en nombre del miembro.'], ['Exámenes y auditorías', 'Ayuda durante un examen o auditoría del IRS, con representación profesional ante el IRS cuando esté autorizada.'], ['Asuntos de cobro y resolución', 'Asistencia con asuntos elegibles de cobro o resolución del IRS.']],
+      covered_note: 'No cubierto: fraude, evasión fiscal intencional, investigaciones fiscales penales, asuntos del IRS previos a la inscripción, declaraciones intencionalmente falsas o incompletas, información ocultada intencionalmente y representación ante tribunales o el Tribunal Fiscal. Best Vision no garantiza el resultado de ninguna disputa con el IRS; el IRS determina las obligaciones fiscales federales, multas, intereses, créditos y reembolsos.',
+      faq_title: 'Preguntas frecuentes',
+      faqs: [
+        ['¿Qué está cubierto?', 'Asuntos elegibles del IRS que surjan mientras tu membresía esté activa y al corriente, incluyendo la revisión de avisos y declaraciones, la preparación de respuestas, la comunicación con el IRS en tu nombre, ayuda durante exámenes o auditorías, representación profesional autorizada y asistencia con asuntos elegibles de cobro o resolución.'],
+        ['¿Qué no está cubierto?', 'Fraude, evasión fiscal intencional, investigaciones fiscales penales, asuntos del IRS previos a la inscripción, declaraciones intencionalmente falsas o incompletas, información ocultada intencionalmente y representación ante tribunales o el Tribunal Fiscal. Best Vision Accounting no garantiza el resultado de una disputa con el IRS.'],
+        ['¿Puedo inscribirme después de recibir un aviso?', 'No. Tu membresía debe estar activa y al corriente en la fecha impresa en el primer aviso del IRS relacionado con el asunto. Si un aviso está fechado el 1 de agosto y te inscribes el 2 de agosto, ese asunto no está cubierto, aunque hayas abierto la carta después.'],
+        ['¿Los $5,000 pagan mi deuda con el IRS?', 'No. Los $5,000 representan hasta $5,000 en servicios de representación fiscal profesional prestados por Best Vision Accounting. No es efectivo y no paga tu obligación fiscal.'],
+        ['¿Cómo funciona el beneficio Plus de $2,000?', 'Si un examen, auditoría o ajuste cubierto del IRS que califique resulta en impuesto federal adicional elegible adeudado, Best Vision Accounting puede aportar hasta $2,000 para esa obligación elegible. No cubre obligaciones preexistentes, impuesto declarado originalmente en tu declaración, pagos estimados, tarifas, asuntos penales, montos superiores a $2,000 ni, en general, multas e intereses.'],
+        ['¿Puedo cancelar?', 'Sí, en cualquier momento. Las cuotas pagadas durante los primeros 30 días pueden ser reembolsables si no has solicitado, recibido o iniciado ningún beneficio del programa. Después de eso, las cuotas pagadas generalmente no son reembolsables.']
+      ],
+      cta_title: 'No esperes la carta. Ten tu protección ante el IRS lista hoy.',
+      cta_sub: 'IRS Protect desde $10.99/mes · IRS Protect Plus desde $19.99/mes',
+      foot_price: 'Membresía desde $10.99/mes', a_product_of: 'UN PRODUCTO DE',
+      foot_body: 'Los problemas con el IRS son impredecibles. Tu protección no tiene que serlo. Representación fiscal profesional del equipo de Best Vision Accounting, lista antes de que llegue la carta.',
+      col_product: 'PRODUCTO', col_company: 'EMPRESA', col_legal: 'LEGAL',
+      contact: 'Contáctanos', help: 'Centro de ayuda', agreement: 'Contrato de membresía', terms: 'Términos del servicio', privacy: 'Política de privacidad',
+      foot_legal: 'IRS Protect e IRS Protect Plus son programas de membresía ofrecidos por Best Vision Accounting y no son seguros. Los beneficios consisten en servicios profesionales y, en el caso de Protect Plus, asistencia elegible con obligaciones ante el IRS, sujetos a los términos, requisitos de elegibilidad, limitaciones y exclusiones del contrato de membresía. La membresía debe estar activa y al corriente en la fecha impresa en el primer aviso del IRS relacionado con un asunto. Best Vision Accounting no garantiza el resultado de ninguna disputa con el IRS.',
+      copyright: '© 2026 Best Vision Accounting. Todos los derechos reservados.', trademark: 'IRS Protect es una marca de Best Vision Accounting.'
+    }
+  };
+  state = { openFaq: 0, lang: (() => { try { return localStorage.getItem('irsprotect.lang') === 'es' ? 'es' : 'en'; } catch (e) { return 'en'; } })() };
+  componentDidMount() {
+    document.documentElement.lang = this.state.lang;
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.setAttribute('data-reveal', 'in'); io.unobserve(e.target); } }), { threshold: 0.15 });
+    const scan = () => document.querySelectorAll('[data-reveal]:not([data-reveal="in"])').forEach(el => io.observe(el));
+    scan(); this._revealTimer = setInterval(scan, 800);
+  }
+  componentWillUnmount() { clearInterval(this._revealTimer); }
+  setLang(lang) {
+    this.setState({ lang });
+    try { localStorage.setItem('irsprotect.lang', lang); } catch (e) {}
+    document.documentElement.lang = lang;
+  }
+  renderVals() {
+    const lang = this.state.lang;
+    const t = Component.DICT[lang] || Component.DICT.en;
+    const msg = this.props.heroMessage ?? 'complicated';
+    const heroTitle = t.hero[msg] || t.hero.complicated;
+    const on = { bg: '#fff', fg: '#10193F', sh: '0 2px 6px rgba(16,25,63,.14)' };
+    const off = { bg: 'transparent', fg: 'rgba(16,25,63,.55)', sh: 'none' };
+    const en = lang === 'en' ? on : off, es = lang === 'es' ? on : off;
+    const done = { bg: '#2648B5', fg: '#fff', border: '#2648B5', mark: '✓', op: 1, anim: 'none' };
+    const now = { bg: '#fff', fg: '#2648B5', border: '#2648B5', mark: '●', op: 1, anim: 'pulse 1.8s ease-out infinite' };
+    const todo = { bg: '#fff', fg: 'transparent', border: 'rgba(16,25,63,.2)', mark: '', op: .45, anim: 'none' };
+    const states = [done, now, todo];
+    const paths = {
+      envelope: ['M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 16.5v-9Z', 'm3.5 7 7.3 5.6a2 2 0 0 0 2.4 0L20.5 7'],
+      reply: ['M9 14 4 9.5 9 5', 'M4 9.5h9.5A6.5 6.5 0 0 1 20 16v3'],
+      search: ['M10.5 17.5a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z', 'm15.5 15.5 5 5', 'M8 10.5h5', 'M10.5 8v5'],
+      handshake: ['M12 3.5v17', 'M8.5 20.5h7', 'M5 7h14', 'm5 7-2.5 6.5a2.5 2.5 0 0 0 5 0L5 7Z', 'm19 7-2.5 6.5a2.5 2.5 0 0 0 5 0L19 7Z']
+    };
+    const iconNames = ['envelope', 'reply', 'search', 'handshake'];
+    const icon = (name) => React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true },
+      paths[name].map((d, i) => React.createElement('path', { key: i, d })));
+    return {
+      t, heroTitle,
+      isEn: lang === 'en', isEs: lang === 'es',
+      setEn: () => this.setLang('en'), setEs: () => this.setLang('es'),
+      enBg: en.bg, enFg: en.fg, enShadow: en.sh, esBg: es.bg, esFg: es.fg, esShadow: es.sh,
+      timeline: t.timeline.map(([title, sub], i) => ({ ...states[i], title, sub })),
+      protectItems: t.protectItems.map(([title, body]) => ({ title, body })),
+      liabilityRows: [{ owed: '$750', benefit: '$750' }, { owed: '$1,600', benefit: '$1,600' }, { owed: '$2,000', benefit: '$2,000' }, { owed: '$5,000', benefit: '$2,000' }],
+      plusExclusions: t.plusExclusions,
+      covered: t.covered.map(([title, body], i) => ({ icon: icon(iconNames[i]), title, body })),
+      faqs: t.faqs.map(([q, a], i) => ({
+        q, a, open: this.state.openFaq === i, rot: this.state.openFaq === i ? 'rotate(45deg)' : 'rotate(0deg)',
+        toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i }))
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
