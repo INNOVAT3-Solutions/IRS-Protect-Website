@@ -265,32 +265,28 @@
     });
   }
 
-  /* ---- Enrollment (3 steps) ---- */
+  /* ---- Enrollment (2 steps, single membership) ---- */
   function initEnrollForm() {
     var form = document.getElementById('enroll-form'); if (!form) return;
     liveValidate(form);
     var panels = $$('.step-panel', form); var steps = $$('.steps .step', form); var cur = 0;
-    var plans = C.plans || {};
-    var params = new URLSearchParams(location.search); var pre = params.get('plan');
-    if (pre === 'protect' || pre === 'plus') { var r = form.querySelector('input[name="plan"][value="' + pre + '"]'); if (r) r.checked = true; }
+    var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99 };
+    var link = C.checkoutUrl || '';
 
     function fmt(n) { return '$' + Number(n).toFixed(2); }
-    function selectedPlan() { var r = form.querySelector('input[name="plan"]:checked'); return r ? r.value : null; }
-    function syncChoice() { $$('.choice-card', form).forEach(function (c) { var i = $('input', c); c.classList.toggle('is-selected', !!(i && i.checked)); }); }
     function updateSummary() {
-      var p = selectedPlan(); var f = collect(form); var plan = plans[p] || {};
+      var f = collect(form);
       var set = function (k, v) { var el = $('[data-sum="' + k + '"]', form); if (el) el.textContent = v || '—'; };
-      set('plan', plan.name || '');
+      set('plan', plan.name);
       set('price', plan.price != null ? fmt(plan.price) + t('per_month') : '');
       set('total', plan.price != null ? fmt(plan.price) : '');
       set('name', [f.first_name, f.last_name].filter(Boolean).join(' '));
       set('email', f.email); set('phone', f.phone); set('zip', f.zip);
       var fs = form.querySelector('select[name="filing_status"]');
       set('fs', fs && fs.value ? fs.options[fs.selectedIndex].textContent : '');
-      set('start', new Date().toLocaleDateString(I && I.lang === 'es' ? 'es-US' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+      set('start', new Date().toLocaleDateString(I && I.lang === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }));
     }
     function updateSubmitLabel() {
-      var link = get(C, 'checkout.' + selectedPlan());
       var btn = $('[data-submit]', form); if (btn && !btn.disabled) btn.textContent = t(link ? 'pay_btn' : 'request_btn');
       var sn = $('[data-secure-note]', form); if (sn) sn.hidden = !link;
     }
@@ -301,15 +297,14 @@
         s.classList.toggle('is-active', idx === i); s.classList.toggle('is-done', idx < i);
         if (idx === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current');
       });
-      if (i === 2) updateSummary();
+      if (i === panels.length - 1) updateSummary();
       updateSubmitLabel();
       if (i > 0) {
         form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        var focusable = $('input:not([type=hidden]):not([type=radio]):not([type=checkbox]), select, textarea', panels[i]) || $('button', panels[i]);
+        var focusable = $('input:not([type=hidden]):not([type=checkbox]), select, textarea', panels[i]) || $('button', panels[i]);
         if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 350);
       }
     }
-    form.addEventListener('change', function (e) { if (e.target.name === 'plan') { syncChoice(); updateSummary(); updateSubmitLabel(); } });
     $$('[data-next]', form).forEach(function (b) { b.addEventListener('click', function () { if (validateScope(panels[cur])) show(cur + 1); }); });
     $$('[data-prev]', form).forEach(function (b) { b.addEventListener('click', function () { show(cur - 1); }); });
     document.addEventListener('langchange', function () { updateSummary(); updateSubmitLabel(); });
@@ -317,13 +312,13 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault(); hideAlert(form);
       if (!validateScope(panels[cur])) return;
-      var f = collect(form); var p = f.plan; var plan = plans[p] || {};
-      f.plan_name = plan.name || p; f.monthly_fee = plan.price != null ? fmt(plan.price) : '';
+      var f = collect(form);
+      f.plan_name = plan.name; f.monthly_fee = plan.price != null ? fmt(plan.price) : '';
+      f.effective_enrollment_date = new Date().toISOString().slice(0, 10);
       var fs = form.querySelector('select[name="filing_status"]');
       if (fs && fs.value) f.filing_status = fs.options[fs.selectedIndex].textContent;
       var btn = $('[data-submit]', form); setBusy(btn, true);
-      var subject = 'IRS Protect enrollment: ' + f.plan_name + ' — ' + f.first_name + ' ' + f.last_name;
-      var link = get(C, 'checkout.' + p);
+      var subject = 'IRS Protect Plus enrollment — ' + f.first_name + ' ' + f.last_name;
       if (link) {
         var ref = 'IRSP-' + Date.now().toString(36).toUpperCase();
         f.reference = ref;
@@ -335,11 +330,10 @@
         return;
       }
       deliver('enrollment', f, null, subject)
-        .then(function (r) { setBusy(btn, false); showResult(form, r, { titleKey: 'enroll_success_t', bodyKey: 'enroll_success_b', vars: { name: f.first_name, email: f.email, plan: f.plan_name } }); })
+        .then(function (r) { setBusy(btn, false); showResult(form, r, { titleKey: 'enroll_success_t', bodyKey: 'enroll_success_b', vars: { name: f.first_name, email: f.email, plan: plan.name } }); })
         .catch(function () { setBusy(btn, false); showAlert(form, 'error', '<p>' + esc(t('submit_failed')) + '</p>'); });
     });
 
-    syncChoice();
     show(0);
   }
 
@@ -393,6 +387,27 @@
   }
 
   /* ------------------------------------------------------------------------
+     Sticky bottom CTA on phones: appears once the hero CTA scrolls away,
+     hides while the final CTA card is on screen or the menu is open
+     ------------------------------------------------------------------------ */
+  function initStickyCta() {
+    var bar = $('.sticky-cta'); if (!bar) return;
+    var heroCta = $('.hero-actions'); var finalCta = $('.cta-card');
+    var mq = window.matchMedia('(max-width: 900px)');
+    var pastHero = !heroCta, atFinal = false;
+    var sync = function () {
+      bar.classList.toggle('is-visible', mq.matches && pastHero && !atFinal);
+      document.body.classList.toggle('has-sticky-cta', mq.matches);
+    };
+    if ('IntersectionObserver' in window) {
+      if (heroCta) new IntersectionObserver(function (es) { es.forEach(function (e) { pastHero = !e.isIntersecting && e.boundingClientRect.top < 0; }); sync(); }).observe(heroCta);
+      if (finalCta) new IntersectionObserver(function (es) { es.forEach(function (e) { atFinal = e.isIntersecting; }); sync(); }, { threshold: 0.15 }).observe(finalCta);
+    } else { pastHero = true; }
+    if (mq.addEventListener) mq.addEventListener('change', sync); else if (mq.addListener) mq.addListener(sync);
+    sync();
+  }
+
+  /* ------------------------------------------------------------------------
      Boot
      ------------------------------------------------------------------------ */
   function init() {
@@ -403,6 +418,7 @@
     initContactForm();
     initEnrollForm();
     initNoticeForm();
+    initStickyCta();
     syncLangOnly();
     document.addEventListener('langchange', syncLangOnly);
   }

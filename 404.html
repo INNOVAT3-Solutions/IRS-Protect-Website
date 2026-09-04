@@ -1,67 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="title_404">Page not found | IRS Protect</title>
-<meta name="description" content="The page you were looking for could not be found.">
+<title data-i18n="title_404">Página no encontrada | IRS Protect Plus</title>
+<meta name="description" content="No encontramos la página que buscas.">
 <meta name="theme-color" content="#2648B5">
 <meta name="robots" content="noindex">
 <base href="/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="assets/opt/irs-protect-shield-logo.png">
+<link rel="apple-touch-icon" href="assets/opt/irs-protect-plus-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="IRS Protect">
-<meta property="og:title" content="Page not found | IRS Protect">
-<meta property="og:description" content="The page you were looking for could not be found.">
+<meta property="og:site_name" content="IRS Protect Plus">
+<meta property="og:title" content="Página no encontrada | IRS Protect Plus">
+<meta property="og:description" content="No encontramos la página que buscas.">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css">
-<script src="js/config.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/site.js" defer></script>
+<link rel="stylesheet" href="css/site.css?v=202609040144">
+<script src="js/config.js?v=202609040144"></script>
+<script src="js/i18n.js?v=202609040144"></script>
+<script src="js/site.js?v=202609040144" defer></script>
 </head>
 <body data-page="404">
-<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="skip">Saltar al contenido</a>
 <header class="site-header">
   <div class="nav-bar wrap">
-    <a href="index.html" class="nav-brand" aria-label="IRS Protect by Best Vision Accounting — home"><img class="nav-logo" src="assets/opt/best-vision-accounting-logo.png" alt="Best Vision Accounting" width="900" height="363"></a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="index.html#how" data-i18n="nav_how">How it works</a>
-      <a href="index.html#plans" data-i18n="nav_plans">Plans</a>
-      <a href="index.html#plus" data-i18n="nav_plus">Protect Plus</a>
-      <a href="index.html#faq" data-i18n="faq_short">FAQ</a>
+    <a href="index.html" class="nav-brand" aria-label="IRS Protect Plus por Best Vision Accounting — inicio"><img class="nav-logo" src="assets/opt/best-vision-accounting-logo.png" alt="Best Vision Accounting" width="900" height="363"></a>
+    <a href="index.html" class="nav-brand nav-brand--mobile" aria-label="IRS Protect Plus — inicio"><img src="assets/opt/irs-protect-plus-plan-logo.png" alt="" width="320" height="249"><span class="nav-brand-text"><b>IRS Protect Plus</b><small data-i18n="by_bva">de Best Vision Accounting</small></span></a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html#how" data-i18n="nav_how">Cómo funciona</a>
+      <a href="index.html#plans" data-i18n="nav_plans">Membresía</a>
+      <a href="index.html#coverage" data-i18n="nav_coverage">Cobertura</a>
+      <a href="index.html#faq" data-i18n="faq_short">Preguntas</a>
     </nav>
     <div class="nav-actions">
-      <div role="group" aria-label="Language / Idioma" class="lang-toggle">
-        <button type="button" data-lang="en" aria-pressed="true" lang="en" aria-label="English">EN</button>
-        <button type="button" data-lang="es" aria-pressed="false" lang="es" aria-label="Español">ES</button>
+      <div role="group" aria-label="Idioma / Language" class="lang-toggle lang-toggle--header">
+        <button type="button" data-lang="es" aria-pressed="true" lang="es" aria-label="Español">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
       </div>
-      <a href="login.html" class="nav-login" data-link="login" data-i18n="login">Log in</a>
-      <a href="enroll.html" class="btn btn-dark nav-cta"><span class="cta-long" data-i18n="cta">Get Protected</span><span class="cta-short" data-i18n="cta_short">Join</span></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" data-i18n-attr="aria-label:menu_open"><span></span><span></span><span></span></button>
+      <a href="login.html" class="nav-login" data-link="login" data-i18n="login">Iniciar sesión</a>
+      <a href="enroll.html" class="btn btn-dark nav-cta"><span class="cta-long" data-i18n="cta">Obtén protección</span><span class="cta-short" data-i18n="cta_short">Únete</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú" data-i18n-attr="aria-label:menu_open"><span></span><span></span><span></span></button>
     </div>
   </div>
-  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden>
-    <a href="index.html#how" data-i18n="nav_how">How it works</a>
-    <a href="index.html#plans" data-i18n="nav_plans">Plans</a>
-    <a href="index.html#plus" data-i18n="nav_plus">Protect Plus</a>
-    <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
-    <a href="submit-notice.html" data-i18n="submit_notice_link">Submit a notice</a>
-    <a href="login.html" data-link="login" data-i18n="login">Log in</a>
-    <a href="enroll.html" class="btn mobile-cta" data-i18n="cta">Get Protected</a>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Menú" hidden>
+    <div class="mobile-nav-top">
+      <span class="mobile-nav-label" data-i18n="language">Idioma</span>
+      <div role="group" aria-label="Idioma / Language" class="lang-toggle lang-toggle--menu">
+        <button type="button" data-lang="es" aria-pressed="true" lang="es">Español</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">English</button>
+      </div>
+    </div>
+    <a href="index.html#how" data-i18n="nav_how">Cómo funciona</a>
+    <a href="index.html#plans" data-i18n="nav_plans">Membresía</a>
+    <a href="index.html#coverage" data-i18n="nav_coverage">Cobertura</a>
+    <a href="index.html#faq" data-i18n="nav_faq">Preguntas frecuentes</a>
+    <a href="submit-notice.html" data-i18n="submit_notice_link">Enviar un aviso</a>
+    <a href="login.html" data-link="login" data-i18n="login">Iniciar sesión</a>
+    <a href="enroll.html" class="btn mobile-cta" data-i18n="cta">Obtén protección</a>
   </nav>
 </header>
 <main id="main">
 <section class="notfound wrap">
   <div class="big" aria-hidden="true">404</div>
-  <h1 data-i18n="nf_title">We can’t find that page.</h1>
-  <p data-i18n="nf_body">The link may be out of date. Head back home or contact us if you need a hand.</p>
+  <h1 data-i18n="nf_title">No encontramos esa página.</h1>
+  <p data-i18n="nf_body">Puede que el enlace esté desactualizado. Vuelve al inicio o contáctanos si necesitas ayuda.</p>
   <div class="hero-actions">
-    <a href="index.html" class="btn btn-primary" data-i18n="go_home">Back to home</a>
-    <a href="contact.html" class="btn btn-ghost" data-i18n="go_contact">Contact us</a>
+    <a href="index.html" class="btn btn-primary" data-i18n="go_home">Volver al inicio</a>
+    <a href="contact.html" class="btn btn-ghost" data-i18n="go_contact">Contáctanos</a>
   </div>
 </section>
 </main>
@@ -69,19 +77,19 @@
   <div class="footer-inner wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" class="brand-lockup"><img src="assets/opt/irs-protect-shield-logo.png" alt="" width="300" height="300" loading="lazy"><div><b>IRS Protect</b><span data-i18n="foot_price">Membership from $10.99/mo</span></div></a>
-        <div class="foot-lockup"><span data-i18n="a_product_of">A product of</span><img src="assets/opt/best-vision-accounting-logo.png" alt="Best Vision Accounting" width="900" height="363" loading="lazy"></div>
-        <p data-i18n="foot_body">IRS problems are unpredictable. Your protection doesn't have to be. Professional tax representation from the Best Vision Accounting team, in place before the letter arrives.</p>
+        <a href="index.html" class="brand-lockup"><img src="assets/opt/irs-protect-plus-plan-logo.png" alt="" width="320" height="249" loading="lazy"><div><b>IRS Protect Plus</b><span data-i18n="foot_price">Membresía · $19.99/mes</span></div></a>
+        <div class="foot-lockup"><span data-i18n="a_product_of">Un producto de</span><img src="assets/opt/best-vision-accounting-logo.png" alt="Best Vision Accounting" width="900" height="363" loading="lazy"></div>
+        <p data-i18n="foot_body">Los problemas con el IRS son impredecibles. Tu protección no tiene que serlo. Representación fiscal profesional del equipo de Best Vision Accounting, lista antes de que llegue la carta.</p>
       </div>
       <div class="foot-cols">
-        <div class="foot-col"><span data-i18n="col_product">Product</span><a href="index.html#how" data-i18n="nav_how">How it works</a><a href="index.html#plans" data-i18n="nav_plans">Plans</a><a href="index.html#plus" data-i18n="nav_plus">Protect Plus</a><a href="index.html#faq" data-i18n="nav_faq">FAQ</a></div>
-        <div class="foot-col"><span data-i18n="col_company">Company</span><a href="contact.html" data-link="company">Best Vision Accounting</a><a href="contact.html" data-i18n="contact">Contact us</a><a href="help.html" data-i18n="help">Help center</a><a href="submit-notice.html" data-i18n="submit_notice_link">Submit a notice</a></div>
-        <div class="foot-col"><span data-i18n="col_legal">Legal</span><a href="membership-agreement.html" data-i18n="agreement">Membership agreement</a><a href="terms.html" data-i18n="terms">Terms of service</a><a href="privacy.html" data-i18n="privacy">Privacy policy</a></div>
+        <div class="foot-col"><span data-i18n="col_product">Producto</span><a href="index.html#how" data-i18n="nav_how">Cómo funciona</a><a href="index.html#plans" data-i18n="nav_plans">Membresía</a><a href="index.html#coverage" data-i18n="nav_coverage">Cobertura</a><a href="index.html#faq" data-i18n="nav_faq">Preguntas frecuentes</a></div>
+        <div class="foot-col"><span data-i18n="col_company">Empresa</span><a href="contact.html" data-link="company">Best Vision Accounting</a><a href="contact.html" data-i18n="contact">Contáctanos</a><a href="help.html" data-i18n="help">Centro de ayuda</a><a href="submit-notice.html" data-i18n="submit_notice_link">Enviar un aviso</a></div>
+        <div class="foot-col"><span data-i18n="col_legal">Legal</span><a href="membership-agreement.html" data-i18n="agreement">Contrato de membresía</a><a href="terms.html" data-i18n="terms">Términos del servicio</a><a href="privacy.html" data-i18n="privacy">Política de privacidad</a></div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-legal" data-i18n="foot_legal">IRS Protect and IRS Protect Plus are membership programs offered by Best Vision Accounting and are not insurance. Benefits consist of professional services and, for Protect Plus, eligible IRS liability assistance, each subject to the terms, eligibility requirements, limitations and exclusions of the membership agreement. Membership must be active and in good standing on the date printed on the first IRS notice relating to a matter. Best Vision Accounting does not guarantee the outcome of any IRS dispute.</p>
-      <div class="footer-meta"><span data-i18n="copyright">© 2026 Best Vision Accounting. All rights reserved.</span><span data-i18n="trademark">IRS Protect is a trademark of Best Vision Accounting.</span></div>
+      <p class="footer-legal" data-i18n="foot_legal">IRS Protect Plus es un programa de membresía ofrecido por Best Vision Accounting, LLC y no es un seguro. Los beneficios consisten en servicios profesionales de representación fiscal con un valor máximo de $10,000 por contribuyente, sujetos a los términos, requisitos de elegibilidad, limitaciones y exclusiones del contrato de membresía. La membresía debe estar activa y al corriente en la fecha impresa en el primer aviso del IRS relacionado con un asunto y durante todo el asunto. Best Vision Accounting no garantiza el resultado de ningún asunto con el IRS.</p>
+      <div class="footer-meta"><span data-i18n="copyright">© 2026 Best Vision Accounting, LLC. Todos los derechos reservados.</span><span data-i18n="trademark">IRS Protect Plus es una marca de Best Vision Accounting, LLC.</span></div>
     </div>
   </div>
 </footer>
