@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./config.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -136,15 +137,15 @@ html{-webkit-text-size-adjust:100%}img{max-width:100%}
 <div data-reveal style="display:flex;flex-direction:column;gap:20px">
 <h2 style="margin:0;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:800;text-wrap:balance">{{ t.f2_title }}</h2>
 <p style="margin:0;font-size:18px;line-height:1.55;color:rgba(16,25,63,.72);text-wrap:pretty">{{ t.f2_body }}</p>
-<a href="#plans" style="display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:#2648B5">{{ t.f2_link }} <span>→</span></a>
+<a href="send-notice.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:#2648B5">{{ t.f2_link }} <span>→</span></a>
 </div>
 <div data-reveal style="display:flex;justify-content:center"><div style="position:relative;width:100%;max-width:560px">
 <div style="position:relative;width:100%;aspect-ratio:1/1;border-radius:40px;border:14px solid #fff;box-shadow:0 0 0 1px rgba(16,25,63,.06),0 34px 70px -30px rgba(16,25,63,.35),0 10px 24px -14px rgba(16,25,63,.18);background:#E2E8F8 url('assets/couple-laptop.jpg') 62% center/cover no-repeat;overflow:hidden"></div>
-<div class="overlay-card" style="position:absolute;left:-28px;bottom:-28px;width:210px;background:#fff;border-radius:22px;padding:16px;box-shadow:0 24px 60px -18px rgba(16,25,63,.32),0 6px 16px -8px rgba(16,25,63,.12);display:flex;flex-direction:column;gap:12px">
+<a href="send-notice.dc.html" class="overlay-card" style="position:absolute;left:-28px;bottom:-28px;width:210px;background:#fff;border-radius:22px;padding:16px;box-shadow:0 24px 60px -18px rgba(16,25,63,.32),0 6px 16px -8px rgba(16,25,63,.12);display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
 <span style="font-size:14px;font-weight:800">{{ t.send_notice }}</span>
 <div style="border:1.5px dashed rgba(38,72,181,.35);border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:5px;background:#F6F7FC"><div style="width:34px;height:34px;border-radius:50%;background:#2648B5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800">↑</div><span style="font-size:12.5px;font-weight:700">{{ t.upload_notice }}</span><span style="font-size:11px;color:rgba(16,25,63,.55)">{{ t.photo_pdf }}</span></div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#F6F7FC;border-radius:10px;font-size:12.5px"><span style="font-weight:600">CP2000_notice.pdf</span><span style="color:#1B7F44;font-weight:700">✓</span></div>
-</div>
+</a>
 </div></div>
 </section>
 
@@ -217,7 +218,7 @@ html{-webkit-text-size-adjust:100%}img{max-width:100%}
 <div style="display:flex;gap:14px;align-items:flex-start"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">✓</span><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16.5px;font-weight:800">{{ t.plus2_t }}</span><span style="font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.62)">{{ t.plus2_b }}</span></div></div>
 <div style="display:flex;gap:14px;align-items:flex-start"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">✓</span><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16.5px;font-weight:800">{{ t.plus3_t }}</span><span style="font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.62)">{{ t.plus3_b }}</span></div></div>
 </div>
-<a href="#" class="btn" style="position:relative;margin-top:auto;text-align:center;padding:17px;border-radius:999px;background:linear-gradient(90deg,#C9A227,#E3C25E);color:#0E1A45;font-size:16px;font-weight:800;box-shadow:0 16px 34px -14px rgba(201,162,39,.8)" style-hover="background:#FFF1B8;color:#0E1A45">{{ t.cta_plus }}</a>
+<a href="{{ checkoutUrl }}" class="btn" style="position:relative;margin-top:auto;text-align:center;padding:17px;border-radius:999px;background:linear-gradient(90deg,#C9A227,#E3C25E);color:#0E1A45;font-size:16px;font-weight:800;box-shadow:0 16px 34px -14px rgba(201,162,39,.8)" style-hover="background:#FFF1B8;color:#0E1A45">{{ t.cta_plus }}</a>
 </div>
 
 </div>
@@ -470,8 +471,13 @@ class Component extends DCLogic {
     const iconNames = ['envelope', 'reply', 'search', 'handshake'];
     const icon = (name) => React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true },
       paths[name].map((d, i) => React.createElement('path', { key: i, d })));
+    // Set in config.js once the GHL checkout page is published (see that
+    // file's comment). Falls back to the same in-page anchor the button
+    // always used before this existed, so it degrades gracefully rather
+    // than linking nowhere while CHECKOUT_URL is still blank.
+    const checkoutUrl = (window.IRS_PROTECT_CONFIG && window.IRS_PROTECT_CONFIG.CHECKOUT_URL) || '#plans';
     return {
-      t, heroTitle,
+      t, heroTitle, checkoutUrl,
       isEn: lang === 'en', isEs: lang === 'es',
       setEn: () => this.setLang('en'), setEs: () => this.setLang('es'),
       enBg: en.bg, enFg: en.fg, enShadow: en.sh, esBg: es.bg, esFg: es.fg, esShadow: es.sh,

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Send us your IRS notice — IRS Protect Plus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Vendored client for @vercel/blob 2.8.0 (esm.sh bundle build), pinned to
+     the same version the dashboard issues upload tokens with. Re-vendor with
+     curl -sL "https://esm.sh/@vercel/blob@<version>/es2022/client.bundle.mjs" -->
+<script src="./config.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:#F6F7FC;color:#10193F}
+  a{color:#2648B5}
+  .wrap{max-width:640px;margin:0 auto;padding:32px 20px 72px}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+  .brand img{height:40px;width:auto}
+  .brand a{font-size:14px;font-weight:600;text-decoration:none;margin-left:auto}
+  h1{margin:0 0 8px;font-size:clamp(26px,4vw,34px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  .sub{margin:0 0 28px;font-size:16px;line-height:1.55;color:rgba(16,25,63,.72)}
+  .card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 24px 60px -30px rgba(16,25,63,.28)}
+  label{display:block;font-size:13px;font-weight:700;margin:0 0 6px}
+  input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;padding:13px 14px;border:1.5px solid rgba(16,25,63,.14);border-radius:12px;font:inherit;color:inherit;background:#fff}
+  input:focus,select:focus,textarea:focus{outline:3px solid rgba(38,72,181,.25);border-color:#2648B5}
+  .field{margin-bottom:16px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:560px){.row{grid-template-columns:1fr}}
+  .files{border:1.5px dashed rgba(38,72,181,.35);border-radius:14px;padding:16px;background:#F6F7FC}
+  .hint{font-size:12.5px;color:rgba(16,25,63,.6);margin-top:6px}
+  #check-status{font-size:13.5px;font-weight:600;margin-top:10px;min-height:20px}
+  #submit-error{color:#B3261E;font-size:13.5px;font-weight:600;margin-top:10px;min-height:20px}
+  button{margin-top:18px;width:100%;padding:17px;border:0;border-radius:999px;background:#2648B5;color:#fff;font:inherit;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 14px 30px -14px rgba(38,72,181,.8)}
+  button:hover:not(:disabled){background:#10193F}
+  button:disabled{opacity:.6;cursor:default}
+  .confirm{background:#fff;border-radius:22px;padding:32px;text-align:center;box-shadow:0 24px 60px -30px rgba(16,25,63,.28)}
+  .confirm .num{font-size:22px;font-weight:800;letter-spacing:.02em;margin:8px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <img src="assets/logo-irs-protect-plus.png" alt="IRS Protect Plus">
+    <a href="IRS Protect v2.dc.html">← Back to the site</a>
+  </div>
+
+  <div id="form-panel">
+    <h1>Send us your IRS notice</h1>
+    <p class="sub">Upload the letter you received and tell us how to reach you. Our team reviews every notice and follows up within one business day.</p>
+
+    <form id="notice-form" class="card" novalidate>
+      <div class="field">
+        <label for="field-name">Full name</label>
+        <input id="field-name" name="name" type="text" autocomplete="name" required maxlength="200">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="field-email">Email</label>
+          <input id="field-email" name="email" type="email" autocomplete="email" required maxlength="320">
+        </div>
+        <div class="field">
+          <label for="field-phone">Phone</label>
+          <input id="field-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40">
+        </div>
+      </div>
+      <div id="check-status" aria-live="polite"></div>
+
+      <div class="field">
+        <label for="field-notice">Which notice did you receive? (optional)</label>
+        <select id="field-notice" name="notice">
+          <option value="">Not sure</option>
+          <option>CP2000</option>
+          <option>CP14</option>
+          <option>CP504</option>
+          <option>LT11</option>
+          <option>CP3219A</option>
+          <option>CP75</option>
+          <option>Letter 525</option>
+          <option>CP12</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field files">
+        <label for="field-files">Upload the notice</label>
+        <input id="field-files" name="files" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.heif" required>
+        <div class="hint">PDF, JPG, PNG or HEIC · up to 10 files · 25 MB each</div>
+      </div>
+
+      <div class="field">
+        <label for="field-note">Anything you think we should know? (optional)</label>
+        <textarea id="field-note" name="note" rows="4" maxlength="4000"></textarea>
+      </div>
+
+      <div id="submit-error" role="alert"></div>
+      <button id="submit-button" type="submit">Send my notice</button>
+      <div class="hint">We'll email you a receipt with a reference number right away.</div>
+    </form>
+  </div>
+
+  <div id="confirmation" class="confirm" hidden>
+    <h1>We received your notice</h1>
+    <p class="sub">A member of our team will review it and follow up within one business day. Your reference number is</p>
+    <div class="num" id="confirmation-number"></div>
+    <p class="hint">Keep this number handy — it's how we'll refer to your notice.</p>
+  </div>
+</div>
+
+<script type="module">
+  import { put } from './vendor/blob-client.mjs';
+
+  const API = (window.IRS_PROTECT_CONFIG && window.IRS_PROTECT_CONFIG.API_BASE) || '';
+  const ALLOWED = ['application/pdf', 'image/jpeg', 'image/png', 'image/heic', 'image/heif'];
+  const MAX_BYTES = 25 * 1024 * 1024;
+  const statusEl = document.getElementById('check-status');
+
+  function pathnameFor(file) {
+    const ext = (file.name.split('.').pop() || 'bin').toLowerCase();
+    const random = crypto.randomUUID().replace(/-/g, '');
+    return `submissions/${new Date().getFullYear()}/${random}.${ext}`;
+  }
+
+  // Soft check as the visitor finishes typing, debounced.
+  let checkTimer;
+  for (const id of ['field-name', 'field-email', 'field-phone']) {
+    document.getElementById(id).addEventListener('input', () => {
+      clearTimeout(checkTimer);
+      checkTimer = setTimeout(runCheck, 600);
+    });
+  }
+
+  async function runCheck() {
+    const payload = {
+      name: document.getElementById('field-name').value,
+      email: document.getElementById('field-email').value,
+      phone: document.getElementById('field-phone').value,
+    };
+    if (!payload.email && !payload.phone) return;
+    try {
+      const res = await fetch(`${API}/api/intake/check`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      const result = await res.json();
+      const matched = [
+        result.nameMatched ? 'name' : null,
+        result.emailMatched ? 'email' : null,
+        result.phoneMatched ? 'phone' : null,
+      ].filter(Boolean);
+      statusEl.textContent =
+        matched.length === 0
+          ? 'We couldn’t confirm a membership — you can still send your notice and our team will match it.'
+          : `Matched ${matched.join(', ')} — ${matched.length === 3 ? 'membership active · upload allowed' : 'we’ll confirm the rest when we review it'}.`;
+      statusEl.style.color = matched.length === 0 ? '#8A6D1F' : '#1B7F44';
+    } catch {
+      statusEl.textContent = 'We couldn’t verify right now — you can still send your notice.';
+      statusEl.style.color = '#8A6D1F';
+    }
+  }
+
+  document.getElementById('notice-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = document.getElementById('submit-button');
+    const errorEl = document.getElementById('submit-error');
+    errorEl.textContent = '';
+    button.disabled = true;
+    try {
+      const name = document.getElementById('field-name').value.trim();
+      const email = document.getElementById('field-email').value.trim();
+      const phone = document.getElementById('field-phone').value.trim();
+      if (!name) throw new Error('Please add your name.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        throw new Error('Please enter a valid email address.');
+      }
+      if (phone.replace(/\D/g, '').length < 10) {
+        throw new Error('Please enter a phone number we can reach you at.');
+      }
+
+      const files = Array.from(document.getElementById('field-files').files);
+      if (files.length === 0) throw new Error('Attach at least one file.');
+      if (files.length > 10) throw new Error('Attach at most 10 files.');
+      for (const file of files) {
+        if (!ALLOWED.includes(file.type)) throw new Error(`Unsupported file type: ${file.type || file.name}`);
+        if (file.size > MAX_BYTES) throw new Error(`${file.name} is over 25 MB.`);
+      }
+
+      // Upload each file straight to private blob storage. The token
+      // endpoint enforces the same limits server-side.
+      button.textContent = 'Uploading…';
+      const uploaded = [];
+      for (const file of files) {
+        const pathname = pathnameFor(file);
+        const tokenRes = await fetch(`${API}/api/intake/upload`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pathname, contentType: file.type }),
+        });
+        if (!tokenRes.ok) {
+          const detail = await tokenRes.json().catch(() => ({}));
+          throw new Error(detail.error || 'Upload could not start — please try again.');
+        }
+        const { clientToken } = await tokenRes.json();
+        await put(pathname, file, { access: 'private', token: clientToken, contentType: file.type });
+        uploaded.push({
+          pathname,
+          name: file.name,
+          contentType: file.type,
+          sizeBytes: file.size,
+        });
+      }
+
+      button.textContent = 'Sending…';
+      const res = await fetch(`${API}/api/intake/submissions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          typedName: name,
+          typedEmail: email,
+          typedPhone: phone,
+          note: document.getElementById('field-note').value,
+          notice: document.getElementById('field-notice').value || null,
+          files: uploaded,
+        }),
+      });
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(result.error || 'Something went wrong — please try again.');
+      document.getElementById('form-panel').hidden = true;
+      document.getElementById('confirmation').hidden = false;
+      document.getElementById('confirmation-number').textContent = result.no;
+    } catch (error) {
+      errorEl.textContent = error.message;
+      button.disabled = false;
+      button.textContent = 'Send my notice';
+    }
+  });
+</script>
+</body>
+</html>
