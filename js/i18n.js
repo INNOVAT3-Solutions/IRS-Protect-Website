@@ -32,6 +32,7 @@
       desc_privacy: 'Cómo Best Vision Accounting, LLC recopila, usa, comparte y protege la información enviada a través del sitio web de IRS Protect Plus.',
       desc_404: 'No encontramos la página que buscas.',
       not_affiliated: 'IRS Protect Plus no está afiliado con el IRS ni con el gobierno de EE. UU.',
+      guides_link: 'Guías de avisos del IRS',
 
       /* Hero */
       hero_title: 'El IRS es complicado. Tu protección no debería serlo.',
@@ -206,6 +207,7 @@
       desc_privacy: 'How Best Vision Accounting, LLC collects, uses, shares and protects information submitted through the IRS Protect Plus website.',
       desc_404: 'We can’t find the page you’re looking for.',
       not_affiliated: 'IRS Protect Plus is not affiliated with the IRS or the U.S. government.',
+      guides_link: 'IRS notice guides',
 
       hero_title: 'The IRS is complicated. Your protection shouldn’t be.',
       hero_sub: 'IRS Protect Plus is an IRS representation membership: the Best Vision Accounting team reviews your IRS letters, responds for you, and helps with eligible audits and collections.',

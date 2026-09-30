@@ -240,43 +240,63 @@ function jsonLd(doc, page, lang, dict) {
 }
 
 /* ---- Head --------------------------------------------------------------- */
-function writeHead(doc, page, lang, dict, version) {
+/* Head metadata for one of the core pages. */
+function pageMeta(doc, page, lang, dict) {
+  return {
+    lang,
+    url: pageUrl(lang, page.slug),
+    alt: page.notFound ? null : { es: pageUrl('es', page.slug), en: pageUrl('en', page.slug) },
+    title: dict['title_' + page.key],
+    desc: dict['desc_' + page.key],
+    descKey: 'desc_' + page.key,
+    noindex: page.noindex,
+    ldJson: page.notFound ? null : jsonLd(doc, page, lang, dict),
+    preloadHero: page.slug === '',
+    ogType: 'website'
+  };
+}
+
+function writeHead(doc, m, version) {
   const head = doc.head;
   head.querySelectorAll('[data-seo]').forEach((n) => n.remove());
   head.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"], meta[name="robots"], link[rel="canonical"], link[rel="alternate"]').forEach((n) => n.remove());
 
   const desc = head.querySelector('meta[name="description"]');
-  desc.setAttribute('data-i18n-attr', 'content:desc_' + page.key);
-  desc.setAttribute('content', dict['desc_' + page.key]);
+  if (m.descKey) desc.setAttribute('data-i18n-attr', 'content:' + m.descKey); else desc.removeAttribute('data-i18n-attr');
+  desc.setAttribute('content', m.desc);
   const title = head.querySelector('title');
-  title.textContent = dict['title_' + page.key];
+  if (!m.descKey) title.removeAttribute('data-i18n');
+  title.textContent = m.title;
 
   const anchor = desc.nextSibling;
   const add = (n) => { head.insertBefore(doc.createTextNode('\n'), anchor); head.insertBefore(n, anchor); };
-  const url = pageUrl(lang, page.slug);
+  const { lang, url } = m;
 
-  if (page.noindex) add(el(doc, 'meta', { name: 'robots', content: 'noindex, follow' }));
-  if (!page.notFound) {
+  if (m.noindex) add(el(doc, 'meta', { name: 'robots', content: 'noindex, follow' }));
+  if (m.alt) {
     add(el(doc, 'link', { rel: 'canonical', href: url }));
-    add(el(doc, 'link', { rel: 'alternate', hreflang: 'es', href: pageUrl('es', page.slug) }));
-    add(el(doc, 'link', { rel: 'alternate', hreflang: 'en', href: pageUrl('en', page.slug) }));
-    add(el(doc, 'link', { rel: 'alternate', hreflang: 'x-default', href: pageUrl('es', page.slug) }));
+    add(el(doc, 'link', { rel: 'alternate', hreflang: 'es', href: m.alt.es }));
+    add(el(doc, 'link', { rel: 'alternate', hreflang: 'en', href: m.alt.en }));
+    add(el(doc, 'link', { rel: 'alternate', hreflang: 'x-default', href: m.alt.es }));
   }
   const ogImg = `${SITE}/assets/og/irs-protect-plus-${lang}.jpg`;
   const og = {
-    'og:type': 'website', 'og:site_name': 'IRS Protect Plus', 'og:title': dict['title_' + page.key],
-    'og:description': dict['desc_' + page.key], 'og:url': url, 'og:image': ogImg,
-    'og:image:width': '1200', 'og:image:height': '630', 'og:image:alt': dict['title_index'],
+    'og:type': m.ogType, 'og:site_name': 'IRS Protect Plus', 'og:title': m.title,
+    'og:description': m.desc, 'og:url': url, 'og:image': ogImg,
+    'og:image:width': '1200', 'og:image:height': '630', 'og:image:alt': 'IRS Protect Plus',
     'og:locale': lang === 'en' ? 'en_US' : 'es_US', 'og:locale:alternate': lang === 'en' ? 'es_US' : 'en_US'
   };
   for (const [k, v] of Object.entries(og)) add(el(doc, 'meta', { property: k, content: v }));
   add(el(doc, 'meta', { name: 'twitter:card', content: 'summary_large_image' }));
   add(el(doc, 'meta', { name: 'twitter:image', content: ogImg }));
 
-  if (page.slug === '') {
+  /* Fonts are self-hosted (css/site.css); drop the Google Fonts tags. */
+  head.querySelectorAll('link[href*="fonts.googleapis.com"], link[href*="fonts.gstatic.com"]').forEach((n) => n.remove());
+  add(el(doc, 'link', { rel: 'preload', as: 'font', type: 'font/woff2', href: '/assets/fonts/manrope-latin.woff2', crossorigin: '' }));
+  if (m.preloadHero) {
     add(el(doc, 'link', { rel: 'preload', as: 'image', href: '/assets/opt/woman-holding-resolved-irs-notice.webp', fetchpriority: 'high', type: 'image/webp' }));
   }
-  if (!page.notFound) add(el(doc, 'script', { type: 'application/ld+json' }, jsonLd(doc, page, lang, dict)));
+  if (m.ldJson) add(el(doc, 'script', { type: 'application/ld+json' }, m.ldJson));
 
   /* Vercel Web Analytics + Speed Insights (enable both in the Vercel dashboard). */
   add(el(doc, 'script', {}, 'window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};'));
@@ -308,6 +328,11 @@ function writeBody(doc, page) {
       if (/phone$/.test(key)) n.setAttribute('href', 'tel:+1' + String(v).replace(/\D/g, ''));
     }
   });
+
+  /* Footer: link to the IRS notice guides. */
+  doc.querySelectorAll('.foot-col [data-seo]').forEach((n) => n.remove());
+  const helpLink = doc.querySelector('.foot-col a[href="/help"]');
+  if (helpLink) helpLink.after(el(doc, 'a', { href: GUIDES_HUB_ES, 'data-i18n': 'guides_link' }, 'Guías de avisos del IRS'));
 
   /* Footer: not-affiliated statement and business name, address, phone. */
   const bottom = doc.querySelector('.footer-bottom');
@@ -359,9 +384,11 @@ function toEnglish(html, page, i18nSrc, version) {
   doc.querySelectorAll('a[href^="/"]').forEach((a) => {
     const h = a.getAttribute('href');
     if (/^\/(assets|css|js|en)(\/|$)|^\/favicon/.test(h)) return;
+    const g = GUIDE_EN_PATH.get(h.split('#')[0]);
+    if (g) { a.setAttribute('href', g + (h.includes('#') ? '#' + h.split('#')[1] : '')); return; }
     a.setAttribute('href', h === '/' ? '/en' : h.startsWith('/#') ? '/en' + h.slice(1) : '/en' + h);
   });
-  writeHead(doc, page, 'en', window.I18N.dict.en, version);
+  writeHead(doc, pageMeta(doc, page, 'en', window.I18N.dict.en), version);
   return tidy(dom.serialize());
 }
 /* Remove the empty lines left in <head> where old tags were replaced. */
@@ -373,14 +400,21 @@ function tidy(html) {
 /* ---- Sitemap, robots, IndexNow ----------------------------------------- */
 function writeCrawlerFiles() {
   const today = new Date().toISOString().slice(0, 10);
-  const urls = PAGES.filter((p) => !p.noindex).flatMap((p) => ['es', 'en'].map((lang) => `  <url>
-    <loc>${pageUrl(lang, p.slug)}</loc>
-    <lastmod>${today}</lastmod>
-    <priority>${p.priority}</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="${pageUrl('es', p.slug)}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${pageUrl('en', p.slug)}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${pageUrl('es', p.slug)}"/>
-  </url>`));
+  const entry = (loc, es, en, lastmod, priority) => `  <url>
+    <loc>${loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <priority>${priority}</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="${es}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${en}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${es}"/>
+  </url>`;
+  const urls = PAGES.filter((p) => !p.noindex).flatMap((p) => ['es', 'en'].map((lang) =>
+    entry(pageUrl(lang, p.slug), pageUrl('es', p.slug), pageUrl('en', p.slug), today, p.priority)));
+  for (const g of GUIDES.filter((x) => x.es.reviewed && x.en.reviewed)) {
+    for (const lang of ['es', 'en']) {
+      urls.push(entry(SITE + g[lang].path, SITE + g.es.path, SITE + g.en.path, g[lang].updated, g.es.hub ? '0.8' : '0.7'));
+    }
+  }
   write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.join('\n')}
@@ -409,6 +443,143 @@ Sitemap: ${SITE}/sitemap.xml
   write(INDEXNOW_KEY + '.txt', INDEXNOW_KEY + '\n');
 }
 
+/* ---- IRS notice guides ------------------------------------------------------
+   Each guide is a pair of files in content/guides/: <name>.es.html and
+   <name>.en.html. Each starts with a JSON block (id="guide-meta") holding its
+   URL path, title, description, headline, answer-first lead, dates and review
+   status, followed by the article body. The build wraps the body in the site
+   header and footer. A guide stays noindex (and out of the sitemap) until
+   "reviewed" is true in BOTH language files. */
+function loadGuides() {
+  const dir = rel('content/guides');
+  if (!fs.existsSync(dir)) return [];
+  const names = [...new Set(fs.readdirSync(dir).filter((f) => /\.(es|en)\.html$/.test(f)).map((f) => f.replace(/\.(es|en)\.html$/, '')))];
+  return names.map((name) => {
+    const g = { name };
+    for (const lang of ['es', 'en']) {
+      const src = read(`content/guides/${name}.${lang}.html`);
+      const m = src.match(/<script type="application\/json" id="guide-meta">([\s\S]*?)<\/script>/);
+      if (!m) throw new Error(`content/guides/${name}.${lang}.html: missing guide-meta block`);
+      g[lang] = { ...JSON.parse(m[1]), body: src.slice(m.index + m[0].length).trim() };
+    }
+    return g;
+  }).sort((a, b) => (b.es.hub ? 1 : 0) - (a.es.hub ? 1 : 0) || a.name.localeCompare(b.name));
+}
+const GUIDES = loadGuides();
+const GUIDE_HUB = GUIDES.find((g) => g.es.hub);
+const GUIDES_HUB_ES = GUIDE_HUB ? GUIDE_HUB.es.path : '/help';
+const GUIDE_EN_PATH = new Map(GUIDES.map((g) => [g.es.path, g.en.path]));
+
+const GUIDE_TEXT = {
+  es: { home: 'Inicio', hub: 'Avisos del IRS', updated: 'Actualizado', source: 'Basado en información de IRS.gov', general: 'Información general, no es asesoría fiscal.', reviewedBy: 'Revisado por',
+    ctaTitle: 'Que la próxima carta del IRS no te tome por sorpresa.',
+    ctaBody: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS por $19.99 al mes. Si ya recibiste este aviso, la membresía no lo cubre, pero puedes hablar con Best Vision Accounting sobre tu caso.',
+    ctaBodyHub: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS por $19.99 al mes. Si ya recibiste un aviso, puedes hablar con Best Vision Accounting sobre tu caso.',
+    ctaJoin: 'Obtén protección', ctaContact: 'Hablar con Best Vision Accounting' },
+  en: { home: 'Home', hub: 'IRS notices', updated: 'Updated', source: 'Based on information from IRS.gov', general: 'General information, not tax advice.', reviewedBy: 'Reviewed by',
+    ctaTitle: 'Don’t let the next IRS letter catch you off guard.',
+    ctaBody: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS for $19.99 a month. If you already received this notice, the membership doesn’t cover it, but you can talk to Best Vision Accounting about your case.',
+    ctaBodyHub: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS for $19.99 a month. If you already received a notice, you can talk to Best Vision Accounting about your case.',
+    ctaJoin: 'Get protected', ctaContact: 'Talk to Best Vision Accounting' }
+};
+
+function longDate(iso, lang) {
+  return new Date(iso + 'T12:00:00Z').toLocaleDateString(lang === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+const escHtml = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function renderGuide(g, lang) {
+  const m = g[lang]; const T = GUIDE_TEXT[lang];
+  const home = lang === 'en' ? '/en' : '/';
+  const crumbs = [`<a href="${home}">${T.home}</a>`];
+  if (!m.hub) crumbs.push(`<a href="${GUIDE_HUB[lang].path}">${T.hub}</a>`);
+  crumbs.push(`<span aria-current="page">${escHtml(m.crumb)}</span>`);
+  const byline = m.reviewer
+    ? `${T.reviewedBy} ${escHtml(m.reviewer)} · `
+    : '<!-- TODO(client): add the reviewing EA/CPA name and credential in the guide-meta "reviewer" field, then set "reviewed": true -->';
+  const enroll = lang === 'en' ? '/en/enroll' : '/enroll';
+  const contact = lang === 'en' ? '/en/contact' : '/contact';
+  return `
+<section class="page-hero guide-hero">
+  <div class="page-hero-inner wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">${crumbs.join('<span class="crumb-sep" aria-hidden="true">/</span>')}</nav>
+    <span class="kicker">${escHtml(m.kicker)}</span>
+    <h1>${escHtml(m.h1)}</h1>
+    <p class="lead">${escHtml(m.lead)}</p>
+    <p class="guide-meta">${byline}${T.updated}: <time datetime="${m.updated}">${longDate(m.updated, lang)}</time> · ${T.source} · ${T.general}</p>
+  </div>
+</section>
+<section class="section wrap guide-body">
+  <article class="prose guide">
+${m.body}
+  </article>
+</section>
+<section class="cta-wrap wrap" aria-labelledby="guide-cta-title">
+  <div class="cta-card">
+    <img src="/assets/opt/irs-protect-plus-plan-logo.webp" alt="" width="320" height="249" loading="lazy">
+    <h2 id="guide-cta-title">${T.ctaTitle}</h2>
+    <p>${m.hub ? T.ctaBodyHub : T.ctaBody}</p>
+    <div class="hero-actions guide-cta-actions">
+      <a href="${enroll}" class="btn btn-white">${T.ctaJoin}</a>
+      <a href="${contact}" class="btn btn-ghost btn-ghost--light">${T.ctaContact}</a>
+    </div>
+  </div>
+</section>
+`;
+}
+
+function guideLd(doc, g, lang) {
+  const m = g[lang]; const url = SITE + m.path; const T = GUIDE_TEXT[lang];
+  const crumbs = [{ name: T.home, item: SITE + (lang === 'en' ? '/en' : '/') }];
+  if (!m.hub) crumbs.push({ name: T.hub, item: SITE + GUIDE_HUB[lang].path });
+  crumbs.push({ name: m.crumb, item: url });
+  const graph = [
+    { '@type': 'AccountingService', '@id': ORG_ID, name: CO.legalName },
+    { '@type': 'WebSite', '@id': SITE_ID, url: SITE + '/', name: 'IRS Protect Plus', inLanguage: ['es', 'en'], publisher: { '@id': ORG_ID } },
+    {
+      '@type': 'Article',
+      '@id': url + '#article',
+      headline: m.h1,
+      description: m.description,
+      inLanguage: lang === 'en' ? 'en-US' : 'es-US',
+      datePublished: m.published,
+      dateModified: m.updated,
+      mainEntityOfPage: url,
+      image: `${SITE}/assets/og/irs-protect-plus-${lang}.jpg`,
+      author: m.reviewer ? { '@type': 'Person', name: m.reviewer } : { '@id': ORG_ID },
+      publisher: { '@id': ORG_ID },
+      isPartOf: { '@id': SITE_ID },
+      ...(m.about ? { about: { '@type': 'Thing', name: m.about } } : {}),
+      citation: [...new Set([...doc.querySelectorAll('.guide .sources a[href^="http"]')].map((a) => a.href))]
+    },
+    { '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.item })) }
+  ];
+  const faq = faqPage(doc, url);
+  if (faq) graph.push(faq);
+  return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+}
+
+function buildGuides(version) {
+  const chrome = { es: read('help.html'), en: read('en/help.html') };
+  for (const g of GUIDES) {
+    const reviewed = !!(g.es.reviewed && g.en.reviewed);
+    for (const lang of ['es', 'en']) {
+      const m = g[lang];
+      const dom = new JSDOM(chrome[lang]);
+      const doc = dom.window.document;
+      doc.body.setAttribute('data-page', 'guide');
+      doc.querySelector('main').innerHTML = renderGuide(g, lang);
+      writeHead(doc, {
+        lang, url: SITE + m.path, alt: { es: SITE + g.es.path, en: SITE + g.en.path },
+        title: m.title, desc: m.description, descKey: null, noindex: !reviewed,
+        ldJson: guideLd(doc, g, lang), preloadHero: false, ogType: 'article'
+      }, version);
+      const out = m.path.replace(/^\//, '') + (m.hub ? '/index.html' : '.html');
+      write(out, tidy(dom.serialize()));
+    }
+  }
+}
+
 /* ---- Run ------------------------------------------------------------------ */
 await buildImages();
 rewriteCss();
@@ -420,10 +591,11 @@ for (const page of PAGES) {
   const dom = new JSDOM(read(page.file));
   const doc = dom.window.document;
   writeBody(doc, page);
-  writeHead(doc, page, 'es', esDict, version);
+  writeHead(doc, pageMeta(doc, page, 'es', esDict), version);
   const esHtml = tidy(dom.serialize());
   write(page.file, esHtml);
   if (!page.notFound) write('en/' + page.file, toEnglish(esHtml, page, i18nSrc, version));
 }
+buildGuides(version);
 writeCrawlerFiles();
-console.log(`Built ${PAGES.length} Spanish pages, ${PAGES.length - 1} English pages, sitemap, robots.txt (v=${version}) for ${SITE}`);
+console.log(`Built ${PAGES.length} Spanish pages, ${PAGES.length - 1} English pages, ${GUIDES.length * 2} guide pages (${GUIDES.filter((g) => g.es.reviewed && g.en.reviewed).length * 2} indexable), sitemap, robots.txt (v=${version}) for ${SITE}`);

@@ -89,7 +89,21 @@ URLs (`/enroll` instead of `/enroll.html`, with automatic redirects from the
 old addresses) and sets security and caching headers. `.vercelignore` keeps
 `design-source/`, `scripts/` and the docs off the live site.
 
-## 5. Editing text
+## 5. IRS notice guides
+
+The guides live in `content/guides/` as pairs: `<name>.es.html` and
+`<name>.en.html`. Each file starts with a JSON block (title, description,
+URL path, headline, answer-first lead, dates, `reviewed`, `reviewer`)
+followed by the article body. The build wraps them in the site header and
+footer and writes them to `avisos-irs/` and `en/irs-notices/`.
+
+A guide is published with `noindex` and left out of the sitemap until
+`"reviewed": true` is set in **both** language files. Before flipping it,
+have a credentialed professional (EA or CPA) check the facts against the
+IRS.gov sources listed at the bottom of each guide, put their name and
+credential in `"reviewer"`, update `"updated"`, and run the build.
+
+## 6. Editing text
 
 All copy, in both languages, is in `js/i18n.js`. Elements are marked with
 `data-i18n="key"`. Page titles are the `title_*` entries and search-result
