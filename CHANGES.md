@@ -52,11 +52,11 @@ connector could not access. Check it while logged in (list in the handoff).
 
 - `index.html`: "Who represents you" section with real credentialed staff (name,
   EA/CPA credential, photo). Only real people and credentials (Circular 230 §10.30).
-- `js/config.js`: `company.email`, `company.hours`, `forms.endpoint`, `checkoutUrl`,
-  `memberPortalUrl` are still blank. bvaccounting.com lists info@bvaccounting.com if
-  that is the right inbox.
+- `js/config.js`: `forms.endpoint`, `checkoutUrl` and `memberPortalUrl` are still blank.
+  Until a form endpoint is set, forms open the visitor's email app addressed to
+  info@bvaccounting.com.
 - Legal name: Florida Sunbiz shows "Best Vision Accounting Corp"; the site uses
   "LLC" as confirmed. Worth confirming with the registered agent.
-- Social profiles (Facebook, Instagram, Yelp) for `sameAs` in structured data.
+- Yelp profile link for structured data, if you want it listed alongside Facebook and Instagram.
 - The hero and share images show an IRS seal on an envelope. Have counsel confirm
   this is acceptable alongside the not-affiliated statement.

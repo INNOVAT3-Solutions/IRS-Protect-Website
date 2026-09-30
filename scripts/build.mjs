@@ -170,7 +170,14 @@ function organization() {
     knowsLanguage: ['es', 'en'],
     areaServed: { '@type': 'Country', name: 'United States' }
   };
-  if (CO.url) { org.url = CO.url; org.sameAs = [CO.url]; }
+  if (CO.url) org.url = CO.url;
+  const sameAs = [CO.url, ...(CO.social || [])].filter(Boolean);
+  if (sameAs.length) org.sameAs = sameAs;
+  if (CO.fax) org.faxNumber = '+1-' + CO.fax.replace(/\D/g, '').replace(/^(\d{3})(\d{3})(\d{4})$/, '$1-$2-$3');
+  if (CO.openingHours && CO.openingHours.length) {
+    const DAY = { Mo: 'Monday', Tu: 'Tuesday', We: 'Wednesday', Th: 'Thursday', Fr: 'Friday', Sa: 'Saturday', Su: 'Sunday' };
+    org.openingHoursSpecification = CO.openingHours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days.map((d) => 'https://schema.org/' + DAY[d]), opens: h.opens, closes: h.closes }));
+  }
   if (CO.phone) org.telephone = '+1-' + CO.phone.replace(/\D/g, '').replace(/^(\d{3})(\d{3})(\d{4})$/, '$1-$2-$3');
   if (CO.email) org.email = CO.email;
   if (CO.streetAddress) {
@@ -374,6 +381,7 @@ function toEnglish(html, page, i18nSrc, version) {
     const t = n.textContent.trim();
     if (esToEn.has(t)) n.textContent = esToEn.get(t);
   });
+  if (CO.hoursEn) doc.querySelectorAll('[data-config="company.hours"]').forEach((n) => { n.textContent = CO.hoursEn; });
   doc.querySelectorAll('[data-lang-only="es"]').forEach((n) => n.remove());
   doc.querySelectorAll('[data-lang-only="en"]').forEach((n) => n.removeAttribute('hidden'));
   doc.querySelectorAll('[aria-label], [alt], [title], [placeholder]').forEach((n) => {

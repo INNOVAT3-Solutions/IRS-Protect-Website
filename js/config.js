@@ -12,9 +12,18 @@ window.SITE_CONFIG = {
     name: 'Best Vision Accounting',
     legalName: 'Best Vision Accounting, LLC',
     url: 'https://bvaccounting.com',
-    email: '',        // e.g. 'hello@bestvisionaccounting.com'  (also the email fallback for forms)
+    email: 'info@bvaccounting.com',   // also the email fallback for forms
     phone: '(305) 220-9616',
-    hours: '',        // e.g. 'Lun–Vie, 9am–6pm ET'
+    fax: '(305) 220-9617',
+    hours: 'Lun–Vie: 9am–5pm · Sáb–Dom: cerrado',
+    hoursEn: 'Mon–Fri: 9am–5pm · Sat–Sun: closed',
+    /* Opening hours for search engines: days (Mo Tu We Th Fr Sa Su) and 24h times. */
+    openingHours: [{ days: ['Mo', 'Tu', 'We', 'Th', 'Fr'], opens: '09:00', closes: '17:00' }],
+    /* Official social profiles (used by search engines to connect the brand). */
+    social: [
+      'https://www.facebook.com/BVAccountingMiami',
+      'https://www.instagram.com/bestvisionaccounting'
+    ],
     address: '11401 SW 40th St, Suite 265, Miami, FL 33165',
     /* The same address split into parts, for search engines (structured
        data). Keep it identical to the address above and to the Google

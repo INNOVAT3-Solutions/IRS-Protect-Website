@@ -32,6 +32,7 @@
     });
     $$('[data-config]').forEach(function (el) {
       var key = el.getAttribute('data-config'); var v = get(C, key);
+      if (key === 'company.hours' && I && I.lang === 'en' && get(C, 'company.hoursEn')) v = get(C, 'company.hoursEn');
       var wrap = el.closest('[data-config-wrap]');
       if (!v) { (wrap || el).hidden = true; return; }
       if (wrap) wrap.hidden = false;

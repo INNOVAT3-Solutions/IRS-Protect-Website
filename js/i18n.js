@@ -148,7 +148,7 @@
       topic: 'Tema', topic_membership: 'Preguntas sobre la membresía', topic_billing: 'Facturación o cancelación', topic_notice: 'Recibí un aviso del IRS', topic_other: 'Otro asunto',
       message: 'Mensaje', message_ph: '¿En qué podemos ayudarte?', send_btn: 'Enviar mensaje',
       contact_success_t: 'Mensaje enviado', contact_success_b: 'Gracias, {name}. Te responderemos en {email} dentro de un día hábil.',
-      contact_details: 'Datos de contacto', contact_email_l: 'Correo', contact_phone_l: 'Teléfono', contact_hours_l: 'Horario', contact_address_l: 'Oficina',
+      contact_details: 'Datos de contacto', contact_email_l: 'Correo', contact_phone_l: 'Teléfono', contact_fax_l: 'Fax', contact_hours_l: 'Horario', contact_address_l: 'Oficina',
 
       /* Login */
       login_kicker: 'Miembros', login_title: 'Acceso para miembros', login_sub: 'Accede a tu membresía, actualiza tu facturación y envía avisos del IRS.',
@@ -312,7 +312,7 @@
       topic: 'Topic', topic_membership: 'Membership questions', topic_billing: 'Billing or cancellation', topic_notice: 'I received an IRS notice', topic_other: 'Something else',
       message: 'Message', message_ph: 'How can we help?', send_btn: 'Send message',
       contact_success_t: 'Message sent', contact_success_b: 'Thanks, {name}. We’ll get back to you at {email} within one business day.',
-      contact_details: 'Contact details', contact_email_l: 'Email', contact_phone_l: 'Phone', contact_hours_l: 'Hours', contact_address_l: 'Office',
+      contact_details: 'Contact details', contact_email_l: 'Email', contact_phone_l: 'Phone', contact_fax_l: 'Fax', contact_hours_l: 'Hours', contact_address_l: 'Office',
 
       login_kicker: 'Members', login_title: 'Member sign in', login_sub: 'Access your membership, update billing, and submit IRS notices.',
       portal_open: 'Open the member portal', portal_note: 'You’ll be taken to the secure Best Vision Accounting member portal.',
