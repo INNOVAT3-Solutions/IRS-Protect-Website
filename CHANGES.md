@@ -20,6 +20,8 @@ Source: SEO + AI-search audit of irs-protect-website.vercel.app, 2026-09-29
 | M3 robots.txt | Explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, Bingbot. | `robots.txt` |
 | M4 Utility pages | `noindex, follow` on `/login` (and 404). | `login.html` |
 | M5 Government affiliation | "No afiliado con el IRS ni con el gobierno de EE. UU." / "Not affiliated with the IRS or the U.S. government." in every footer. | all pages, `js/i18n.js` |
+| M2 No informational content | Hub + 5 IRS notice guides (CP2000, Letter 566, CP3219A, CP14–CP504, LT11/Letter 1058) in ES and EN, sourced to IRS.gov, with Article, BreadcrumbList and FAQPage schema. **Shipped as noindex until reviewed.** | `content/guides/`, `avisos-irs/`, `en/irs-notices/` |
+| L1 Render-blocking fonts | Manrope self-hosted (woff2, preloaded); Google Fonts removed. | `assets/fonts/`, `css/site.css` |
 | L2 Security headers | `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`. Cache headers for css/js/assets. | `vercel.json` |
 
 ## Verification (local, headless Chrome + scripted checks)
@@ -37,11 +39,16 @@ connector could not access. Check it while logged in (list in the handoff).
 
 ## Not applied (outside the approved scope)
 
-- Content roadmap (notice-code guides): deferred by decision.
-- Self-hosting the Manrope font (audit L1).
+- The remaining roadmap pages (comparison page, notice-date rule explainer, Miami
+  local page, CP90/Letter 525): not written yet.
 - Google Search Console verification: use a DNS "Domain" property instead of a meta tag.
 
 ## Needs client input (TODOs)
+
+- **Guide review:** have your EA/CPA check each guide in `content/guides/`
+  against the IRS.gov sources listed on it, add their name and credential in
+  `"reviewer"`, set `"reviewed": true` in both language files and run the
+  build. Until then the guides are live but noindex.
 
 - `index.html`: "Who represents you" section with real credentialed staff (name,
   EA/CPA credential, photo). Only real people and credentials (Circular 230 §10.30).
