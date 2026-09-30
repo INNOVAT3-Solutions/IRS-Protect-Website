@@ -1,0 +1,8 @@
+{
+  "name": "irs-protect-site-build",
+  "private": true,
+  "type": "module",
+  "description": "Generates the English pages, SEO head tags, structured data, sitemap and WebP images. Run from this folder: npm install && npm run build",
+  "scripts": { "build": "node build.mjs" },
+  "devDependencies": { "jsdom": "^25.0.1", "sharp": "^0.33.5" }
+}

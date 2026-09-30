@@ -12,6 +12,10 @@
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function get(o, p) { return String(p).split('.').reduce(function (a, k) { return a == null ? undefined : a[k]; }, o); }
+  /* Internal page URL in the current language (Spanish at /, English at /en/). */
+  function pageUrl(slug) { return ((I && I.lang === 'en') ? '/en/' : '/') + slug; }
+  /* Conversion events for Vercel Web Analytics (no-op when it isn't loaded). */
+  function track(name, data) { try { if (window.va) window.va('event', { name: name, data: data || {} }); } catch (e) { /* ignore */ } }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   /* ------------------------------------------------------------------------
@@ -24,7 +28,7 @@
     });
     $$('[data-link="company"]').forEach(function (a) {
       var u = get(C, 'company.url');
-      if (u) { a.href = u; a.target = '_blank'; a.rel = 'noopener'; } else { a.href = 'contact.html'; }
+      if (u) { a.href = u; a.target = '_blank'; a.rel = 'noopener'; } else { a.href = pageUrl('contact'); }
     });
     $$('[data-config]').forEach(function (el) {
       var key = el.getAttribute('data-config'); var v = get(C, key);
@@ -74,7 +78,11 @@
     }
 
     $$('[data-lang]').forEach(function (b) {
-      b.addEventListener('click', function () { if (I) I.setLang(b.getAttribute('data-lang')); });
+      b.addEventListener('click', function () {
+        var l = b.getAttribute('data-lang');
+        if (I && l !== I.lang) track('lang_switch', { to: l });
+        if (I) I.setLang(l);
+      });
     });
 
     var links = $$('.nav-links a[href^="#"]');
@@ -195,6 +203,12 @@
      2. mailto: to SITE_CONFIG.company.email (no attachments possible)
      3. none — the visitor is asked to contact the company directly */
   function deliver(kind, fields, files, subject) {
+    return send(kind, fields, files, subject).then(function (r) {
+      if (r.mode !== 'none') track(kind + '_submit', { delivery: r.mode, lang: I ? I.lang : 'es' });
+      return r;
+    });
+  }
+  function send(kind, fields, files, subject) {
     var endpoint = get(C, 'forms.endpoint');
     if (endpoint) {
       var fd = new FormData();
@@ -232,7 +246,7 @@
   function showResult(form, result, opts) {
     if (result.mode === 'none') {
       var onContact = document.body.getAttribute('data-page') === 'contact';
-      showAlert(form, 'info', '<p>' + esc(t('no_delivery')) + '</p>' + (onContact ? '' : '<p><a href="contact.html">' + esc(t('go_contact')) + ' →</a></p>'));
+      showAlert(form, 'info', '<p>' + esc(t('no_delivery')) + '</p>' + (onContact ? '' : '<p><a href="' + pageUrl('contact') + '">' + esc(t('go_contact')) + ' →</a></p>'));
       return;
     }
     var box = document.getElementById(form.getAttribute('data-success')); if (!box) return;
@@ -268,6 +282,7 @@
   /* ---- Enrollment (2 steps, single membership) ---- */
   function initEnrollForm() {
     var form = document.getElementById('enroll-form'); if (!form) return;
+    form.addEventListener('input', function started() { track('enroll_start'); form.removeEventListener('input', started); });
     liveValidate(form);
     var panels = $$('.step-panel', form); var steps = $$('.steps .step', form); var cur = 0;
     var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99 };

@@ -18,11 +18,24 @@
       from_price: '$19.99 al mes', go_contact: 'Contáctanos', go_home: 'Volver al inicio', optional: '(opcional)',
 
       /* Page titles */
-      title_index: 'IRS Protect Plus | Representación profesional ante el IRS por $19.99 al mes', title_enroll: 'Obtén protección | IRS Protect Plus', title_contact: 'Contáctanos | IRS Protect Plus', title_login: 'Acceso para miembros | IRS Protect Plus', title_notice: 'Enviar un aviso del IRS | IRS Protect Plus', title_help: 'Centro de ayuda | IRS Protect Plus', title_agreement: 'Contrato de membresía | IRS Protect Plus', title_terms: 'Términos del servicio | IRS Protect Plus', title_privacy: 'Política de privacidad | IRS Protect Plus', title_404: 'Página no encontrada | IRS Protect Plus',
+      title_index: 'Protección ante el IRS por $19.99 al mes | IRS Protect Plus', title_enroll: 'Obtén protección | IRS Protect Plus', title_contact: 'Contáctanos | IRS Protect Plus', title_login: 'Acceso para miembros | IRS Protect Plus', title_notice: 'Enviar un aviso del IRS | IRS Protect Plus', title_help: 'Centro de ayuda | IRS Protect Plus', title_agreement: 'Contrato de membresía | IRS Protect Plus', title_terms: 'Términos del servicio | IRS Protect Plus', title_privacy: 'Política de privacidad | IRS Protect Plus', title_404: 'Página no encontrada | IRS Protect Plus',
+
+      /* Meta descriptions (search results), ~155 characters max */
+      desc_index: 'Membresía de representación ante el IRS: revisamos tus cartas del IRS y te ayudamos en auditorías y cobros. Hasta $10,000 en servicios por $19.99 al mes.',
+      desc_enroll: 'Inscríbete en IRS Protect Plus en unos dos minutos: representación profesional ante el IRS por $19.99 al mes. Cancela cuando quieras.',
+      desc_contact: '¿Preguntas sobre la membresía IRS Protect Plus, la facturación o un aviso del IRS? Contacta al equipo de Best Vision Accounting en Miami.',
+      desc_help: 'Respuestas sobre la membresía IRS Protect Plus, cobertura, facturación, cancelación y qué hacer cuando llega una carta del IRS.',
+      desc_notice: 'Miembros de IRS Protect Plus: sube tu aviso o carta del IRS y el equipo de Best Vision Accounting lo revisará y te dirá qué sigue.',
+      desc_login: 'Acceso para miembros de IRS Protect Plus: entra al portal, envía un aviso del IRS o contacta al equipo de Best Vision Accounting.',
+      desc_agreement: 'Contrato de membresía de IRS Protect Plus: beneficios, elegibilidad, exclusiones, cuotas, cancelación y reembolsos. Best Vision Accounting, LLC.',
+      desc_terms: 'Términos que rigen el uso del sitio web de IRS Protect Plus y los servicios en línea de Best Vision Accounting, LLC.',
+      desc_privacy: 'Cómo Best Vision Accounting, LLC recopila, usa, comparte y protege la información enviada a través del sitio web de IRS Protect Plus.',
+      desc_404: 'No encontramos la página que buscas.',
+      not_affiliated: 'IRS Protect Plus no está afiliado con el IRS ni con el gobierno de EE. UU.',
 
       /* Hero */
       hero_title: 'El IRS es complicado. Tu protección no debería serlo.',
-      hero_sub: 'Representación fiscal profesional para asuntos elegibles del IRS, lista antes de que se conviertan en tu problema.',
+      hero_sub: 'IRS Protect Plus es una membresía de representación ante el IRS: el equipo de Best Vision Accounting revisa tus cartas del IRS, responde por ti y te ayuda en auditorías y cobros elegibles.',
       stat_rep: 'en representación profesional', cancel_anytime: 'Cancela cuando quieras.', hero_backed: 'Respaldado por Best Vision Accounting',
       hero_disclaimer: 'IRS Protect Plus es un programa de membresía y no es un seguro. Aplican requisitos de elegibilidad, limitaciones y exclusiones.',
       alt_hero: 'Una mujer sonriente señala una carta del IRS mientras sostiene un sobre del IRS con el sello Resuelto y un escudo azul detrás',
@@ -179,10 +192,23 @@
       submit_notice_link: 'Submit a notice', contact: 'Contact us', help: 'Help center', agreement: 'Membership Agreement', terms: 'Terms of Service', privacy: 'Privacy Policy',
       from_price: '$19.99 a month', go_contact: 'Contact us', go_home: 'Back to home', optional: '(optional)',
 
-      title_index: 'IRS Protect Plus | Professional IRS representation for $19.99 a month', title_enroll: 'Get protected | IRS Protect Plus', title_contact: 'Contact us | IRS Protect Plus', title_login: 'Member sign in | IRS Protect Plus', title_notice: 'Submit an IRS notice | IRS Protect Plus', title_help: 'Help center | IRS Protect Plus', title_agreement: 'Membership Agreement | IRS Protect Plus', title_terms: 'Terms of Service | IRS Protect Plus', title_privacy: 'Privacy Policy | IRS Protect Plus', title_404: 'Page not found | IRS Protect Plus',
+      title_index: 'IRS Notice & Audit Protection, $19.99/mo | IRS Protect Plus', title_enroll: 'Get protected | IRS Protect Plus', title_contact: 'Contact us | IRS Protect Plus', title_login: 'Member sign in | IRS Protect Plus', title_notice: 'Submit an IRS notice | IRS Protect Plus', title_help: 'Help center | IRS Protect Plus', title_agreement: 'Membership Agreement | IRS Protect Plus', title_terms: 'Terms of Service | IRS Protect Plus', title_privacy: 'Privacy Policy | IRS Protect Plus', title_404: 'Page not found | IRS Protect Plus',
+
+      /* Meta descriptions (search results), ~155 characters max */
+      desc_index: 'IRS representation membership: we review your IRS letters and help with audits and collections. Up to $10,000 in professional services for $19.99 a month.',
+      desc_enroll: 'Join IRS Protect Plus in about two minutes: professional IRS representation for $19.99 a month. Cancel anytime.',
+      desc_contact: 'Questions about IRS Protect Plus membership, billing or an IRS notice? Contact the Best Vision Accounting team in Miami, in English or Spanish.',
+      desc_help: 'Answers about IRS Protect Plus membership, coverage, billing, cancellation, and what to do when an IRS letter arrives.',
+      desc_notice: 'IRS Protect Plus members: upload your IRS notice or letter and the Best Vision Accounting team will review it and tell you what comes next.',
+      desc_login: 'IRS Protect Plus member access: open the member portal, submit an IRS notice, or contact the Best Vision Accounting team.',
+      desc_agreement: 'IRS Protect Plus Membership Agreement: benefits, eligibility, exclusions, fees, cancellation and refunds. Best Vision Accounting, LLC.',
+      desc_terms: 'Terms governing use of the IRS Protect Plus website and the online services of Best Vision Accounting, LLC.',
+      desc_privacy: 'How Best Vision Accounting, LLC collects, uses, shares and protects information submitted through the IRS Protect Plus website.',
+      desc_404: 'We can’t find the page you’re looking for.',
+      not_affiliated: 'IRS Protect Plus is not affiliated with the IRS or the U.S. government.',
 
       hero_title: 'The IRS is complicated. Your protection shouldn’t be.',
-      hero_sub: 'Professional tax representation for eligible IRS matters, in place before they become your problem.',
+      hero_sub: 'IRS Protect Plus is an IRS representation membership: the Best Vision Accounting team reviews your IRS letters, responds for you, and helps with eligible audits and collections.',
       stat_rep: 'in professional representation', cancel_anytime: 'Cancel anytime.', hero_backed: 'Backed by Best Vision Accounting',
       hero_disclaimer: 'IRS Protect Plus is a membership program and is not insurance. Eligibility requirements, limitations and exclusions apply.',
       alt_hero: 'A smiling woman points at an IRS letter while holding an IRS envelope stamped Resolved, with a blue shield behind her',
@@ -324,12 +350,10 @@
   var GLOBALS = { mb: cfg.maxUploadMb || 10 };
   function get(obj, path) { return String(path).split('.').reduce(function (o, k) { return o == null ? undefined : o[k]; }, obj); }
 
-  var lang = cfg.defaultLanguage === 'en' ? 'en' : 'es';
-  try {
-    var stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === 'es' || stored === 'en') lang = stored;
-    else if (cfg.autoDetectLanguage === true) lang = /^es\b/i.test(navigator.language || '') ? 'es' : 'en';
-  } catch (e) { /* storage unavailable */ }
+  /* Each language has its own static pages (Spanish at /, English at /en/),
+     so the page's own <html lang> decides the language. The visitor's choice
+     is remembered only so the toggle can highlight it. */
+  var lang = /^en\b/i.test(document.documentElement.getAttribute('lang') || '') ? 'en' : 'es';
 
   function t(key, vars) {
     var v = get(DICT[lang], key);
@@ -361,9 +385,15 @@
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
   }
 
+  /* Switching language opens the same page in the other language. The
+     counterpart URL comes from the page's hreflang alternate links. */
   function setLang(l) {
-    lang = l === 'en' ? 'en' : 'es';
-    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* ignore */ }
+    l = l === 'en' ? 'en' : 'es';
+    try { localStorage.setItem(STORAGE_KEY, l); } catch (e) { /* ignore */ }
+    if (l === lang) return;
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + l + '"]');
+    if (alt) { window.location.href = alt.getAttribute('href').replace(/^https?:\/\/[^/]+/, '') + window.location.hash; return; }
+    lang = l;
     apply();
   }
 

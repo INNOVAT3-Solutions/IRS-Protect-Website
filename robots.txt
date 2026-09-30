@@ -1,4 +1,19 @@
+# IRS Protect Plus
 User-agent: *
 Allow: /
-Disallow: /uploads/
 Disallow: /design-source/
+
+# AI search and answer engines are welcome to read and cite this site.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+Allow: /
+Disallow: /design-source/
+
+Sitemap: https://irsprotect.us/sitemap.xml
