@@ -89,6 +89,9 @@ reviews them.
 
 ## 5. Legal and compliance review (counsel)
 
+**Start with `COMPLIANCE.md`.** It lists what was fixed on 2026-10-09 and every remaining legal risk in priority order, with sources. The most urgent items: whether the membership counts as insurance in Florida; the "IRS" brand name and logo (31 U.S.C. §333); a written security plan and an encrypted upload provider (FTC Safeguards Rule); and confirming credentialed representatives.
+
+
 - [ ] **Legal name:** the site says "Best Vision Accounting, LLC". Florida's Sunbiz shows "Best Vision Accounting Corp" (name change 03/11/2024). Confirm which is correct. If it's the Corp, update `company.legalName` and the legal pages.
 - [ ] **IRS seal:** the hero image and the social share images show an IRS seal on an envelope. Confirm this is acceptable next to the "not affiliated with the IRS" statement, or swap the image.
 - [ ] **Insurance question:** confirm the membership, a prepaid service capped at $10,000 in value for future notices, is exempt from Florida insurance and legal-expense-plan rules (Ch. 624 and Ch. 642).
