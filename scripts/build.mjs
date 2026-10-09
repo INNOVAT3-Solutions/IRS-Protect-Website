@@ -37,6 +37,9 @@ const PAGES = [
   { file: 'membership-agreement.html', slug: 'membership-agreement', key: 'agreement', priority: '0.4' },
   { file: 'terms.html', slug: 'terms', key: 'terms', priority: '0.2' },
   { file: 'privacy.html', slug: 'privacy', key: 'privacy', priority: '0.2' },
+  { file: 'cookie-policy.html', slug: 'cookie-policy', key: 'cookies', priority: '0.2' },
+  { file: 'refund-policy.html', slug: 'refund-policy', key: 'refund', priority: '0.3' },
+  { file: 'accessibility.html', slug: 'accessibility', key: 'accessibility', priority: '0.2' },
   { file: 'login.html', slug: 'login', key: 'login', noindex: true },
   { file: '404.html', slug: '404', key: '404', noindex: true, notFound: true }
 ];
@@ -48,7 +51,6 @@ const pageUrl = (lang, slug) => lang === 'en'
 /* Strings in the markup that have no i18n key. */
 const EN_ATTRS = {
   'IRS Protect Plus por Best Vision Accounting — inicio': 'IRS Protect Plus by Best Vision Accounting — home',
-  'IRS Protect Plus — inicio': 'IRS Protect Plus — home',
   'Principal': 'Main',
   'Menú': 'Menu',
   'Documentos legales': 'Legal documents',
@@ -264,6 +266,12 @@ function pageMeta(doc, page, lang, dict) {
 }
 
 function writeHead(doc, m, version) {
+  /* Tables that scroll sideways on phones must be reachable by keyboard (WCAG 2.1.1). */
+  doc.querySelectorAll('.table-scroll').forEach((t) => {
+    t.setAttribute('tabindex', '0');
+    t.setAttribute('role', 'region');
+    t.setAttribute('aria-label', m.lang === 'en' ? 'Table (scrolls sideways)' : 'Tabla (se desplaza hacia los lados)');
+  });
   const head = doc.head;
   head.querySelectorAll('[data-seo]').forEach((n) => n.remove());
   head.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"], meta[name="robots"], link[rel="canonical"], link[rel="alternate"]').forEach((n) => n.remove());
@@ -335,6 +343,21 @@ function writeBody(doc, page) {
       if (/phone$/.test(key)) n.setAttribute('href', 'tel:+1' + String(v).replace(/\D/g, ''));
     }
   });
+
+  /* Legal documents: the same list in the legal-page tabs and the footer. */
+  const LEGAL = [['/membership-agreement', 'agreement', 'Contrato de membresía'], ['/terms', 'terms', 'Términos del servicio'],
+    ['/privacy', 'privacy', 'Política de privacidad'], ['/cookie-policy', 'cookies', 'Política de cookies'],
+    ['/refund-policy', 'refund', 'Reembolsos y cancelación'], ['/accessibility', 'accessibility', 'Accesibilidad']];
+  const here = '/' + page.slug;
+  const legalLinks = (current) => LEGAL.map(([href, key, text]) => {
+    const a = doc.createElement('a'); a.setAttribute('href', href); a.setAttribute('data-i18n', key); a.textContent = text;
+    if (current && href === here) a.setAttribute('aria-current', 'page');
+    return a;
+  });
+  const legalNav = doc.querySelector('.legal-nav');
+  if (legalNav) { legalNav.replaceChildren(...legalLinks(true).flatMap((a) => [doc.createTextNode('\n    '), a]), doc.createTextNode('\n  ')); }
+  const legalCol = [...doc.querySelectorAll('.foot-col')].find((c) => c.querySelector('[data-i18n="col_legal"]'));
+  if (legalCol) { legalCol.replaceChildren(legalCol.querySelector('[data-i18n="col_legal"]'), ...legalLinks(false)); }
 
   /* Footer: link to the IRS notice guides. */
   doc.querySelectorAll('.foot-col [data-seo]').forEach((n) => n.remove());
@@ -595,8 +618,23 @@ const version = assetVersion();
 const i18nSrc = read('js/i18n.js');
 const esDict = (() => { const w = { SITE_CONFIG: CONFIG }; const d = { documentElement: { getAttribute: () => 'es', classList: { add() {} } }, readyState: 'loading', addEventListener() {} }; new Function('window', 'document', 'localStorage', i18nSrc)(w, d, {}); return w.I18N.dict.es; })();
 
+/* Write the Spanish dictionary into the Spanish pages too, so js/i18n.js is
+   the single source of text and crawlers see the current copy. */
+function applySpanish(html) {
+  const dom = new JSDOM(html, { runScripts: 'outside-only' });
+  const { window } = dom;
+  window.document.documentElement.setAttribute('lang', 'es');
+  window.SITE_CONFIG = CONFIG;
+  window.eval(i18nSrc);
+  window.I18N.apply();
+  const root = window.document.documentElement;
+  root.classList.remove('js');
+  if (!root.getAttribute('class')) root.removeAttribute('class');
+  return dom;
+}
+
 for (const page of PAGES) {
-  const dom = new JSDOM(read(page.file));
+  const dom = applySpanish(read(page.file));
   const doc = dom.window.document;
   writeBody(doc, page);
   writeHead(doc, pageMeta(doc, page, 'es', esDict), version);

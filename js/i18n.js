@@ -34,10 +34,18 @@
       not_affiliated: 'IRS Protect Plus no está afiliado con el IRS ni con el gobierno de EE. UU.',
       guides_link: 'Guías de avisos del IRS',
 
+      title_cookies: 'Política de cookies | IRS Protect Plus', title_refund: 'Reembolsos y cancelación | IRS Protect Plus', title_accessibility: 'Accesibilidad | IRS Protect Plus',
+      desc_cookies: 'Qué guarda el sitio de IRS Protect Plus en tu navegador: solo tu preferencia de idioma. Analítica sin cookies y sin seguimiento entre sitios.',
+      desc_refund: 'Cómo cancelar IRS Protect Plus ($19.99 al mes, renovación automática) y cuándo las cuotas pueden ser reembolsables, según el contrato de membresía.',
+      desc_accessibility: 'Compromiso de accesibilidad de IRS Protect Plus: objetivo WCAG 2.1 AA, lo que hemos hecho, limitaciones conocidas y cómo pedir ayuda.',
+      cookies: 'Política de cookies', refund: 'Reembolsos y cancelación', accessibility: 'Accesibilidad',
+      legal_cookies_title: 'Política de cookies', legal_refund_title: 'Política de reembolsos y cancelación', legal_accessibility_title: 'Declaración de accesibilidad',
+      legal_updated_privacy: 'Última actualización: 9 de octubre de 2026', legal_updated_terms: 'Última actualización: 9 de octubre de 2026', legal_updated_cookies: 'Última actualización: 9 de octubre de 2026', legal_updated_refund: 'Última actualización: 9 de octubre de 2026', legal_updated_accessibility: 'Última actualización: 9 de octubre de 2026',
+
       /* Hero */
       hero_title: 'El IRS es complicado. Tu protección no debería serlo.',
       hero_sub: 'IRS Protect Plus es una membresía de representación ante el IRS: el equipo de Best Vision Accounting revisa tus cartas del IRS, responde por ti y te ayuda en auditorías y cobros elegibles.',
-      stat_rep: 'en representación profesional', cancel_anytime: 'Cancela cuando quieras.', hero_backed: 'Respaldado por Best Vision Accounting',
+      stat_rep: 'máximo en servicios de representación', cancel_anytime: 'Cancela cuando quieras.', hero_backed: 'Respaldado por Best Vision Accounting',
       hero_disclaimer: 'IRS Protect Plus es un programa de membresía y no es un seguro. Aplican requisitos de elegibilidad, limitaciones y exclusiones.',
       alt_hero: 'Una mujer sonriente señala una carta del IRS mientras sostiene un sobre del IRS con el sello Resuelto y un escudo azul detrás',
 
@@ -53,7 +61,7 @@
       f1_body: 'Para calificar, tu membresía debe estar activa y al corriente en la fecha impresa en el primer aviso del IRS. Un aviso fechado el 1 de agosto no está cubierto por una membresía que inicia el 2 de agosto, aunque abras el sobre después. La cobertura no es retroactiva: la protección empieza antes que el problema.',
       f1_link: 'Protégete hoy',
       f2_title: '¿Recibiste una carta del IRS? Envíanosla.',
-      f2_body: 'La mayoría de las personas no sabe si un CP2000, un aviso de examen o un aviso de cobro es grave. Tú no tienes que saberlo. Entrega el aviso, la declaración correspondiente y los documentos solicitados, y el equipo de Best Vision determina qué pide el IRS y qué sigue.',
+      f2_body: 'Muchas personas no saben si un CP2000, un aviso de examen o un aviso de cobro es grave. Tú no tienes que saberlo. Entrega el aviso, la declaración correspondiente y los documentos solicitados, y el equipo de Best Vision determina qué pide el IRS y qué sigue.',
       f2_link: 'Ver qué incluye',
       send_notice: 'Enviar un aviso', upload_notice: 'Sube el aviso del IRS', photo_pdf: 'Foto o PDF', notice_cp2000: 'Aviso CP2000', in_progress: 'En proceso',
       timeline: [['Aviso y declaración revisados', 'Best Vision Accounting'], ['Respuesta al IRS', 'En proceso'], ['Representación y resolución', 'Autorizada ante el IRS']],
@@ -62,9 +70,9 @@
       alt_envelope: 'Un sobre del IRS con el sello Aviso fiscal importante', alt_couple: 'Una pareja revisa un aviso del IRS en una laptop', alt_advisor: 'Un contador revisa documentos fiscales',
 
       /* Single plan */
-      plans_title: 'Una membresía. Protección completa.',
-      plans_sub: 'Representación profesional ante el IRS del equipo de Best Vision Accounting por $19.99 al mes. Sin niveles ni sorpresas.',
-      plan_tag: 'Membresía', ribbon: 'Protección completa', plan_tagline: 'Hasta $10,000 en representación profesional, lista antes de la carta.',
+      plans_title: 'Una membresía. Reglas claras.',
+      plans_sub: 'Representación profesional ante el IRS del equipo de Best Vision Accounting por $19.99 al mes. Un solo plan, sin niveles.',
+      plan_tag: 'Membresía', ribbon: 'Un solo plan', plan_tagline: 'Hasta $10,000 en representación profesional, lista antes de la carta.',
       plan_items: [
         ['Hasta $10,000 en representación profesional', 'Servicios de representación fiscal profesional por contribuyente para asuntos elegibles del IRS.'],
         ['Revisión de avisos, declaraciones y documentos', 'Revisamos la correspondencia del IRS, tu declaración federal correspondiente y organizamos los documentos de respaldo.'],
@@ -133,10 +141,10 @@
       step_details: 'Tus datos', step_review: 'Revisar y confirmar',
       details_title: '¿A quién protegemos?', details_sub: 'Usa el nombre exactamente como aparece en tu declaración federal de impuestos.',
       review_title: 'Revisa y confirma', review_sub: 'Verifica tus datos y acepta los términos de la membresía. Al enviar, aceptas el contrato electrónicamente.',
-      summary_plan: 'Membresía', summary_price: 'Cuota mensual', summary_name: 'Miembro', summary_email: 'Correo', summary_phone: 'Teléfono', summary_zip: 'Código postal', summary_fs: 'Estado civil fiscal', summary_start: 'Fecha efectiva de inscripción', summary_total: 'A pagar hoy', billed_monthly: 'Se factura mensualmente. Cancela cuando quieras.',
+      summary_plan: 'Membresía', summary_price: 'Cuota mensual', summary_name: 'Miembro', summary_email: 'Correo', summary_phone: 'Teléfono', summary_zip: 'Código postal', summary_fs: 'Estado civil fiscal', summary_start: 'Fecha efectiva de inscripción', summary_total: 'A pagar hoy', billed_monthly: 'Tu membresía se renueva automáticamente cada mes y se cobran $19.99 al mes hasta que la canceles. Puedes cancelar en cualquier momento escribiendo a info@bvaccounting.com o llamando al (305) 220-9616; la cancelación detiene los cobros futuros. Reembolsos: las cuotas de los primeros 30 días pueden ser reembolsables si no has solicitado, recibido ni iniciado ningún beneficio.',
       agree_pre: 'He leído, entiendo y acepto el ', agree_mid: ', los ', agree_mid2: ' y la ', agree_post: '.',
       agree_notice: 'Entiendo que IRS Protect Plus es un programa de membresía y no un seguro; que solo son elegibles los asuntos cuyo primer aviso del IRS esté fechado en o después de mi fecha efectiva de inscripción; y que debo mantener mi membresía activa y al corriente durante todo el asunto cubierto para seguir recibiendo beneficios.',
-      agree_billing: 'Autorizo a Best Vision Accounting, LLC a cobrar la cuota mensual de membresía de $19.99 hasta que cancele.',
+      agree_billing: 'Autorizo a Best Vision Accounting, LLC a cobrar automáticamente la cuota de membresía de $19.99 cada mes hasta que cancele.',
       pay_btn: 'Continuar al pago seguro', request_btn: 'Enviar inscripción', secure_note: 'El pago se procesa de forma segura. Puedes cancelar cuando quieras.',
       enroll_success_t: '¡Ya casi estás protegido!', enroll_success_b: 'Gracias, {name}. Recibimos tu inscripción a {plan}. Un miembro del equipo de Best Vision Accounting te contactará en {email} para activar tu membresía.',
       enroll_redirect: 'Te llevamos al pago seguro…',
@@ -147,7 +155,7 @@
       contact_kicker: 'Contacto', contact_title: 'Habla con el equipo detrás de tu protección.', contact_sub: '¿Preguntas sobre la membresía, la facturación o un aviso del IRS? Envía un mensaje y Best Vision Accounting te responderá.',
       topic: 'Tema', topic_membership: 'Preguntas sobre la membresía', topic_billing: 'Facturación o cancelación', topic_notice: 'Recibí un aviso del IRS', topic_other: 'Otro asunto',
       message: 'Mensaje', message_ph: '¿En qué podemos ayudarte?', send_btn: 'Enviar mensaje',
-      contact_success_t: 'Mensaje enviado', contact_success_b: 'Gracias, {name}. Te responderemos en {email} dentro de un día hábil.',
+      contact_success_t: 'Mensaje enviado', contact_success_b: 'Gracias, {name}. Te responderemos en {email} en horario de oficina.',
       contact_details: 'Datos de contacto', contact_email_l: 'Correo', contact_phone_l: 'Teléfono', contact_fax_l: 'Fax', contact_hours_l: 'Horario', contact_address_l: 'Oficina',
 
       /* Login */
@@ -164,8 +172,12 @@
       upload_label: 'Sube tu aviso', upload_hint: 'Fotos o PDF, hasta {mb} MB cada uno. Incluye todas las páginas, por ambos lados.', upload_cta: 'Toca para elegir archivos o arrástralos aquí',
       notes: '¿Algo más que debamos saber?', notes_ph: 'Plazos mencionados en la carta, si ya respondiste o cualquier cosa fuera de lo común.',
       notice_btn: 'Enviar mi aviso',
+      consent_contact: 'Acepto que Best Vision Accounting use la información de este formulario para responder a mi mensaje, según la ',
+      consent_notice: 'Autorizo a Best Vision Accounting a revisar la información y los documentos que envío para atender mi aviso del IRS, según la ',
+      privacy_enroll: 'Usamos estos datos solo para crear y administrar tu membresía. Más información en la ',
+      consent_phone: 'Usaremos tu teléfono solo para comunicarnos sobre tu solicitud o tu membresía, no para marketing.', remove_file: 'Quitar {name}',
       notice_success_t: 'Aviso recibido', notice_success_b: 'Gracias, {name}. Revisaremos tu aviso y te contactaremos en {email} con los siguientes pasos. Mantén tu membresía activa hasta que el asunto se resuelva.',
-      before_send: 'Antes de enviar', before_items: ['Tu membresía debe haber estado activa y al corriente en la fecha impresa en el aviso.', 'Envía todas las páginas de la carta, por ambos lados.', 'Ten a la mano la declaración del año en cuestión.', 'No respondas al IRS por tu cuenta hasta que hayamos revisado el aviso.'],
+      before_send: 'Antes de enviar', before_items: ['Tu membresía debe haber estado activa y al corriente en la fecha impresa en el aviso.', 'Envía todas las páginas de la carta, por ambos lados.', 'Ten a la mano la declaración del año en cuestión.', 'Envíanos el aviso cuanto antes: los plazos del IRS siguen corriendo mientras lo revisamos.'],
 
       /* Help center */
       help_kicker: 'Centro de ayuda', help_title: '¿En qué podemos ayudarte?', help_sub: 'Respuestas sobre membresía, cobertura, facturación y qué hacer cuando llega una carta.',
@@ -177,7 +189,7 @@
         ['¿Qué pasa si mi membresía queda inactiva durante un asunto?', 'Best Vision puede suspender o terminar la representación y los beneficios. Reactivar la membresía no restaura la cobertura de un asunto surgido mientras estaba inactiva.'],
         ['¿IRS Protect Plus cubre avisos de impuestos estatales?', 'IRS Protect Plus cubre asuntos federales elegibles del IRS. Para avisos de impuestos estatales, contacta directamente a Best Vision Accounting.']
       ],
-      still_need: '¿Aún necesitas ayuda?', still_need_b: 'Envíanos un mensaje y te responderemos dentro de un día hábil.',
+      still_need: '¿Aún necesitas ayuda?', still_need_b: 'Envíanos un mensaje y te responderemos en horario de oficina.',
 
       /* Legal */
       legal_kicker: 'Legal', legal_agreement_title: 'Contrato de membresía', legal_terms_title: 'Términos del servicio', legal_privacy_title: 'Política de privacidad', legal_updated: 'Última actualización: 3 de septiembre de 2026',
@@ -209,9 +221,17 @@
       not_affiliated: 'IRS Protect Plus is not affiliated with the IRS or the U.S. government.',
       guides_link: 'IRS notice guides',
 
+      title_cookies: 'Cookie Policy | IRS Protect Plus', title_refund: 'Refunds and Cancellation | IRS Protect Plus', title_accessibility: 'Accessibility | IRS Protect Plus',
+      desc_cookies: 'What the IRS Protect Plus site stores in your browser: only your language choice. Cookieless analytics and no cross-site tracking.',
+      desc_refund: 'How to cancel IRS Protect Plus ($19.99 a month, renews automatically) and when fees may be refundable, under the Membership Agreement.',
+      desc_accessibility: 'IRS Protect Plus accessibility commitment: WCAG 2.1 AA goal, what we have done, known limitations and how to get help.',
+      cookies: 'Cookie Policy', refund: 'Refunds and Cancellation', accessibility: 'Accessibility',
+      legal_cookies_title: 'Cookie Policy', legal_refund_title: 'Refund and Cancellation Policy', legal_accessibility_title: 'Accessibility Statement',
+      legal_updated_privacy: 'Last updated: October 9, 2026', legal_updated_terms: 'Last updated: October 9, 2026', legal_updated_cookies: 'Last updated: October 9, 2026', legal_updated_refund: 'Last updated: October 9, 2026', legal_updated_accessibility: 'Last updated: October 9, 2026',
+
       hero_title: 'The IRS is complicated. Your protection shouldn’t be.',
       hero_sub: 'IRS Protect Plus is an IRS representation membership: the Best Vision Accounting team reviews your IRS letters, responds for you, and helps with eligible audits and collections.',
-      stat_rep: 'in professional representation', cancel_anytime: 'Cancel anytime.', hero_backed: 'Backed by Best Vision Accounting',
+      stat_rep: 'maximum in representation services', cancel_anytime: 'Cancel anytime.', hero_backed: 'Backed by Best Vision Accounting',
       hero_disclaimer: 'IRS Protect Plus is a membership program and is not insurance. Eligibility requirements, limitations and exclusions apply.',
       alt_hero: 'A smiling woman points at an IRS letter while holding an IRS envelope stamped Resolved, with a blue shield behind her',
 
@@ -225,7 +245,7 @@
       f1_body: 'To qualify, your membership must be active and in good standing on the date printed on the first IRS notice. A notice dated August 1 isn’t covered by a membership that starts August 2, even if you open the envelope later. Coverage is not retroactive: protection starts before the problem does.',
       f1_link: 'Get protected today',
       f2_title: 'Got a letter from the IRS? Send it to us.',
-      f2_body: 'Most people can’t tell whether a CP2000, an examination notice, or a collection notice is serious. You don’t have to. Provide the notice, the applicable return, and requested documents, and the Best Vision team determines what the IRS is asking for and what happens next.',
+      f2_body: 'Many people can’t tell whether a CP2000, an examination notice, or a collection notice is serious. You don’t have to. Provide the notice, the applicable return, and requested documents, and the Best Vision team determines what the IRS is asking for and what happens next.',
       f2_link: 'See what’s included',
       send_notice: 'Send a notice', upload_notice: 'Upload IRS notice', photo_pdf: 'Photo or PDF', notice_cp2000: 'Notice CP2000', in_progress: 'In progress',
       timeline: [['Notice and return reviewed', 'Best Vision Accounting'], ['Response to the IRS', 'In progress'], ['Representation and resolution', 'Authorized before the IRS']],
@@ -233,9 +253,9 @@
       f3_body: 'Depending on the situation, Best Vision Accounting prepares correspondence, organizes documentation, communicates with the IRS, and represents you through an authorized Enrolled Agent, CPA or attorney. Keep your membership active and in good standing until the matter is resolved.',
       alt_envelope: 'An IRS envelope stamped Important Tax Notice', alt_couple: 'A couple reviewing an IRS notice together on a laptop', alt_advisor: 'An accountant reviewing tax documents',
 
-      plans_title: 'One membership. Complete protection.',
-      plans_sub: 'Professional IRS representation from the Best Vision Accounting team for $19.99 a month. No tiers, no surprises.',
-      plan_tag: 'Membership', ribbon: 'Complete protection', plan_tagline: 'Up to $10,000 in professional representation, in place before the letter.',
+      plans_title: 'One membership. Clear rules.',
+      plans_sub: 'Professional IRS representation from the Best Vision Accounting team for $19.99 a month. One plan, no tiers.',
+      plan_tag: 'Membership', ribbon: 'One plan', plan_tagline: 'Up to $10,000 in professional representation, in place before the letter.',
       plan_items: [
         ['Up to $10,000 in professional representation', 'Professional tax representation services per taxpayer for eligible IRS matters.'],
         ['Notice, return and document review', 'We review IRS correspondence, your applicable federal return, and organize supporting documents.'],
@@ -298,10 +318,10 @@
       step_details: 'Your details', step_review: 'Review & confirm',
       details_title: 'Who are we protecting?', details_sub: 'Use the name exactly as it appears on your federal tax return.',
       review_title: 'Review and confirm', review_sub: 'Check your details and agree to the membership terms. Submitting accepts the agreement electronically.',
-      summary_plan: 'Membership', summary_price: 'Monthly fee', summary_name: 'Member', summary_email: 'Email', summary_phone: 'Phone', summary_zip: 'ZIP', summary_fs: 'Filing status', summary_start: 'Effective enrollment date', summary_total: 'Due today', billed_monthly: 'Billed monthly. Cancel anytime.',
+      summary_plan: 'Membership', summary_price: 'Monthly fee', summary_name: 'Member', summary_email: 'Email', summary_phone: 'Phone', summary_zip: 'ZIP', summary_fs: 'Filing status', summary_start: 'Effective enrollment date', summary_total: 'Due today', billed_monthly: 'Your membership renews automatically every month and is billed $19.99 a month until you cancel. You can cancel anytime by emailing info@bvaccounting.com or calling (305) 220-9616; cancelling stops future charges. Refunds: fees paid in the first 30 days may be refundable if no benefit has been requested, received or initiated.',
       agree_pre: 'I have read, understand and agree to the ', agree_mid: ', the ', agree_mid2: ' and the ', agree_post: '.',
       agree_notice: 'I understand that IRS Protect Plus is a membership program and not insurance; that only matters whose first IRS notice is dated on or after my effective enrollment date are eligible; and that I must remain active and in good standing throughout any covered matter to continue receiving benefits.',
-      agree_billing: 'I authorize Best Vision Accounting, LLC to bill the $19.99 monthly membership fee until I cancel.',
+      agree_billing: 'I authorize Best Vision Accounting, LLC to automatically charge the $19.99 membership fee every month until I cancel.',
       pay_btn: 'Continue to secure payment', request_btn: 'Submit enrollment', secure_note: 'Payment is processed securely. You can cancel anytime.',
       enroll_success_t: 'You’re almost protected!', enroll_success_b: 'Thanks, {name}. We received your enrollment in {plan}. A Best Vision Accounting team member will contact you at {email} to activate your membership.',
       enroll_redirect: 'Taking you to secure checkout…',
@@ -311,7 +331,7 @@
       contact_kicker: 'Contact', contact_title: 'Talk to the team behind your protection.', contact_sub: 'Questions about membership, billing, or an IRS notice? Send a message and Best Vision Accounting will get back to you.',
       topic: 'Topic', topic_membership: 'Membership questions', topic_billing: 'Billing or cancellation', topic_notice: 'I received an IRS notice', topic_other: 'Something else',
       message: 'Message', message_ph: 'How can we help?', send_btn: 'Send message',
-      contact_success_t: 'Message sent', contact_success_b: 'Thanks, {name}. We’ll get back to you at {email} within one business day.',
+      contact_success_t: 'Message sent', contact_success_b: 'Thanks, {name}. We’ll get back to you at {email} during business hours.',
       contact_details: 'Contact details', contact_email_l: 'Email', contact_phone_l: 'Phone', contact_fax_l: 'Fax', contact_hours_l: 'Hours', contact_address_l: 'Office',
 
       login_kicker: 'Members', login_title: 'Member sign in', login_sub: 'Access your membership, update billing, and submit IRS notices.',
@@ -326,8 +346,12 @@
       upload_label: 'Upload your notice', upload_hint: 'Photos or PDFs, up to {mb} MB each. Include every page, front and back.', upload_cta: 'Tap to choose files or drag them here',
       notes: 'Anything else we should know?', notes_ph: 'Deadlines mentioned in the letter, whether you already replied, or anything unusual.',
       notice_btn: 'Send my notice',
+      consent_contact: 'I agree that Best Vision Accounting may use the information in this form to respond to my message, as described in the ',
+      consent_notice: 'I authorize Best Vision Accounting to review the information and documents I send in order to handle my IRS notice, as described in the ',
+      privacy_enroll: 'We use this information only to set up and manage your membership. Learn more in the ',
+      consent_phone: 'We’ll use your phone number only to contact you about your request or membership, not for marketing.', remove_file: 'Remove {name}',
       notice_success_t: 'Notice received', notice_success_b: 'Thanks, {name}. We’ll review your notice and contact you at {email} with next steps. Keep your membership active until the matter is resolved.',
-      before_send: 'Before you send', before_items: ['Your membership must have been active and in good standing on the date printed on the notice.', 'Send every page of the letter, front and back.', 'Have the tax return for the year in question handy.', 'Don’t reply to the IRS on your own until we’ve reviewed the notice.'],
+      before_send: 'Before you send', before_items: ['Your membership must have been active and in good standing on the date printed on the notice.', 'Send every page of the letter, front and back.', 'Have the tax return for the year in question handy.', 'Send us the notice as soon as possible: IRS deadlines keep running while we review it.'],
 
       help_kicker: 'Help center', help_title: 'How can we help?', help_sub: 'Answers about membership, coverage, billing, and what to do when a letter arrives.',
       help_topics_title: 'Using your membership',
@@ -338,7 +362,7 @@
         ['What happens if my membership becomes inactive during a matter?', 'Best Vision may suspend or discontinue the representation and benefits. Reactivating the membership does not restore coverage for a matter that arose while it was inactive.'],
         ['Does IRS Protect Plus cover state tax notices?', 'IRS Protect Plus covers eligible federal IRS matters. For state tax notices, contact Best Vision Accounting directly.']
       ],
-      still_need: 'Still need help?', still_need_b: 'Send us a message and we’ll get back to you within one business day.',
+      still_need: 'Still need help?', still_need_b: 'Send us a message and we’ll get back to you during business hours.',
 
       legal_kicker: 'Legal', legal_agreement_title: 'Membership Agreement', legal_terms_title: 'Terms of Service', legal_privacy_title: 'Privacy Policy', legal_updated: 'Last updated: September 3, 2026',
 

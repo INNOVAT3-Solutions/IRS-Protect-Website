@@ -223,7 +223,11 @@
       return fetch(endpoint, { method: 'POST', body: fd, headers: { Accept: 'application/json' } })
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return { mode: 'endpoint' }; });
     }
-    var email = get(C, 'company.email');
+    /* IRS notices contain Social Security numbers and tax data, so they are
+       never sent through the visitor's email app (not encrypted end to end;
+       FTC Safeguards Rule, 16 CFR 314.4(c)(3)). Without a secure endpoint the
+       visitor is asked to contact the team instead. */
+    var email = kind === 'notice' ? '' : get(C, 'company.email');
     if (email) {
       var body = Object.keys(fields).filter(function (k) { return fields[k]; })
         .map(function (k) { return k.replace(/_/g, ' ') + ': ' + fields[k]; }).join('\n');
@@ -368,7 +372,7 @@
         var li = document.createElement('li');
         var s = document.createElement('span'); s.textContent = f.name;
         var sm = document.createElement('small'); sm.textContent = (f.size / 1048576).toFixed(1) + ' MB'; s.appendChild(sm);
-        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Remove ' + f.name); b.textContent = '×';
+        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', t('remove_file', { name: f.name })); b.textContent = '×';
         b.addEventListener('click', function () { files.splice(i, 1); render(); });
         li.appendChild(s); li.appendChild(b); list.appendChild(li);
       });
