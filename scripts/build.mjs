@@ -618,6 +618,17 @@ const version = assetVersion();
 const i18nSrc = read('js/i18n.js');
 const esDict = (() => { const w = { SITE_CONFIG: CONFIG }; const d = { documentElement: { getAttribute: () => 'es', classList: { add() {} } }, readyState: 'loading', addEventListener() {} }; new Function('window', 'document', 'localStorage', i18nSrc)(w, d, {}); return w.I18N.dict.es; })();
 
+/* Both languages must define the same keys: i18n.t() quietly falls back to
+   Spanish for a key English lacks, so a gap would ship Spanish on /en pages. */
+(() => {
+  const w = { SITE_CONFIG: CONFIG }; const d = { documentElement: { getAttribute: () => 'en', classList: { add() {} } }, readyState: 'loading', addEventListener() {} };
+  new Function('window', 'document', 'localStorage', i18nSrc)(w, d, {});
+  const keys = (o, p = '') => Object.entries(o).flatMap(([k, v]) => (v && typeof v === 'object' ? keys(v, p + k + '.') : [p + k]));
+  const es = new Set(keys(w.I18N.dict.es)); const en = new Set(keys(w.I18N.dict.en));
+  const missing = [...[...es].filter((k) => !en.has(k)).map((k) => 'en lacks ' + k), ...[...en].filter((k) => !es.has(k)).map((k) => 'es lacks ' + k)];
+  if (missing.length) throw new Error('js/i18n.js: the two languages differ:\n  ' + missing.join('\n  '));
+})();
+
 /* Write the Spanish dictionary into the Spanish pages too, so js/i18n.js is
    the single source of text and crawlers see the current copy. */
 function applySpanish(html) {

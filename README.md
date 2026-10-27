@@ -17,8 +17,8 @@ IRS Protect Plus Membership Agreement.
 | File | Purpose |
 | --- | --- |
 | `index.html` | Landing page (hero, trust, how it works, membership, coverage rules, what's included, FAQ, CTA) |
-| `enroll.html` | 2-step enrollment: your details → review & confirm (electronic acceptance of the agreement) |
-| `submit-notice.html` | Members upload an IRS notice (photos/PDF, drag & drop, validation) |
+| `enroll.html` | 2-step enrollment: review & accept the terms (price, auto-renewal, cancellation, three required boxes) → details and payment in the embedded GoHighLevel order form, which activates the membership in the dashboard |
+| `submit-notice.html` | Anyone uploads an IRS notice (PDF/JPG/PNG/HEIC, drag & drop, validation); the files go privately to the IRS Protect Plus dashboard |
 | `contact.html` | Contact form + contact details |
 | `help.html` | Help center: FAQ + how-to topics |
 | `login.html` | Member sign-in (links to your portal when configured) |
@@ -41,19 +41,19 @@ blank values degrade gracefully.
 | --- | --- |
 | `company.email`, `phone`, `hours`, `address`, `url` | Shown on the Contact page, the footer and the legal pages, and used as the email fallback for forms. Blank rows are hidden automatically. |
 | `company.streetAddress`, `city`, `region`, `postalCode` | The same address split into parts for search engines (structured data). Keep it identical to your Google Business Profile. |
-| `forms.endpoint` | Where form submissions are POSTed (multipart/form-data, notice uploads as `attachments`). Works with **Formspree**, Basin, Getform, Netlify Forms or your own API. If blank, forms open the visitor's email app addressed to `company.email`. If that is blank too, visitors are asked to contact you directly. |
-| `checkoutUrl` | Hosted checkout for the $19.99/month membership. A **Stripe Payment Link** works out of the box (the member's email and a reference ID are appended). When set, enrollment sends members to checkout after they confirm; when blank, the enrollment is delivered as a form and your team completes it. |
-| `memberPortalUrl` | Your client-portal sign-in URL. When set, every "Iniciar sesión / Log in" link opens it. |
-| `maxUploadMb` | Max size per uploaded notice file (default 10). |
+| `dashboardUrl` | The IRS Protect Plus dashboard (`https://app.irsprotect.us`). The notice form uploads each file privately to it, then it records the notice, emails the receipt in the visitor's language and alerts the team. On `localhost` the site uses a dashboard on port 3000 instead. The dashboard must list this site's origin in its `MARKETING_SITE_ORIGIN`. |
+| `ghlOrderFormId` | The GoHighLevel order form shown on `/enroll` after the terms are accepted. Paying there fires the GHL workflow that activates the membership in the dashboard. |
+| `memberPortalUrl` | The member portal (`https://app.irsprotect.us`). Every "Iniciar sesión / Log in" link opens it. |
+| `forms.endpoint` | Optional, contact form only: where it POSTs (multipart/form-data, e.g. Formspree). If blank, it opens the visitor's email app addressed to `company.email`. |
+| `maxUploadMb`, `maxFiles` | Notice upload limits, matching the dashboard's (25 MB per file, 10 files). |
 
-### Fastest production setup (about 10 minutes)
+### Production setup
 
-1. **Forms:** create a free form at formspree.io, copy the endpoint URL into
-   `forms.endpoint`. Enrollments, contact messages and notice uploads will
-   arrive in your inbox.
-2. **Payments:** in Stripe, create a Payment Link for a $19.99/month recurring
-   price and paste it into `checkoutUrl`.
-3. **Contact info:** fill in `company.email` and `company.phone`.
+Notices and payments run through the IRS Protect Plus dashboard and
+GoHighLevel; there is no form service or Stripe account to configure. What
+must stay true: the dashboard answers at `dashboardUrl` and lists this site's
+origins in `MARKETING_SITE_ORIGIN`, and the GHL order form's price is the one
+the dashboard expects (`GHL_PROTECT_PLUS_MONTHLY_PRICE_ID`).
 
 ## 2. Build (after any change to pages, text or config)
 
@@ -78,9 +78,13 @@ It is safe to run repeatedly. Commit its output. The site's domain is the
 ## 3. Run locally
 
 ```
-npx serve .
-# then visit http://localhost:3000  (serve supports clean URLs like /enroll)
+npx serve -l 8000 .
+# then visit http://localhost:8000  (serve supports clean URLs like /enroll)
 ```
+
+Port 8000, not serve's default 3000: on localhost the notice form talks to a
+dashboard running on port 3000 (`npm run dev:vercel` in the dashboard repo,
+with `http://localhost:8000` in its `MARKETING_SITE_ORIGIN`).
 
 ## 4. Deploy
 

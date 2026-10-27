@@ -23,8 +23,9 @@
      ------------------------------------------------------------------------ */
   function wireConfig() {
     var portal = C.memberPortalUrl;
+    /* Signing in is the next step, not a side trip: same tab. */
     $$('[data-link="login"]').forEach(function (a) {
-      if (portal) { a.href = portal; a.target = '_blank'; a.rel = 'noopener'; }
+      if (portal) a.href = portal;
     });
     $$('[data-link="company"]').forEach(function (a) {
       var u = get(C, 'company.url');
@@ -173,6 +174,7 @@
     else if (v && type === 'email' && !EMAIL_RE.test(v)) msg = t('err_email');
     else if (v && type === 'tel' && (!PHONE_RE.test(v) || v.replace(/\D/g, '').length < 10)) msg = t('err_phone');
     else if (v && input.getAttribute('data-validate') === 'zip' && !ZIP_RE.test(v)) msg = t('err_zip');
+    else if (v && input.getAttribute('data-validate') === 'year' && !(/^\d{4}$/.test(v) && +v >= 1900 && +v <= 2100)) msg = t('err_year');
     else if (v && type === 'date' && isNaN(new Date(v).getTime())) msg = t('err_date');
     setError(input, msg);
     return !msg;
@@ -284,31 +286,53 @@
     });
   }
 
-  /* ---- Enrollment (2 steps, single membership) ---- */
+  /* ---- Enrollment: accept the terms, then pay in the GoHighLevel form ----
+     Step 1 shows the price, auto-renewal and cancellation terms with three
+     required boxes; only then does step 2 load the GHL order form, where the
+     member's details and payment go. Paying there activates the membership
+     in the dashboard (its "Order Submitted" webhook). Nothing loads from GHL
+     before the visitor continues. */
+  var GHL_FORM_URL = 'https://api.leadconnectorhq.com/widget/form/';
+  var GHL_EMBED_JS = 'https://link.msgsndr.com/js/form_embed.js';
+
   function initEnrollForm() {
     var form = document.getElementById('enroll-form'); if (!form) return;
     form.addEventListener('input', function started() { track('enroll_start'); form.removeEventListener('input', started); });
     liveValidate(form);
-    var panels = $$('.step-panel', form); var steps = $$('.steps .step', form); var cur = 0;
+    var panels = $$('.step-panel', form); var steps = $$('.steps .step', form); var cur = 0; var opened = false;
     var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99 };
-    var link = C.checkoutUrl || '';
 
     function fmt(n) { return '$' + Number(n).toFixed(2); }
     function updateSummary() {
-      var f = collect(form);
       var set = function (k, v) { var el = $('[data-sum="' + k + '"]', form); if (el) el.textContent = v || '—'; };
       set('plan', plan.name);
       set('price', plan.price != null ? fmt(plan.price) + t('per_month') : '');
       set('total', plan.price != null ? fmt(plan.price) : '');
-      set('name', [f.first_name, f.last_name].filter(Boolean).join(' '));
-      set('email', f.email); set('phone', f.phone); set('zip', f.zip);
-      var fs = form.querySelector('select[name="filing_status"]');
-      set('fs', fs && fs.value ? fs.options[fs.selectedIndex].textContent : '');
       set('start', new Date().toLocaleDateString(I && I.lang === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }));
     }
-    function updateSubmitLabel() {
-      var btn = $('[data-submit]', form); if (btn && !btn.disabled) btn.textContent = t(link ? 'pay_btn' : 'request_btn');
-      var sn = $('[data-secure-note]', form); if (sn) sn.hidden = !link;
+    /* The order form, built from the snippet GHL issues for it. The fixed
+       height holds the space until form_embed.js sizes the frame to fit. */
+    function openCheckout() {
+      if (opened) return;
+      var id = C.ghlOrderFormId; var box = $('[data-checkout]', form);
+      if (!id || !box) { showAlert(form, 'info', '<p>' + esc(t('no_delivery')) + '</p><p><a href="' + pageUrl('contact') + '">' + esc(t('go_contact')) + ' →</a></p>'); return; }
+      opened = true;
+      var frame = document.createElement('iframe');
+      frame.src = GHL_FORM_URL + encodeURIComponent(id);
+      frame.id = 'inline-' + id;
+      frame.title = t('checkout_frame_title');
+      frame.style.cssText = 'width:100%;height:1142px;border:none;border-radius:8px';
+      [['data-layout', "{'id':'INLINE'}"], ['data-trigger-type', 'alwaysShow'], ['data-trigger-value', ''],
+        ['data-activation-type', 'alwaysActivated'], ['data-activation-value', ''], ['data-deactivation-type', 'neverDeactivate'],
+        ['data-deactivation-value', ''], ['data-form-name', 'Order Form'], ['data-height', '1142'],
+        ['data-layout-iframe-id', 'inline-' + id], ['data-form-id', id], ['data-cookie-consent', 'true'],
+        ['data-cookie-consent-provider', 'auto']].forEach(function (a) { frame.setAttribute(a[0], a[1]); });
+      box.appendChild(frame);
+      if (!document.querySelector('script[src="' + GHL_EMBED_JS + '"]')) {
+        var js = document.createElement('script'); js.src = GHL_EMBED_JS; js.async = true; document.body.appendChild(js);
+      }
+      var alt = $('[data-checkout-alt]', form); if (alt) { alt.href = frame.src; alt.hidden = false; }
+      track('enroll_checkout_open', { lang: I ? I.lang : 'es' });
     }
     function show(i) {
       cur = i;
@@ -317,63 +341,79 @@
         s.classList.toggle('is-active', idx === i); s.classList.toggle('is-done', idx < i);
         if (idx === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current');
       });
-      if (i === panels.length - 1) updateSummary();
-      updateSubmitLabel();
+      if (i === 1) openCheckout();
       if (i > 0) {
         form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        var focusable = $('input:not([type=hidden]):not([type=checkbox]), select, textarea', panels[i]) || $('button', panels[i]);
+        var focusable = $('[data-step-focus]', panels[i]) || $('button', panels[i]);
         if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 350);
       }
     }
-    $$('[data-next]', form).forEach(function (b) { b.addEventListener('click', function () { if (validateScope(panels[cur])) show(cur + 1); }); });
+    $$('[data-next]', form).forEach(function (b) { b.addEventListener('click', function () { hideAlert(form); if (validateScope(panels[cur])) show(cur + 1); }); });
     $$('[data-prev]', form).forEach(function (b) { b.addEventListener('click', function () { show(cur - 1); }); });
-    document.addEventListener('langchange', function () { updateSummary(); updateSubmitLabel(); });
-
+    document.addEventListener('langchange', updateSummary);
+    /* Enter in step 1 continues to payment; the form never posts anywhere. */
     form.addEventListener('submit', function (e) {
       e.preventDefault(); hideAlert(form);
-      if (!validateScope(panels[cur])) return;
-      var f = collect(form);
-      f.plan_name = plan.name; f.monthly_fee = plan.price != null ? fmt(plan.price) : '';
-      f.effective_enrollment_date = new Date().toISOString().slice(0, 10);
-      var fs = form.querySelector('select[name="filing_status"]');
-      if (fs && fs.value) f.filing_status = fs.options[fs.selectedIndex].textContent;
-      var btn = $('[data-submit]', form); setBusy(btn, true);
-      var subject = 'IRS Protect Plus enrollment — ' + f.first_name + ' ' + f.last_name;
-      if (link) {
-        var ref = 'IRSP-' + Date.now().toString(36).toUpperCase();
-        f.reference = ref;
-        var go = function () {
-          window.location.href = link + (link.indexOf('?') > -1 ? '&' : '?') + 'prefilled_email=' + encodeURIComponent(f.email) + '&client_reference_id=' + encodeURIComponent(ref);
-        };
-        showAlert(form, 'info', '<p>' + esc(t('enroll_redirect')) + '</p>');
-        if (get(C, 'forms.endpoint')) deliver('enrollment', f, null, subject).catch(function () {}).then(go); else setTimeout(go, 400);
-        return;
-      }
-      deliver('enrollment', f, null, subject)
-        .then(function (r) { setBusy(btn, false); showResult(form, r, { titleKey: 'enroll_success_t', bodyKey: 'enroll_success_b', vars: { name: f.first_name, email: f.email, plan: plan.name } }); })
-        .catch(function () { setBusy(btn, false); showAlert(form, 'error', '<p>' + esc(t('submit_failed')) + '</p>'); });
+      if (cur === 0 && validateScope(panels[0])) show(1);
     });
 
+    updateSummary();
     show(0);
   }
 
-  /* ---- Submit a notice (with file upload) ---- */
+  /* ---- Submit a notice: uploaded privately, straight to the dashboard ----
+     Each file goes from the browser to private Blob storage with a one-file
+     token from the dashboard, then the dashboard records the notice, sends
+     the receipt in the visitor's language and alerts the team. IRS notices
+     carry SSNs, so there is no email fallback (FTC Safeguards Rule). */
+  var NOTICE_EXT = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/heic': 'heic', 'image/heif': 'heif' };
+  var EXT_TYPE = { pdf: 'application/pdf', jpg: 'image/jpeg', jpeg: 'image/jpeg', jfif: 'image/jpeg', png: 'image/png', heic: 'image/heic', heif: 'image/heif' };
+
+  /* The dashboard to upload to: one running locally while developing. */
+  function dashboardUrl() {
+    return /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:3000' : (C.dashboardUrl || '');
+  }
+  /* One type per file, used for the token, the upload and the record alike
+     (the dashboard checks they agree). Windows reports no type for HEIC, and
+     some pickers say octet-stream: the extension decides then. */
+  function noticeFileType(f) {
+    var type = String(f.type || '').toLowerCase();
+    if (type === 'image/jpg' || type === 'image/pjpeg') type = 'image/jpeg';
+    if (!type || type === 'application/octet-stream') {
+      var m = /\.([a-z0-9]+)$/i.exec(f.name || '');
+      type = m ? (EXT_TYPE[m[1].toLowerCase()] || '') : '';
+    }
+    return NOTICE_EXT[type] ? type : '';
+  }
+  /* submissions/<year>/<32 hex>.<ext>: the only shape the dashboard issues tokens for. */
+  function noticePathname(type) {
+    var bytes = new Uint8Array(16); crypto.getRandomValues(bytes);
+    var hex = Array.prototype.map.call(bytes, function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+    return 'submissions/' + new Date().getFullYear() + '/' + hex + '.' + NOTICE_EXT[type];
+  }
+  function noticeError(code) { var e = new Error(code); e.code = code; return e; }
+  /* Loaded on first use, and kept out of this file's syntax so a very old
+     browser still runs the rest of the site. */
+  function loadBlobClient() { return (new Function('return import("/vendor/blob-client.mjs")'))(); }
+
   function initNoticeForm() {
     var form = document.getElementById('notice-form'); if (!form) return;
     liveValidate(form);
     var drop = $('.file-drop', form); var input = $('input[type=file]', form); var list = $('.file-list', form);
-    var files = []; var maxMb = C.maxUploadMb || 10;
-    var okType = /^(image\/(jpeg|jpg|png|heic|heif|webp|gif|tiff)|application\/pdf)$/i;
-    var okExt = /\.(jpe?g|png|heic|heif|webp|gif|tiff?|pdf)$/i;
+    var files = []; var maxMb = C.maxUploadMb || 25; var maxFiles = C.maxFiles || 10;
+    /* Uploads already done, kept while the file list is unchanged so a retry
+       after a lost answer re-sends only the notice, not the files. */
+    var uploaded = null;
     function fileErr(msg) { var w = input.closest('.field'); var e = $('.error', w); w.classList.toggle('is-invalid', !!msg); if (e) e.textContent = msg || ''; }
+    function size(n) { return n < 1048576 ? Math.max(1, Math.round(n / 1024)) + ' KB' : (n / 1048576).toFixed(1) + ' MB'; }
     function render() {
       list.innerHTML = '';
-      files.forEach(function (f, i) {
+      files.forEach(function (item, i) {
         var li = document.createElement('li');
-        var s = document.createElement('span'); s.textContent = f.name;
-        var sm = document.createElement('small'); sm.textContent = (f.size / 1048576).toFixed(1) + ' MB'; s.appendChild(sm);
-        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', t('remove_file', { name: f.name })); b.textContent = '×';
-        b.addEventListener('click', function () { files.splice(i, 1); render(); });
+        var s = document.createElement('span'); s.textContent = item.file.name;
+        var sm = document.createElement('small'); sm.textContent = size(item.file.size); s.appendChild(sm);
+        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', t('remove_file', { name: item.file.name })); b.textContent = '×';
+        b.addEventListener('click', function () { files.splice(i, 1); uploaded = null; render(); });
         li.appendChild(s); li.appendChild(b); list.appendChild(li);
       });
       list.hidden = !files.length;
@@ -381,9 +421,14 @@
     function add(fl) {
       var err = '';
       Array.prototype.forEach.call(fl, function (f) {
-        if (!(okType.test(f.type) || okExt.test(f.name))) { err = t('err_file_type'); return; }
+        var type = noticeFileType(f);
+        if (!type) { err = t('err_file_type'); return; }
+        if (!f.size) { err = t('err_file_empty'); return; }
         if (f.size > maxMb * 1048576) { err = t('err_file_size', { mb: maxMb }); return; }
-        if (!files.some(function (x) { return x.name === f.name && x.size === f.size; })) files.push(f);
+        if (files.some(function (x) { return x.file.name === f.name && x.file.size === f.size; })) return;
+        if (files.length >= maxFiles) { err = t('err_file_count', { n: maxFiles }); return; }
+        files.push({ file: f, type: type });
+        uploaded = null;
       });
       fileErr(err); render();
     }
@@ -393,16 +438,83 @@
       ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('is-drag'); }); });
       drop.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files) add(e.dataTransfer.files); });
     }
+
+    function post(base, path, body) {
+      return fetch(base + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+        /* No answer at all -- offline, or a crash whose reply carried no CORS header. */
+        .catch(function () { throw noticeError('network'); })
+        .then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (data) {
+            if (r.ok || r.status === 409) return { status: r.status, data: data };
+            throw noticeError(data.code || (r.status === 429 ? 'rate_limited' : 'failed'));
+          });
+        });
+    }
+    function busyText(btn, text) { btn.innerHTML = '<span class="spinner" aria-hidden="true"></span>' + esc(text); }
+
+    function deliverNotice(f, btn) {
+      var base = dashboardUrl();
+      if (!base) return Promise.reject(noticeError('unavailable'));
+      var uploads = uploaded ? Promise.resolve(uploaded) : loadBlobClient()
+        .catch(function () { throw noticeError('network'); })
+        .then(function (blob) {
+          var done = [];
+          return files.reduce(function (p, item, i) {
+            return p.then(function () {
+              busyText(btn, t('uploading', { i: i + 1, n: files.length }));
+              var pathname = noticePathname(item.type);
+              return post(base, '/api/intake/upload', { pathname: pathname, contentType: item.type })
+                .then(function (r) {
+                  return blob.put(pathname, item.file, { access: 'private', token: r.data.clientToken, contentType: item.type })
+                    .catch(function () { throw noticeError('network'); });
+                })
+                .then(function () { done.push({ pathname: pathname, name: item.file.name.slice(0, 255), contentType: item.type, sizeBytes: item.file.size }); });
+            });
+          }, Promise.resolve()).then(function () { return done; });
+        });
+      return uploads.then(function (done) {
+        uploaded = done;
+        busyText(btn, t('sending'));
+        var body = {
+          typedName: (f.first_name + ' ' + f.last_name).trim(),
+          typedEmail: f.email,
+          typedPhone: f.phone,
+          note: f.notes || '',
+          lang: I ? I.lang : 'es',
+          consent: true,
+          files: done
+        };
+        /* Optional fields go only when filled: the dashboard reads a missing key as "not given". */
+        if (f.notice_type) body.notice = f.notice_type.trim();
+        if (f.notice_date) body.noticeDate = f.notice_date;
+        if (f.tax_year) body.taxYear = f.tax_year.trim();
+        if (f.member_id) body.memberNumber = f.member_id.trim();
+        return post(base, '/api/intake/submissions', body);
+      }).then(function (r) { return { no: r.data.no || '', again: r.status === 409 }; });
+    }
+    var ERRORS = { rate_limited: 'err_notice_busy', unverified_file: 'err_notice_unverified', unsupported_file: 'err_file_type', unavailable: 'no_delivery' };
+
     form.addEventListener('submit', function (e) {
       e.preventDefault(); hideAlert(form);
       var ok = validateScope(form);
       if (!files.length) { fileErr(t('err_file_required')); if (ok) drop.scrollIntoView({ behavior: 'smooth', block: 'center' }); ok = false; }
       if (!ok) return;
-      var f = collect(form); f.files = files.map(function (x) { return x.name; }).join(', ');
+      var f = collect(form);
       var btn = $('button[type="submit"]', form); setBusy(btn, true);
-      deliver('notice', f, files, 'IRS notice submitted: ' + (f.notice_type || 'IRS notice') + ' — ' + f.first_name + ' ' + f.last_name)
-        .then(function (r) { setBusy(btn, false); showResult(form, r, { titleKey: 'notice_success_t', bodyKey: 'notice_success_b', vars: { name: f.first_name, email: f.email } }); })
-        .catch(function () { setBusy(btn, false); showAlert(form, 'error', '<p>' + esc(t('submit_failed')) + '</p>'); });
+      deliverNotice(f, btn)
+        .then(function (r) {
+          setBusy(btn, false);
+          track('notice_submit', { delivery: 'dashboard', lang: I ? I.lang : 'es' });
+          showResult(form, { mode: 'dashboard' }, { titleKey: 'notice_success_t', bodyKey: r.again ? 'notice_again_b' : 'notice_success_b', vars: { name: f.first_name, email: f.email } });
+          var ref = $('[data-notice-ref]', document.getElementById(form.getAttribute('data-success')));
+          if (ref && r.no) { ref.textContent = t('notice_ref', { no: r.no }); ref.hidden = false; }
+        })
+        .catch(function (err) {
+          setBusy(btn, false);
+          /* The files themselves were refused: upload them again next time. */
+          if (err.code === 'unverified_file' || err.code === 'unsupported_file') uploaded = null;
+          showAlert(form, 'error', '<p>' + esc(t(ERRORS[err.code] || 'submit_failed')) + '</p>');
+        });
     });
   }
 

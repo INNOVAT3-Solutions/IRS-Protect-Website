@@ -60,3 +60,16 @@ connector could not access. Check it while logged in (list in the handoff).
 - Yelp profile link for structured data, if you want it listed alongside Facebook and Instagram.
 - The hero and share images show an IRS seal on an envelope. Have counsel confirm
   this is acceptable alongside the not-affiliated statement.
+
+# Dashboard connection — branch `feat/dashboard-connection`
+
+Built on `seo/audit-20260929`; connects the site to the IRS Protect Plus
+dashboard (`https://app.irsprotect.us`) and GoHighLevel.
+
+| Area | Change | Files |
+| --- | --- | --- |
+| Notice form | Files upload from the browser straight to the dashboard's private, encrypted storage (a one-file token per upload, the vendored `@vercel/blob` 2.8.0 client), then the dashboard records the notice, sends the receipt in the visitor's language with a `SUB-…` reference number, and alerts the team. The notice date, tax year, member ID and consent go with it. Only PDF, JPG, PNG and HEIC, up to 25 MB and 10 files (the dashboard's limits); a retry after a lost answer re-sends only the notice. | `js/site.js`, `submit-notice.html`, `vendor/`, `js/config.js` |
+| Enrollment | Step 1 is the terms (price, auto-renewal, cancellation, three required boxes); step 2 loads the GoHighLevel order form, where the details and payment go. Nothing loads from GHL before the visitor continues. Paying activates the membership in the dashboard. Stripe and the site's own details step are gone. Event `enroll_checkout_open` replaces `enrollment_submit`. | `enroll.html`, `js/site.js` |
+| Sign in | Every "Iniciar sesión / Log in" link opens the member portal at `https://app.irsprotect.us`, in the same tab. | `js/config.js`, `js/site.js`, `js/i18n.js` |
+| Legal | Privacy and Cookie Policies name the real providers (Vercel incl. Blob, Neon, GoHighLevel, Resend) and the GHL form's cookies. **Counsel to review.** | `privacy.html`, `cookie-policy.html` |
+| Build | Fails when the Spanish and English dictionaries define different keys. | `scripts/build.mjs` |
