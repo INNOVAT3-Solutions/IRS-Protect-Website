@@ -286,21 +286,28 @@
     });
   }
 
-  /* ---- Enrollment: accept the terms, then pay in the GoHighLevel form ----
+  /* The dashboard the notice and enrollment forms talk to: one running
+     locally while developing. */
+  function dashboardUrl() {
+    return /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:3000' : (C.dashboardUrl || '');
+  }
+
+  /* ---- Enrollment: accept the terms, then pay on Stripe's page ----
      Step 1 shows the price, auto-renewal and cancellation terms with three
-     required boxes; only then does step 2 load the GHL order form, where the
-     member's details and payment go. Paying there activates the membership
-     in the dashboard (its "Order Submitted" webhook). Nothing loads from GHL
-     before the visitor continues. */
-  var GHL_FORM_URL = 'https://api.leadconnectorhq.com/widget/form/';
-  var GHL_EMBED_JS = 'https://link.msgsndr.com/js/form_embed.js';
+     required boxes. Continuing asks the dashboard for a Stripe Checkout page
+     in the visitor's language and goes there; Stripe takes the member's
+     details and payment, and the dashboard makes the member from Stripe's
+     payment. Stripe sends the visitor back here with ?checkout=success or
+     ?checkout=canceled. */
+  var CHECKOUT_ERRORS = { rate_limited: 'err_notice_busy', checkout_unavailable: 'checkout_unavailable', origin_not_allowed: 'checkout_unavailable', unavailable: 'checkout_unavailable' };
 
   function initEnrollForm() {
     var form = document.getElementById('enroll-form'); if (!form) return;
     form.addEventListener('input', function started() { track('enroll_start'); form.removeEventListener('input', started); });
     liveValidate(form);
-    var panels = $$('.step-panel', form); var steps = $$('.steps .step', form); var cur = 0; var opened = false;
     var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99 };
+    var lang = function () { return I ? I.lang : 'es'; };
+    var btn = $('button[type="submit"]', form);
 
     function fmt(n) { return '$' + Number(n).toFixed(2); }
     function updateSummary() {
@@ -308,57 +315,49 @@
       set('plan', plan.name);
       set('price', plan.price != null ? fmt(plan.price) + t('per_month') : '');
       set('total', plan.price != null ? fmt(plan.price) : '');
-      set('start', new Date().toLocaleDateString(I && I.lang === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+      set('start', new Date().toLocaleDateString(lang() === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }));
     }
-    /* The order form, built from the snippet GHL issues for it. The fixed
-       height holds the space until form_embed.js sizes the frame to fit. */
-    function openCheckout() {
-      if (opened) return;
-      var id = C.ghlOrderFormId; var box = $('[data-checkout]', form);
-      if (!id || !box) { showAlert(form, 'info', '<p>' + esc(t('no_delivery')) + '</p><p><a href="' + pageUrl('contact') + '">' + esc(t('go_contact')) + ' →</a></p>'); return; }
-      opened = true;
-      var frame = document.createElement('iframe');
-      frame.src = GHL_FORM_URL + encodeURIComponent(id);
-      frame.id = 'inline-' + id;
-      frame.title = t('checkout_frame_title');
-      frame.style.cssText = 'width:100%;height:1142px;border:none;border-radius:8px';
-      [['data-layout', "{'id':'INLINE'}"], ['data-trigger-type', 'alwaysShow'], ['data-trigger-value', ''],
-        ['data-activation-type', 'alwaysActivated'], ['data-activation-value', ''], ['data-deactivation-type', 'neverDeactivate'],
-        ['data-deactivation-value', ''], ['data-form-name', 'Order Form'], ['data-height', '1142'],
-        ['data-layout-iframe-id', 'inline-' + id], ['data-form-id', id], ['data-cookie-consent', 'true'],
-        ['data-cookie-consent-provider', 'auto']].forEach(function (a) { frame.setAttribute(a[0], a[1]); });
-      box.appendChild(frame);
-      if (!document.querySelector('script[src="' + GHL_EMBED_JS + '"]')) {
-        var js = document.createElement('script'); js.src = GHL_EMBED_JS; js.async = true; document.body.appendChild(js);
-      }
-      var alt = $('[data-checkout-alt]', form); if (alt) { alt.href = frame.src; alt.hidden = false; }
-      track('enroll_checkout_open', { lang: I ? I.lang : 'es' });
+    /* The Checkout page's address, from the dashboard; the accepted terms go with the request. */
+    function checkoutUrl() {
+      var base = dashboardUrl();
+      if (!base) return Promise.reject({ code: 'unavailable' });
+      return fetch(base + '/api/checkout/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lang: lang(), consent: true }) })
+        /* No answer at all -- offline, or a crash whose reply carried no CORS header. */
+        .catch(function () { throw { code: 'network' }; })
+        .then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (data) {
+            if (r.ok && data.url) return data.url;
+            throw { code: data.code || (r.status === 429 ? 'rate_limited' : 'failed') };
+          });
+        });
     }
-    function show(i) {
-      cur = i;
-      panels.forEach(function (p, idx) { p.hidden = idx !== i; });
-      steps.forEach(function (s, idx) {
-        s.classList.toggle('is-active', idx === i); s.classList.toggle('is-done', idx < i);
-        if (idx === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current');
-      });
-      if (i === 1) openCheckout();
-      if (i > 0) {
-        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        var focusable = $('[data-step-focus]', panels[i]) || $('button', panels[i]);
-        if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 350);
-      }
-    }
-    $$('[data-next]', form).forEach(function (b) { b.addEventListener('click', function () { hideAlert(form); if (validateScope(panels[cur])) show(cur + 1); }); });
-    $$('[data-prev]', form).forEach(function (b) { b.addEventListener('click', function () { show(cur - 1); }); });
-    document.addEventListener('langchange', updateSummary);
-    /* Enter in step 1 continues to payment; the form never posts anywhere. */
+
     form.addEventListener('submit', function (e) {
       e.preventDefault(); hideAlert(form);
-      if (cur === 0 && validateScope(panels[0])) show(1);
+      if (!validateScope(form)) return;
+      setBusy(btn, true);
+      btn.innerHTML = '<span class="spinner" aria-hidden="true"></span>' + esc(t('enroll_redirect'));
+      checkoutUrl()
+        .then(function (url) { track('enroll_checkout_open', { lang: lang() }); window.location.assign(url); })
+        .catch(function (err) {
+          setBusy(btn, false);
+          showAlert(form, 'error', '<p>' + esc(t(CHECKOUT_ERRORS[err.code] || 'checkout_failed')) + '</p>');
+        });
     });
+    /* Back from Stripe with the browser's Back button: the page comes back as it was left, mid-redirect. */
+    window.addEventListener('pageshow', function (e) { if (e.persisted) setBusy(btn, false); });
 
+    var back = new URLSearchParams(location.search).get('checkout');
+    if (back === 'success') {
+      var box = document.getElementById(form.getAttribute('data-success'));
+      if (box) { form.hidden = true; box.hidden = false; }
+      track('enroll_complete', { lang: lang() });
+    } else if (back === 'canceled') {
+      showAlert(form, 'info', '<p>' + esc(t('checkout_canceled')) + '</p>');
+    }
+
+    document.addEventListener('langchange', updateSummary);
     updateSummary();
-    show(0);
   }
 
   /* ---- Submit a notice: uploaded privately, straight to the dashboard ----
@@ -369,10 +368,6 @@
   var NOTICE_EXT = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/heic': 'heic', 'image/heif': 'heif' };
   var EXT_TYPE = { pdf: 'application/pdf', jpg: 'image/jpeg', jpeg: 'image/jpeg', jfif: 'image/jpeg', png: 'image/png', heic: 'image/heic', heif: 'image/heif' };
 
-  /* The dashboard to upload to: one running locally while developing. */
-  function dashboardUrl() {
-    return /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:3000' : (C.dashboardUrl || '');
-  }
   /* One type per file, used for the token, the upload and the record alike
      (the dashboard checks they agree). Windows reports no type for HEIC, and
      some pickers say octet-stream: the extension decides then. */

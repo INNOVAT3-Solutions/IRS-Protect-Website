@@ -28,10 +28,10 @@
 <meta name="theme-color" content="#2648B5">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/opt/irs-protect-plus-touch-icon.png">
-<link rel="stylesheet" href="/css/site.css?v=1a1805e1e6">
-<script src="/js/config.js?v=1a1805e1e6"></script>
-<script src="/js/i18n.js?v=1a1805e1e6"></script>
-<script src="/js/site.js?v=1a1805e1e6" defer=""></script>
+<link rel="stylesheet" href="/css/site.css?v=6b179cc67b">
+<script src="/js/config.js?v=6b179cc67b"></script>
+<script src="/js/i18n.js?v=6b179cc67b"></script>
+<script src="/js/site.js?v=6b179cc67b" defer=""></script>
 </head>
 <body data-page="enroll">
 <a class="skip-link" href="#main" data-i18n="skip">Saltar al contenido</a>
@@ -77,13 +77,13 @@
   <div class="page-hero-inner wrap">
     <span class="kicker" data-i18n="enroll_kicker">Inscripción</span>
     <h1 data-i18n="enroll_title">Protégete en unos dos minutos.</h1>
-    <p class="lead" data-i18n="enroll_sub">Revisa y acepta los términos de la membresía, y luego completa tus datos y el pago en un formulario seguro. Tu protección comienza en tu fecha efectiva de inscripción.</p>
+    <p class="lead" data-i18n="enroll_sub">Revisa y acepta los términos de la membresía; después completarás tus datos y el pago en la página segura de Stripe. Tu protección comienza en tu fecha efectiva de inscripción.</p>
   </div>
 </section>
 <section class="page-body wrap">
   <div class="layout-2">
     <div>
-      <form id="enroll-form" class="card form" novalidate="" autocomplete="on">
+      <form id="enroll-form" class="card form" novalidate="" data-success="enroll-success" autocomplete="on">
         <ol class="steps" aria-label="Pasos de inscripción">
           <li class="step is-active" aria-current="step"><span class="step-n" aria-hidden="true">1</span><span class="step-label" data-i18n="step_review">Revisar y confirmar</span></li>
           <li class="step-line" aria-hidden="true"></li>
@@ -94,7 +94,7 @@
         <!-- Step 1: the terms, accepted before any payment -->
         <fieldset class="step-panel" aria-labelledby="step1-title">
           <h2 id="step1-title" data-i18n="review_title">Revisa y confirma</h2>
-          <p class="form-intro" data-i18n="review_sub">Revisa los términos de la membresía y acéptalos. Después completarás tus datos y el pago en un formulario seguro.</p>
+          <p class="form-intro" data-i18n="review_sub">Revisa los términos de la membresía y acéptalos. Después te llevaremos a la página de pago segura de Stripe para completar tus datos y el pago.</p>
           <div class="summary summary-box">
             <div class="summary-row"><span data-i18n="summary_plan">Membresía</span><span data-sum="plan">IRS Protect Plus</span></div>
             <div class="summary-row"><span data-i18n="summary_price">Cuota mensual</span><span data-sum="price">$19.99/mes</span></div>
@@ -114,18 +114,21 @@
             <label><input type="checkbox" name="agree_billing" value="yes" required=""><span data-i18n="agree_billing">Autorizo a Best Vision Accounting, LLC a cobrar automáticamente la cuota de membresía de $19.99 cada mes hasta que cancele.</span></label>
             <span class="error" role="alert"></span>
           </div>
-          <div class="form-actions"><span></span><button type="button" class="btn btn-primary" data-next="" data-i18n="pay_btn">Continuar al pago seguro</button></div>
+          <div class="form-actions"><span></span><button type="submit" class="btn btn-primary" data-i18n="pay_btn">Continuar al pago seguro</button></div>
+          <p class="form-foot" data-i18n="checkout_note">El pago se procesa en la página segura de Stripe. Tu membresía se activa en cuanto se confirma el pago y te enviaremos un correo de bienvenida con tu número de miembro.</p>
         </fieldset>
-
-        <!-- Step 2: details and payment in the GoHighLevel order form, loaded only once the terms are accepted -->
-        <fieldset class="step-panel" aria-labelledby="step2-title" hidden="">
-          <h2 id="step2-title" tabindex="-1" data-step-focus="" data-i18n="pay_title">Tus datos y el pago</h2>
-          <p class="form-intro" data-i18n="pay_sub">Completa el formulario seguro. Tu membresía se activa en cuanto se confirma el pago, y te enviaremos un correo de bienvenida con tu número de miembro.</p>
-          <div class="checkout-frame" data-checkout=""></div>
-          <p class="form-foot"><span data-i18n="secure_note">El pago se procesa de forma segura. Puedes cancelar cuando quieras.</span> <a href="/enroll" data-checkout-alt="" target="_blank" rel="noopener" hidden="" data-i18n="checkout_alt">¿No ves el formulario? Ábrelo en una pestaña nueva</a></p>
-          <div class="form-actions"><button type="button" class="btn btn-ghost" data-prev="" data-i18n="back_btn">Atrás</button><span></span></div>
-        </fieldset>
+        <!-- Step 2, details and payment, happens on Stripe's page -->
       </form>
+
+      <!-- Shown when Stripe sends the visitor back with ?checkout=success -->
+      <div id="enroll-success" class="card" hidden="">
+        <div class="success">
+          <div class="success-icon" aria-hidden="true">✓</div>
+          <h2 data-i18n="enroll_success_t">¡Gracias por inscribirte!</h2>
+          <p data-i18n="enroll_success_b">En cuanto se confirme tu pago (normalmente al instante), recibirás un correo de bienvenida con tu número de miembro y el enlace a tu portal. Si no llega en unos minutos, revisa tu carpeta de correo no deseado.</p>
+          <a href="/" class="btn btn-ghost" data-i18n="go_home">Volver al inicio</a>
+        </div>
+      </div>
     </div>
 
     <aside class="aside">

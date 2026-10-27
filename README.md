@@ -17,7 +17,7 @@ IRS Protect Plus Membership Agreement.
 | File | Purpose |
 | --- | --- |
 | `index.html` | Landing page (hero, trust, how it works, membership, coverage rules, what's included, FAQ, CTA) |
-| `enroll.html` | 2-step enrollment: review & accept the terms (price, auto-renewal, cancellation, three required boxes) → details and payment in the embedded GoHighLevel order form, which activates the membership in the dashboard |
+| `enroll.html` | Enrollment: review & accept the terms (price, auto-renewal, cancellation, three required boxes) → details and payment on Stripe's secure Checkout page, in the visitor's language. The dashboard creates that page, activates the membership from Stripe's payment and emails the welcome; Stripe's return shows a thank-you or a "not charged" note |
 | `submit-notice.html` | Anyone uploads an IRS notice (PDF/JPG/PNG/HEIC, drag & drop, validation); the files go privately to the IRS Protect Plus dashboard |
 | `contact.html` | Contact form + contact details |
 | `help.html` | Help center: FAQ + how-to topics |
@@ -41,19 +41,19 @@ blank values degrade gracefully.
 | --- | --- |
 | `company.email`, `phone`, `hours`, `address`, `url` | Shown on the Contact page, the footer and the legal pages, and used as the email fallback for forms. Blank rows are hidden automatically. |
 | `company.streetAddress`, `city`, `region`, `postalCode` | The same address split into parts for search engines (structured data). Keep it identical to your Google Business Profile. |
-| `dashboardUrl` | The IRS Protect Plus dashboard (`https://app.irsprotect.us`). The notice form uploads each file privately to it, then it records the notice, emails the receipt in the visitor's language and alerts the team. On `localhost` the site uses a dashboard on port 3000 instead. The dashboard must list this site's origin in its `MARKETING_SITE_ORIGIN`. |
-| `ghlOrderFormId` | The GoHighLevel order form shown on `/enroll` after the terms are accepted. Paying there fires the GHL workflow that activates the membership in the dashboard. |
-| `memberPortalUrl` | The member portal (`https://app.irsprotect.us`). Every "Iniciar sesión / Log in" link opens it. |
+| `dashboardUrl` | The IRS Protect Plus dashboard (`https://irs-protect-dashboard.vercel.app`; `https://app.irsprotect.us` once that domain points at it). The notice form uploads each file privately to it, then it records the notice, emails the receipt in the visitor's language and alerts the team; `/enroll` asks it for the Stripe Checkout page. On `localhost` the site uses a dashboard on port 3000 instead. The dashboard must list this site's origin in its `MARKETING_SITE_ORIGIN`. |
+| `memberPortalUrl` | The member portal (`https://irs-protect-dashboard.vercel.app`, the same app). Every "Iniciar sesión / Log in" link opens it. |
 | `forms.endpoint` | Optional, contact form only: where it POSTs (multipart/form-data, e.g. Formspree). If blank, it opens the visitor's email app addressed to `company.email`. |
 | `maxUploadMb`, `maxFiles` | Notice upload limits, matching the dashboard's (25 MB per file, 10 files). |
 
 ### Production setup
 
-Notices and payments run through the IRS Protect Plus dashboard and
-GoHighLevel; there is no form service or Stripe account to configure. What
-must stay true: the dashboard answers at `dashboardUrl` and lists this site's
-origins in `MARKETING_SITE_ORIGIN`, and the GHL order form's price is the one
-the dashboard expects (`GHL_PROTECT_PLUS_MONTHLY_PRICE_ID`).
+Notices and payments run through the IRS Protect Plus dashboard: notices go
+to its private storage, and payments to the client's Stripe account through a
+Checkout page the dashboard creates (the dashboard then records each payment
+in GoHighLevel). The site holds no Stripe key and no form service. What must
+stay true: the dashboard answers at `dashboardUrl` and lists this site's
+origins in `MARKETING_SITE_ORIGIN`.
 
 ## 2. Build (after any change to pages, text or config)
 

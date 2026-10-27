@@ -140,18 +140,20 @@
       privacy_short: 'Solo usamos tu información para crear y administrar tu membresía. Consulta nuestra Política de privacidad.',
 
       /* Enrollment */
-      enroll_kicker: 'Inscripción', enroll_title: 'Protégete en unos dos minutos.', enroll_sub: 'Revisa y acepta los términos de la membresía, y luego completa tus datos y el pago en un formulario seguro. Tu protección comienza en tu fecha efectiva de inscripción.',
+      enroll_kicker: 'Inscripción', enroll_title: 'Protégete en unos dos minutos.', enroll_sub: 'Revisa y acepta los términos de la membresía; después completarás tus datos y el pago en la página segura de Stripe. Tu protección comienza en tu fecha efectiva de inscripción.',
       step_details: 'Tus datos', step_review: 'Revisar y confirmar', step_pay: 'Pago',
       details_title: '¿A quién protegemos?', details_sub: 'Usa el nombre exactamente como aparece en tu declaración federal de impuestos.',
-      review_title: 'Revisa y confirma', review_sub: 'Revisa los términos de la membresía y acéptalos. Después completarás tus datos y el pago en un formulario seguro.',
-      pay_title: 'Tus datos y el pago', pay_sub: 'Completa el formulario seguro. Tu membresía se activa en cuanto se confirma el pago, y te enviaremos un correo de bienvenida con tu número de miembro.',
-      checkout_alt: '¿No ves el formulario? Ábrelo en una pestaña nueva', checkout_frame_title: 'Formulario de pago de IRS Protect Plus',
+      review_title: 'Revisa y confirma', review_sub: 'Revisa los términos de la membresía y acéptalos. Después te llevaremos a la página de pago segura de Stripe para completar tus datos y el pago.',
+      checkout_note: 'El pago se procesa en la página segura de Stripe. Tu membresía se activa en cuanto se confirma el pago y te enviaremos un correo de bienvenida con tu número de miembro.',
+      checkout_canceled: 'No se completó el pago y no se te cobró nada. Puedes intentarlo de nuevo cuando quieras.',
+      checkout_failed: 'No pudimos abrir la página de pago. Revisa tu conexión e inténtalo de nuevo en un momento.',
+      checkout_unavailable: 'La inscripción en línea no está disponible por el momento. Llámanos al (305) 220-9616 y con gusto te inscribimos.',
       summary_plan: 'Membresía', summary_price: 'Cuota mensual', summary_name: 'Miembro', summary_email: 'Correo', summary_phone: 'Teléfono', summary_zip: 'Código postal', summary_fs: 'Estado civil fiscal', summary_start: 'Fecha efectiva de inscripción', summary_total: 'A pagar hoy', billed_monthly: 'Tu membresía se renueva automáticamente cada mes y se cobran $19.99 al mes hasta que la canceles. Puedes cancelar en cualquier momento escribiendo a info@bvaccounting.com o llamando al (305) 220-9616; la cancelación detiene los cobros futuros. Reembolsos: las cuotas de los primeros 30 días pueden ser reembolsables si no has solicitado, recibido ni iniciado ningún beneficio.',
       agree_pre: 'He leído, entiendo y acepto el ', agree_mid: ', los ', agree_mid2: ' y la ', agree_post: '.',
       agree_notice: 'Entiendo que IRS Protect Plus es un programa de membresía y no un seguro; que solo son elegibles los asuntos cuyo primer aviso del IRS esté fechado en o después de mi fecha efectiva de inscripción; y que debo mantener mi membresía activa y al corriente durante todo el asunto cubierto para seguir recibiendo beneficios.',
       agree_billing: 'Autorizo a Best Vision Accounting, LLC a cobrar automáticamente la cuota de membresía de $19.99 cada mes hasta que cancele.',
-      pay_btn: 'Continuar al pago seguro', request_btn: 'Enviar inscripción', secure_note: 'El pago se procesa de forma segura. Puedes cancelar cuando quieras.',
-      enroll_success_t: '¡Ya casi estás protegido!', enroll_success_b: 'Gracias, {name}. Recibimos tu inscripción a {plan}. Un miembro del equipo de Best Vision Accounting te contactará en {email} para activar tu membresía.',
+      pay_btn: 'Continuar al pago seguro', request_btn: 'Enviar inscripción',
+      enroll_success_t: '¡Gracias por inscribirte!', enroll_success_b: 'En cuanto se confirme tu pago (normalmente al instante), recibirás un correo de bienvenida con tu número de miembro y el enlace a tu portal. Si no llega en unos minutos, revisa tu carpeta de correo no deseado.',
       enroll_redirect: 'Te llevamos al pago seguro…',
       your_plan: 'Tu membresía', includes: 'Incluye',
       member_q: '¿Ya eres miembro y recibiste un aviso?', member_q_b: 'Envíanos la carta directamente. La revisaremos y te diremos qué sigue.',
@@ -323,18 +325,20 @@
       no_delivery: 'Online submission isn’t available right now. Please contact Best Vision Accounting directly and we’ll take care of you.',
       privacy_short: 'We only use your information to set up and service your membership. See our Privacy Policy.',
 
-      enroll_kicker: 'Enrollment', enroll_title: 'Get protected in about two minutes.', enroll_sub: 'Review and accept the membership terms, then enter your details and payment in a secure form. Your protection starts on your effective enrollment date.',
+      enroll_kicker: 'Enrollment', enroll_title: 'Get protected in about two minutes.', enroll_sub: 'Review and accept the membership terms; next you’ll enter your details and payment on Stripe’s secure page. Your protection starts on your effective enrollment date.',
       step_details: 'Your details', step_review: 'Review & confirm', step_pay: 'Payment',
       details_title: 'Who are we protecting?', details_sub: 'Use the name exactly as it appears on your federal tax return.',
-      review_title: 'Review and confirm', review_sub: 'Review the membership terms and accept them. Next you’ll enter your details and payment in a secure form.',
-      pay_title: 'Your details and payment', pay_sub: 'Complete the secure form. Your membership starts as soon as payment is confirmed, and we’ll email you a welcome message with your membership number.',
-      checkout_alt: 'Don’t see the form? Open it in a new tab', checkout_frame_title: 'IRS Protect Plus payment form',
+      review_title: 'Review and confirm', review_sub: 'Review the membership terms and accept them. Then we’ll take you to Stripe’s secure payment page to enter your details and payment.',
+      checkout_note: 'Payment is processed on Stripe’s secure page. Your membership starts as soon as payment is confirmed, and we’ll email you a welcome message with your membership number.',
+      checkout_canceled: 'Payment wasn’t completed and you weren’t charged. You can try again whenever you’re ready.',
+      checkout_failed: 'We couldn’t open the payment page. Check your connection and try again in a moment.',
+      checkout_unavailable: 'Online enrollment isn’t available right now. Call us at (305) 220-9616 and we’ll be glad to enroll you.',
       summary_plan: 'Membership', summary_price: 'Monthly fee', summary_name: 'Member', summary_email: 'Email', summary_phone: 'Phone', summary_zip: 'ZIP', summary_fs: 'Filing status', summary_start: 'Effective enrollment date', summary_total: 'Due today', billed_monthly: 'Your membership renews automatically every month and is billed $19.99 a month until you cancel. You can cancel anytime by emailing info@bvaccounting.com or calling (305) 220-9616; cancelling stops future charges. Refunds: fees paid in the first 30 days may be refundable if no benefit has been requested, received or initiated.',
       agree_pre: 'I have read, understand and agree to the ', agree_mid: ', the ', agree_mid2: ' and the ', agree_post: '.',
       agree_notice: 'I understand that IRS Protect Plus is a membership program and not insurance; that only matters whose first IRS notice is dated on or after my effective enrollment date are eligible; and that I must remain active and in good standing throughout any covered matter to continue receiving benefits.',
       agree_billing: 'I authorize Best Vision Accounting, LLC to automatically charge the $19.99 membership fee every month until I cancel.',
-      pay_btn: 'Continue to secure payment', request_btn: 'Submit enrollment', secure_note: 'Payment is processed securely. You can cancel anytime.',
-      enroll_success_t: 'You’re almost protected!', enroll_success_b: 'Thanks, {name}. We received your enrollment in {plan}. A Best Vision Accounting team member will contact you at {email} to activate your membership.',
+      pay_btn: 'Continue to secure payment', request_btn: 'Submit enrollment',
+      enroll_success_t: 'Thanks for enrolling!', enroll_success_b: 'As soon as your payment is confirmed (usually right away), you’ll get a welcome email with your membership number and the link to your portal. If it doesn’t arrive within a few minutes, check your spam folder.',
       enroll_redirect: 'Taking you to secure checkout…',
       your_plan: 'Your membership', includes: 'Includes',
       member_q: 'Already a member with a notice?', member_q_b: 'Send us the letter directly. We’ll review it and tell you what happens next.',
@@ -423,14 +427,15 @@
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
   }
 
-  /* Switching language opens the same page in the other language. The
-     counterpart URL comes from the page's hreflang alternate links. */
+  /* Switching language opens the same page in the other language, keeping
+     its query (Stripe's ?checkout=success, say). The counterpart URL comes
+     from the page's hreflang alternate links. */
   function setLang(l) {
     l = l === 'en' ? 'en' : 'es';
     try { localStorage.setItem(STORAGE_KEY, l); } catch (e) { /* ignore */ }
     if (l === lang) return;
     var alt = document.querySelector('link[rel="alternate"][hreflang="' + l + '"]');
-    if (alt) { window.location.href = alt.getAttribute('href').replace(/^https?:\/\/[^/]+/, '') + window.location.hash; return; }
+    if (alt) { window.location.href = alt.getAttribute('href').replace(/^https?:\/\/[^/]+/, '') + window.location.search + window.location.hash; return; }
     lang = l;
     apply();
   }

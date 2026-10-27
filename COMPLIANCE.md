@@ -10,9 +10,9 @@ authoritative summary. Items marked *unverified* could not be confirmed.
 | Area | Change |
 | --- | --- |
 | Legal pages | Added a **Cookie Policy** (`/cookie-policy`), a **Refund and Cancellation Policy** (`/refund-policy`) and an **Accessibility Statement** (`/accessibility`), in Spanish and English. All legal pages and the footer now list all six documents. |
-| Privacy Policy | Removed the outdated Google Fonts statement (fonts are now self-hosted). Disclosed Vercel Web Analytics and Speed Insights, and named the service providers (Vercel, Stripe, form/email/storage providers). _Updated with the dashboard connection: Vercel incl. private Blob document storage, Neon, GoHighLevel (records, messages, payments) and Resend; Stripe removed._ Strengthened the tax-information clause to match IRC §7216. Added a Do Not Track statement (CalOPPA), a financial-privacy (GLBA-style) statement and a breach-notice statement (Fla. Stat. §501.171). |
+| Privacy Policy | Removed the outdated Google Fonts statement (fonts are now self-hosted). Disclosed Vercel Web Analytics and Speed Insights, and named the service providers (Vercel, Stripe, form/email/storage providers). _Updated with the dashboard connection: Vercel incl. private Blob document storage, Neon, Stripe (payments), GoHighLevel (records, messages, invoices) and Resend._ Strengthened the tax-information clause to match IRC §7216. Added a Do Not Track statement (CalOPPA), a financial-privacy (GLBA-style) statement and a breach-notice statement (Fla. Stat. §501.171). |
 | Cookie consent | **Not required.** The site sets no cookies of its own. It stores only the language choice in local storage, and Vercel Web Analytics is cookieless. No banner was added; this is explained in the Cookie Policy. |
-| Third parties | No ads, social widgets, maps or videos. External links go only to IRS.gov, TAS and the U.S. Tax Court. _Since the dashboard connection:_ the one embed is the GoHighLevel order form on `/enroll`, loaded only after the visitor accepts the terms; GoHighLevel and its payment processor may set cookies inside it. The Privacy and Cookie Policies say so. |
+| Third parties | No ads, social widgets, maps or videos. External links go only to IRS.gov, TAS and the U.S. Tax Court. _Since the dashboard connection:_ payment happens on Stripe's own Checkout page, so the site embeds nothing; Stripe may set its own cookies there, as the Cookie Policy says. |
 | Form consent | The contact and notice forms now require a consent checkbox that links to the Privacy Policy. Each form states that phone numbers are used only for the request or membership, never for marketing. The enrollment form links to the Privacy Policy. |
 | Data minimization | ZIP code is now optional at enrollment. Name, email and phone are still required to service the membership. |
 | SSN safety | **IRS notice uploads can no longer fall back to the visitor's email app**, since plain email is not encrypted (FTC Safeguards Rule). _Since the dashboard connection:_ uploads go from the browser straight to private, encrypted Vercel Blob storage with a one-file token issued by the IRS Protect Plus dashboard, and only signed-in staff (or the member, in the portal) can open them. List this provider in the WISP. |
@@ -66,9 +66,9 @@ authoritative summary. Items marked *unverified* could not be confirmed.
 ### E. Subscription and cancellation: **business**
 - ROSCA (15 U.S.C. §8403) requires clear terms before billing, express consent and a simple way to stop charges. The site now covers the first two.
 - **Action:**
-  - Offer a self-service online cancellation. With GoHighLevel checkout this is planned as a "Cancel membership" action in the dashboard's member portal (app.irsprotect.us); until then, cancellation is by email or phone as the enrollment page states.
+  - Offer a self-service online cancellation. With Stripe checkout this can be Stripe's customer portal, opened from the dashboard's member portal; until then, cancellation is by email or phone as the enrollment page states.
   - Send an email confirming enrollment terms and how to cancel.
-  - Keep consent records.
+  - Keep consent records. _Since the dashboard connection, each Stripe subscription carries the moment the three enrollment boxes were accepted (`consent_at` in its metadata) and the visitor's language._
 - California's automatic renewal law (if you sell to CA residents; AB 2863, effective July 1, 2025) adds online cancellation in the same medium, an acknowledgment, annual reminders and keeping consent records for 3 years.
 - The FTC "click-to-cancel" rule was vacated (8th Cir., July 8, 2025). ROSCA still applies.
 - Fla. Stat. §501.165 most likely does not apply to a month-to-month plan (attorney to confirm).

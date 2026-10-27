@@ -420,8 +420,6 @@ a.overlay-card--upload:hover{transform:translateY(-4px);box-shadow:0 30px 60px -
 .success p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-70);max-width:520px}
 .success .btn{margin-top:8px}
 .success .notice-ref{font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
-/* The GHL order form on /enroll; form_embed.js sizes the iframe once it loads. */
-.checkout-frame{margin:4px 0 14px;min-height:200px}
 
 /* Steps */
 .steps{display:flex;gap:10px;align-items:center;margin-bottom:28px;font-size:13px;font-weight:700}

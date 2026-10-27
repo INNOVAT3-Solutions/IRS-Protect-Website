@@ -40,8 +40,8 @@ Commit the build output.
 
 - [ ] **Vercel Web Analytics** and **Speed Insights**: turn both on in the
       project dashboard. The tags are already in every page. Custom events
-      (`enroll_start`, `enroll_checkout_open`, `contact_submit`, `notice_submit`,
-      `lang_switch`; `enrollment_submit` is gone: payment happens inside the GHL form) need a Vercel Pro plan to show up.
+      (`enroll_start`, `enroll_checkout_open`, `enroll_complete`, `contact_submit`, `notice_submit`,
+      `lang_switch`; `enrollment_submit` is gone: payment happens on Stripe's page) need a Vercel Pro plan to show up.
 - [ ] **Google Search Console**:
   1. Add a **Domain** property for `irsprotect.us`, verified with a DNS TXT record at GoDaddy.
   2. Submit `https://irsprotect.us/sitemap.xml`.
@@ -59,9 +59,9 @@ Put these values in `js/config.js` unless noted, then rebuild.
 
 | Item | Where it goes | Status |
 | --- | --- | --- |
-| Notice uploads | `dashboardUrl` | **Done.** Notices upload privately to the IRS Protect Plus dashboard (`https://app.irsprotect.us`), which emails the receipt and alerts the team. |
-| Checkout | `ghlOrderFormId` | **Done.** The GoHighLevel order form loads on `/enroll` after the terms are accepted; paying there activates the membership in the dashboard. Stripe isn't used. |
-| Member portal sign-in URL | `memberPortalUrl` | **Done:** `https://app.irsprotect.us`. |
+| Notice uploads | `dashboardUrl` | **Done.** Notices upload privately to the IRS Protect Plus dashboard (`https://irs-protect-dashboard.vercel.app`), which emails the receipt and alerts the team. |
+| Checkout | `dashboardUrl` | **Done.** Once the terms are accepted, `/enroll` sends the visitor to a Stripe Checkout page (the client's Stripe account) in their language; the dashboard activates the membership from Stripe's payment and records it in GoHighLevel. |
+| Member portal sign-in URL | `memberPortalUrl` | **Done:** `https://irs-protect-dashboard.vercel.app` (to become `https://app.irsprotect.us` when that domain points at the dashboard). |
 | Contact form endpoint (optional, e.g. Formspree) | `forms.endpoint` | Optional. Only the contact form uses it; without it, the contact form opens the visitor's email app to info@bvaccounting.com. |
 | Names, credentials (EA / CPA / attorney) and photos of the people who represent members | New "Quién te representa / Who represents you" section on the homepage (marked `TODO(client)` in `index.html`) | **Needed.** This is the biggest trust signal Google looks for on tax and money sites. Use only real people and real credentials (Circular 230 §10.30). |
 | Name and credential of the EA/CPA who reviews the IRS notice guides | `"reviewer"` in each file in `content/guides/` | **Needed** (see section 4) |

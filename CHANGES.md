@@ -64,12 +64,13 @@ connector could not access. Check it while logged in (list in the handoff).
 # Dashboard connection — branch `feat/dashboard-connection`
 
 Built on `seo/audit-20260929`; connects the site to the IRS Protect Plus
-dashboard (`https://app.irsprotect.us`) and GoHighLevel.
+dashboard (`https://irs-protect-dashboard.vercel.app`), which takes the payments through the
+client's Stripe account and records members and payments in GoHighLevel.
 
 | Area | Change | Files |
 | --- | --- | --- |
 | Notice form | Files upload from the browser straight to the dashboard's private, encrypted storage (a one-file token per upload, the vendored `@vercel/blob` 2.8.0 client), then the dashboard records the notice, sends the receipt in the visitor's language with a `SUB-…` reference number, and alerts the team. The notice date, tax year, member ID and consent go with it. Only PDF, JPG, PNG and HEIC, up to 25 MB and 10 files (the dashboard's limits); a retry after a lost answer re-sends only the notice. | `js/site.js`, `submit-notice.html`, `vendor/`, `js/config.js` |
-| Enrollment | Step 1 is the terms (price, auto-renewal, cancellation, three required boxes); step 2 loads the GoHighLevel order form, where the details and payment go. Nothing loads from GHL before the visitor continues. Paying activates the membership in the dashboard. Stripe and the site's own details step are gone. Event `enroll_checkout_open` replaces `enrollment_submit`. | `enroll.html`, `js/site.js` |
-| Sign in | Every "Iniciar sesión / Log in" link opens the member portal at `https://app.irsprotect.us`, in the same tab. | `js/config.js`, `js/site.js`, `js/i18n.js` |
-| Legal | Privacy and Cookie Policies name the real providers (Vercel incl. Blob, Neon, GoHighLevel, Resend) and the GHL form's cookies. **Counsel to review.** | `privacy.html`, `cookie-policy.html` |
+| Enrollment | Step 1 is the terms (price, auto-renewal, cancellation, three required boxes); continuing sends the visitor to a Stripe Checkout page in their language, which the dashboard creates (recording the consent time and the language on the subscription). Stripe's return shows a thank-you (`?checkout=success`) or a "you weren't charged" note (`?checkout=canceled`); the language toggle keeps that query. The dashboard activates the membership from Stripe's payment, emails the welcome in the purchase language and mirrors every payment as a GoHighLevel invoice. The site's own details step is gone. Events `enroll_checkout_open` and `enroll_complete` replace `enrollment_submit`. | `enroll.html`, `js/site.js`, `js/i18n.js` |
+| Sign in | Every "Iniciar sesión / Log in" link opens the member portal at `https://irs-protect-dashboard.vercel.app`, in the same tab. | `js/config.js`, `js/site.js`, `js/i18n.js` |
+| Legal | Privacy and Cookie Policies name the real providers (Vercel incl. Blob, Neon, Stripe, GoHighLevel, Resend). **Counsel to review.** | `privacy.html`, `cookie-policy.html` |
 | Build | Fails when the Spanish and English dictionaries define different keys. | `scripts/build.mjs` |

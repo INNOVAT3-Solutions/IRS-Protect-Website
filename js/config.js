@@ -37,17 +37,14 @@ window.SITE_CONFIG = {
   /* The single membership offered. Shown in the enrollment summary. */
   plan: { name: 'IRS Protect Plus', price: 19.99 },
 
-  /* Checkout: the GoHighLevel order form embedded on /enroll after the
-     visitor accepts the terms. Paying there activates the membership in the
-     IRS Protect Plus dashboard. Blank = the payment step says to contact
-     the team instead. */
-  ghlOrderFormId: 'whwv2sNwm86bXuvbLLVo',
-
   /* The IRS Protect Plus dashboard (also the member portal). Notices
-     submitted on /submit-notice upload straight to it, privately. On
+     submitted on /submit-notice upload straight to it, privately, and
+     /enroll asks it for the Stripe payment page once the terms are
+     accepted. Blank = both forms say to contact the team instead. On
      localhost the site talks to a dashboard running on port 3000 instead
-     (see js/site.js). */
-  dashboardUrl: 'https://app.irsprotect.us',
+     (see js/site.js). Moves to https://app.irsprotect.us once that domain
+     points at the dashboard. */
+  dashboardUrl: 'https://irs-protect-dashboard.vercel.app',
 
   /* Contact form delivery. Any endpoint that accepts a multipart/form-data
      POST works (Formspree, Basin, Getform…). If blank, the contact form
@@ -58,7 +55,7 @@ window.SITE_CONFIG = {
   },
 
   /* Member portal / login. Every "Iniciar sesión" link opens it. */
-  memberPortalUrl: 'https://app.irsprotect.us',
+  memberPortalUrl: 'https://irs-protect-dashboard.vercel.app',
 
   /* Notice uploads: the dashboard accepts at most this many files, each up
      to this size (PDF, JPG, PNG or HEIC). */
