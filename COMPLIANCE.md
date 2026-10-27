@@ -66,7 +66,7 @@ authoritative summary. Items marked *unverified* could not be confirmed.
 ### E. Subscription and cancellation: **business**
 - ROSCA (15 U.S.C. §8403) requires clear terms before billing, express consent and a simple way to stop charges. The site now covers the first two.
 - **Action:**
-  - Offer a self-service online cancellation. With Stripe checkout this can be Stripe's customer portal, opened from the dashboard's member portal; until then, cancellation is by email or phone as the enrollment page states.
+  - Offer a self-service online cancellation. _Done: Stripe's customer portal (cancel at the end of the period, update the card), listed on `/refund-policy`, linked from `/login` and in the welcome email; email and phone still work._
   - Send an email confirming enrollment terms and how to cancel.
   - Keep consent records. _Since the dashboard connection, each Stripe subscription carries the moment the three enrollment boxes were accepted (`consent_at` in its metadata) and the visitor's language._
 - California's automatic renewal law (if you sell to CA residents; AB 2863, effective July 1, 2025) adds online cancellation in the same medium, an acknowledgment, annual reminders and keeping consent records for 3 years.

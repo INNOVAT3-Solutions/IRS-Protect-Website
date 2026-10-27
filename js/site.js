@@ -27,6 +27,10 @@
     $$('[data-link="login"]').forEach(function (a) {
       if (portal) a.href = portal;
     });
+    /* Stripe's billing portal, where members update their card or cancel. */
+    $$('[data-link="billing"]').forEach(function (a) {
+      if (C.billingPortalUrl) a.href = C.billingPortalUrl;
+    });
     $$('[data-link="company"]').forEach(function (a) {
       var u = get(C, 'company.url');
       if (u) { a.href = u; a.target = '_blank'; a.rel = 'noopener'; } else { a.href = pageUrl('contact'); }

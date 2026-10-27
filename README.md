@@ -41,8 +41,9 @@ blank values degrade gracefully.
 | --- | --- |
 | `company.email`, `phone`, `hours`, `address`, `url` | Shown on the Contact page, the footer and the legal pages, and used as the email fallback for forms. Blank rows are hidden automatically. |
 | `company.streetAddress`, `city`, `region`, `postalCode` | The same address split into parts for search engines (structured data). Keep it identical to your Google Business Profile. |
-| `dashboardUrl` | The IRS Protect Plus dashboard (`https://irs-protect-dashboard.vercel.app`; `https://app.irsprotect.us` once that domain points at it). The notice form uploads each file privately to it, then it records the notice, emails the receipt in the visitor's language and alerts the team; `/enroll` asks it for the Stripe Checkout page. On `localhost` the site uses a dashboard on port 3000 instead. The dashboard must list this site's origin in its `MARKETING_SITE_ORIGIN`. |
-| `memberPortalUrl` | The member portal (`https://irs-protect-dashboard.vercel.app`, the same app). Every "Iniciar sesión / Log in" link opens it. |
+| `dashboardUrl` | The IRS Protect Plus dashboard (`https://app.irsprotect.us`). The notice form uploads each file privately to it, then it records the notice, emails the receipt in the visitor's language and alerts the team; `/enroll` asks it for the Stripe Checkout page. On `localhost` the site uses a dashboard on port 3000 instead. The dashboard must list this site's origin in its `MARKETING_SITE_ORIGIN`. |
+| `memberPortalUrl` | The member portal (`https://app.irsprotect.us`, the same app). Every "Iniciar sesión / Log in" link opens it. |
+| `billingPortalUrl` | Stripe's customer portal login link. Members update their card or cancel there; `/refund-policy` lists it as the online way to cancel and `/login` links it. Blank hides both links. |
 | `forms.endpoint` | Optional, contact form only: where it POSTs (multipart/form-data, e.g. Formspree). If blank, it opens the visitor's email app addressed to `company.email`. |
 | `maxUploadMb`, `maxFiles` | Notice upload limits, matching the dashboard's (25 MB per file, 10 files). |
 

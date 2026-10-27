@@ -59,9 +59,10 @@ Put these values in `js/config.js` unless noted, then rebuild.
 
 | Item | Where it goes | Status |
 | --- | --- | --- |
-| Notice uploads | `dashboardUrl` | **Done.** Notices upload privately to the IRS Protect Plus dashboard (`https://irs-protect-dashboard.vercel.app`), which emails the receipt and alerts the team. |
+| Notice uploads | `dashboardUrl` | **Done.** Notices upload privately to the IRS Protect Plus dashboard (`https://app.irsprotect.us`), which emails the receipt and alerts the team. |
 | Checkout | `dashboardUrl` | **Done.** Once the terms are accepted, `/enroll` sends the visitor to a Stripe Checkout page (the client's Stripe account) in their language; the dashboard activates the membership from Stripe's payment and records it in GoHighLevel. |
-| Member portal sign-in URL | `memberPortalUrl` | **Done:** `https://irs-protect-dashboard.vercel.app` (to become `https://app.irsprotect.us` when that domain points at the dashboard). |
+| Member portal sign-in URL | `memberPortalUrl` | **Done:** `https://app.irsprotect.us`. |
+| Online cancellation | `billingPortalUrl` | **Done.** Stripe's customer portal (cancel at the end of the period, update the card, see invoices), linked from `/refund-policy` and `/login`. |
 | Contact form endpoint (optional, e.g. Formspree) | `forms.endpoint` | Optional. Only the contact form uses it; without it, the contact form opens the visitor's email app to info@bvaccounting.com. |
 | Names, credentials (EA / CPA / attorney) and photos of the people who represent members | New "Quién te representa / Who represents you" section on the homepage (marked `TODO(client)` in `index.html`) | **Needed.** This is the biggest trust signal Google looks for on tax and money sites. Use only real people and real credentials (Circular 230 §10.30). |
 | Name and credential of the EA/CPA who reviews the IRS notice guides | `"reviewer"` in each file in `content/guides/` | **Needed** (see section 4) |

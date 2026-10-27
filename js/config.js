@@ -42,9 +42,8 @@ window.SITE_CONFIG = {
      /enroll asks it for the Stripe payment page once the terms are
      accepted. Blank = both forms say to contact the team instead. On
      localhost the site talks to a dashboard running on port 3000 instead
-     (see js/site.js). Moves to https://app.irsprotect.us once that domain
-     points at the dashboard. */
-  dashboardUrl: 'https://irs-protect-dashboard.vercel.app',
+     (see js/site.js). */
+  dashboardUrl: 'https://app.irsprotect.us',
 
   /* Contact form delivery. Any endpoint that accepts a multipart/form-data
      POST works (Formspree, Basin, Getform…). If blank, the contact form
@@ -55,7 +54,12 @@ window.SITE_CONFIG = {
   },
 
   /* Member portal / login. Every "Iniciar sesión" link opens it. */
-  memberPortalUrl: 'https://irs-protect-dashboard.vercel.app',
+  memberPortalUrl: 'https://app.irsprotect.us',
+
+  /* Stripe's customer portal: members update their card or cancel there,
+     signing in with their enrollment email (Stripe emails them a link).
+     Linked from /refund-policy and /login; blank = those links hide. */
+  billingPortalUrl: 'https://billing.stripe.com/p/login/28EbJ1dSWf0VfT8bgT18c00',
 
   /* Notice uploads: the dashboard accepts at most this many files, each up
      to this size (PDF, JPG, PNG or HEIC). */

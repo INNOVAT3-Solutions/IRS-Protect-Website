@@ -168,6 +168,7 @@
       /* Login */
       login_kicker: 'Miembros', login_title: 'Acceso para miembros', login_sub: 'Consulta tu membresía, tus avisos y tus casos, y envía avisos del IRS.',
       portal_open: 'Abrir el portal de miembros', portal_note: 'Irás al portal seguro de miembros de Best Vision Accounting.',
+      billing_note: '¿Necesitas actualizar tu tarjeta o cancelar tu membresía?', billing_open: 'Abre tu portal de facturación',
       portal_soon_t: 'El acceso a tu cuenta en línea llegará pronto', portal_soon_b: 'Los miembros ya pueden enviar un aviso del IRS en línea o comunicarse directamente con el equipo de Best Vision Accounting. Todo lo demás sobre tu membresía lo gestiona el equipo en tu nombre.',
       not_member: '¿Aún no eres miembro?', join_now: 'Protégete hoy', member_actions: 'Lo que los miembros pueden hacer ahora',
 
@@ -351,6 +352,7 @@
 
       login_kicker: 'Members', login_title: 'Member sign in', login_sub: 'See your membership, notices and cases, and submit IRS notices.',
       portal_open: 'Open the member portal', portal_note: 'You’ll be taken to the secure Best Vision Accounting member portal.',
+      billing_note: 'Need to update your card or cancel your membership?', billing_open: 'Open your billing portal',
       portal_soon_t: 'Online account access is coming soon', portal_soon_b: 'Members can already submit an IRS notice online or reach the Best Vision Accounting team directly. Everything else about your membership is handled by the team on your behalf.',
       not_member: 'Not a member yet?', join_now: 'Get protected today', member_actions: 'What members can do right now',
 
