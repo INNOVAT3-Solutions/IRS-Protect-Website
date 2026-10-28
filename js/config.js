@@ -62,7 +62,7 @@ window.SITE_CONFIG = {
   /* Stripe's customer portal: members update their card or cancel there,
      signing in with their enrollment email (Stripe emails them a link).
      Linked from /refund-policy and /login; blank = those links hide. */
-  billingPortalUrl: 'https://billing.stripe.com/p/login/28EbJ1dSWf0VfT8bgT18c00',
+  billingPortalUrl: 'https://billing.stripe.com/p/login/00w9ATcZd67K8iU8ns8EM00',
 
   /* Notice uploads: the dashboard accepts at most this many files, each up
      to this size (PDF, JPG, PNG or HEIC). */
