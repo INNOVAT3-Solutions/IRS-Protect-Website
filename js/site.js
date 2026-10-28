@@ -21,12 +21,17 @@
   /* ------------------------------------------------------------------------
      Config wiring — fills contact details and links from SITE_CONFIG
      ------------------------------------------------------------------------ */
-  function wireConfig() {
+  /* Signing in is the next step, not a side trip: same tab. The portal opens
+     in the language the visitor is reading (?lang=es|en), and follows a switch. */
+  function wireLogin() {
     var portal = C.memberPortalUrl;
-    /* Signing in is the next step, not a side trip: same tab. */
-    $$('[data-link="login"]').forEach(function (a) {
-      if (portal) a.href = portal;
-    });
+    if (!portal) return;
+    var href = portal + (portal.indexOf('?') === -1 ? '?' : '&') + 'lang=' + (I ? I.lang : 'es');
+    $$('[data-link="login"]').forEach(function (a) { a.href = href; });
+  }
+
+  function wireConfig() {
+    wireLogin();
     /* Stripe's billing portal, where members update their card or cancel. */
     $$('[data-link="billing"]').forEach(function (a) {
       if (C.billingPortalUrl) a.href = C.billingPortalUrl;
@@ -552,6 +557,7 @@
     initStickyCta();
     syncLangOnly();
     document.addEventListener('langchange', syncLangOnly);
+    document.addEventListener('langchange', wireLogin);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
