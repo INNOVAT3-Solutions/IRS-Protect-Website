@@ -279,19 +279,57 @@
     if (title) { title.setAttribute('tabindex', '-1'); title.focus({ preventScroll: true }); }
   }
 
-  /* ---- Contact form ---- */
+  /* ---- Contact form ----
+     The message goes to the dashboard, which emails the office (Reply
+     answers the visitor) and notes it in GHL. When the dashboard can't take
+     it -- not set up, unreachable, or its email failed -- the visitor's own
+     email app opens with the message, as before. */
+  var CONTACT_FALLBACK = { unavailable: 1, network: 1, origin_not_allowed: 1 };
+
   function initContactForm() {
     var form = document.getElementById('contact-form'); if (!form) return;
     liveValidate(form);
+    /* Since when the form has been on screen: a script sends at once, a person doesn't. */
+    var shownAt = Date.now();
+
+    function deliverContact(f, topic, website, subject) {
+      var base = dashboardUrl();
+      var byEmail = function () { return deliver('contact', f, null, subject); };
+      if (!base) return byEmail();
+      return post(base, '/api/intake/contact', {
+        name: (f.first_name + ' ' + f.last_name).trim(),
+        email: f.email,
+        phone: f.phone || '',
+        topic: topic,
+        message: f.message,
+        lang: I ? I.lang : 'es',
+        consent: true,
+        website: website,
+        elapsedMs: Date.now() - shownAt
+      }).then(function () {
+        track('contact_submit', { delivery: 'dashboard', lang: I ? I.lang : 'es' });
+        return { mode: 'dashboard' };
+      }, function (err) {
+        if (CONTACT_FALLBACK[err.code]) return byEmail();
+        throw err;
+      });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault(); hideAlert(form);
       if (!validateScope(form)) return;
       var f = collect(form); var btn = $('button[type="submit"]', form); setBusy(btn, true);
       var topicSel = form.querySelector('select[name="topic"]');
+      var topic = topicSel ? topicSel.value : 'other';
       if (topicSel && topicSel.value) f.topic = topicSel.options[topicSel.selectedIndex].textContent;
-      deliver('contact', f, null, 'IRS Protect contact: ' + (f.topic || 'General') + ' — ' + f.first_name + ' ' + f.last_name)
+      /* The hidden field is the dashboard's bot check, never part of an email. */
+      var website = f.website || ''; delete f.website;
+      deliverContact(f, topic || 'other', website, 'IRS Protect contact: ' + (f.topic || 'General') + ' — ' + f.first_name + ' ' + f.last_name)
         .then(function (r) { setBusy(btn, false); showResult(form, r, { titleKey: 'contact_success_t', bodyKey: 'contact_success_b', vars: { name: f.first_name, email: f.email } }); })
-        .catch(function () { setBusy(btn, false); showAlert(form, 'error', '<p>' + esc(t('submit_failed')) + '</p>'); });
+        .catch(function (err) {
+          setBusy(btn, false);
+          showAlert(form, 'error', '<p>' + esc(t(err && err.code === 'rate_limited' ? 'err_notice_busy' : 'submit_failed')) + '</p>');
+        });
     });
   }
 
@@ -396,6 +434,19 @@
     return 'submissions/' + new Date().getFullYear() + '/' + hex + '.' + NOTICE_EXT[type];
   }
   function noticeError(code) { var e = new Error(code); e.code = code; return e; }
+  /* JSON to the dashboard. A refusal comes back as its machine-readable code
+     (never the English text); 409 is an answer, not an error. */
+  function post(base, path, body) {
+    return fetch(base + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      /* No answer at all -- offline, or a crash whose reply carried no CORS header. */
+      .catch(function () { throw noticeError('network'); })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (data) {
+          if (r.ok || r.status === 409) return { status: r.status, data: data };
+          throw noticeError(data.code || (r.status === 429 ? 'rate_limited' : 'failed'));
+        });
+      });
+  }
   /* Loaded on first use, and kept out of this file's syntax so a very old
      browser still runs the rest of the site. */
   function loadBlobClient() { return (new Function('return import("/vendor/blob-client.mjs")'))(); }
@@ -443,17 +494,6 @@
       drop.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files) add(e.dataTransfer.files); });
     }
 
-    function post(base, path, body) {
-      return fetch(base + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-        /* No answer at all -- offline, or a crash whose reply carried no CORS header. */
-        .catch(function () { throw noticeError('network'); })
-        .then(function (r) {
-          return r.json().catch(function () { return {}; }).then(function (data) {
-            if (r.ok || r.status === 409) return { status: r.status, data: data };
-            throw noticeError(data.code || (r.status === 429 ? 'rate_limited' : 'failed'));
-          });
-        });
-    }
     function busyText(btn, text) { btn.innerHTML = '<span class="spinner" aria-hidden="true"></span>' + esc(text); }
 
     function deliverNotice(f, btn) {

@@ -63,7 +63,7 @@ Put these values in `js/config.js` unless noted, then rebuild.
 | Checkout | `dashboardUrl` | **Done.** Once the terms are accepted, `/enroll` sends the visitor to a Stripe Checkout page (the client's Stripe account) in their language; the dashboard activates the membership from Stripe's payment and records it in GoHighLevel. |
 | Member portal sign-in URL | `memberPortalUrl` | **Done:** `https://app.irsprotect.us`. |
 | Online cancellation | `billingPortalUrl` | **Done.** Stripe's customer portal (cancel at the end of the period, update the card, see invoices), linked from `/refund-policy` and `/login`. |
-| Contact form endpoint (optional, e.g. Formspree) | `forms.endpoint` | Optional. Only the contact form uses it; without it, the contact form opens the visitor's email app to info@bvaccounting.com. |
+| Contact form | `dashboardUrl` | **Done.** Messages go to the dashboard, which emails the office's inbox (its `CONTACT_FORM_EMAIL`; Reply answers the visitor) and notes the person in GoHighLevel. Until that inbox is set, or if the dashboard can't be reached, the form opens the visitor's email app to info@bvaccounting.com (or posts to `forms.endpoint`, if one is set). |
 | Names, credentials (EA / CPA / attorney) and photos of the people who represent members | New "Quién te representa / Who represents you" section on the homepage (marked `TODO(client)` in `index.html`) | **Needed.** This is the biggest trust signal Google looks for on tax and money sites. Use only real people and real credentials (Circular 230 §10.30). |
 | Name and credential of the EA/CPA who reviews the IRS notice guides | `"reviewer"` in each file in `content/guides/` | **Needed** (see section 4) |
 | Yelp profile URL (optional) | `company.social` | Optional |

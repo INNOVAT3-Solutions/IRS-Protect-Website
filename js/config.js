@@ -38,16 +38,19 @@ window.SITE_CONFIG = {
   plan: { name: 'IRS Protect Plus', price: 19.99 },
 
   /* The IRS Protect Plus dashboard (also the member portal). Notices
-     submitted on /submit-notice upload straight to it, privately, and
-     /enroll asks it for the Stripe payment page once the terms are
-     accepted. Blank = both forms say to contact the team instead. On
+     submitted on /submit-notice upload straight to it, privately, /enroll
+     asks it for the Stripe payment page once the terms are accepted, and
+     the contact form's messages go through it to the office's inbox.
+     Blank = the notice and enrollment forms say to contact the team
+     instead, and the contact form falls back as below. On
      localhost the site talks to a dashboard running on port 3000 instead
      (see js/site.js). */
   dashboardUrl: 'https://app.irsprotect.us',
 
-  /* Contact form delivery. Any endpoint that accepts a multipart/form-data
-     POST works (Formspree, Basin, Getform…). If blank, the contact form
-     opens the visitor's email app addressed to company.email. Notices and
+  /* Where the contact form goes when the dashboard can't take a message
+     (not set up yet, or unreachable). Any endpoint that accepts a
+     multipart/form-data POST works (Formspree, Basin, Getform…). If blank,
+     the visitor's email app opens addressed to company.email. Notices and
      enrollment never use this. */
   forms: {
     endpoint: ''      // e.g. 'https://formspree.io/f/abcdwxyz'
