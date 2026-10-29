@@ -7,17 +7,19 @@ server-side code. A small build script (see section 2) generates the English
 pages, the SEO tags and the sitemap; its output is committed, so the site
 deploys as plain files.
 
-All program facts on the site (the $19.99 monthly fee, up to $10,000 in
-professional representation, the notice-date rule, future-tax-year coverage,
-exclusions, cancellation and refunds, Florida governing law) come from the
-IRS Protect Plus Membership Agreement.
+All program facts on the site (the 30-day free trial and the $19.99 monthly fee
+that follows it, up to $10,000 in professional representation, the notice-date
+rule, future-tax-year coverage, exclusions, cancellation and refunds, Florida
+governing law) come from the IRS Protect Plus Membership Agreement. The trial
+length is configured in the dashboard with `STRIPE_TRIAL_DAYS=30`; the site copy
+states 30 days, so the dashboard setting and this copy must change together.
 
 ## Pages
 
 | File | Purpose |
 | --- | --- |
 | `index.html` | Landing page (hero, trust, how it works, membership, coverage rules, what's included, FAQ, CTA) |
-| `enroll.html` | Enrollment: review & accept the terms (price, auto-renewal, cancellation, three required boxes) → details and payment on Stripe's secure Checkout page, in the visitor's language. The dashboard creates that page, activates the membership from Stripe's payment and emails the welcome; Stripe's return shows a thank-you or a "not charged" note |
+| `enroll.html` | Enrollment: review & accept the terms (30-day free trial, then $19.99/month auto-renewal, cancellation, three required boxes) → details and payment on Stripe's secure Checkout page, in the visitor's language. The dashboard creates that page with the 30-day trial (`STRIPE_TRIAL_DAYS`), activates the membership when checkout completes (trial start) and emails the welcome; Stripe's return shows a "free trial started" or a "not charged" note |
 | `submit-notice.html` | Anyone uploads an IRS notice (PDF/JPG/PNG/HEIC, drag & drop, validation); the files go privately to the IRS Protect Plus dashboard |
 | `contact.html` | Contact form + contact details |
 | `help.html` | Help center: FAQ + how-to topics |
@@ -52,9 +54,15 @@ blank values degrade gracefully.
 Notices and payments run through the IRS Protect Plus dashboard: notices go
 to its private storage, and payments to the client's Stripe account through a
 Checkout page the dashboard creates (the dashboard then records each payment
-in GoHighLevel). The site holds no Stripe key and no form service. What must
-stay true: the dashboard answers at `dashboardUrl` and lists this site's
-origins in `MARKETING_SITE_ORIGIN`.
+in GoHighLevel). The checkout must create **every** subscription with a
+30-day free trial: the site tells visitors there is no charge today, that the
+first $19.99 charge happens automatically when the trial ends, and that the
+membership then renews monthly. That is the dashboard's
+`STRIPE_TRIAL_DAYS=30` setting; if it changes, update the enrollment, Terms,
+Refund Policy, Membership Agreement and FAQ copy (mostly `js/i18n.js` plus the
+legal pages) in the same change and rebuild. The site holds no Stripe key and
+no form service. What must stay true: the dashboard answers at `dashboardUrl`
+and lists this site's origins in `MARKETING_SITE_ORIGIN`.
 
 ## 2. Build (after any change to pages, text or config)
 

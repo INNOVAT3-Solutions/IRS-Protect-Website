@@ -16,7 +16,7 @@ authoritative summary. Items marked *unverified* could not be confirmed.
 | Form consent | The contact and notice forms now require a consent checkbox that links to the Privacy Policy. Each form states that phone numbers are used only for the request or membership, never for marketing. The enrollment form links to the Privacy Policy. |
 | Data minimization | ZIP code is now optional at enrollment. Name, email and phone are still required to service the membership. |
 | SSN safety | **IRS notice uploads can no longer fall back to the visitor's email app**, since plain email is not encrypted (FTC Safeguards Rule). _Since the dashboard connection:_ uploads go from the browser straight to private, encrypted Vercel Blob storage with a one-file token issued by the IRS Protect Plus dashboard, and only signed-in staff (or the member, in the portal) can open them. List this provider in the WISP. |
-| Auto-renewal (ROSCA) | The enrollment page now states the price, monthly automatic renewal, how to cancel (email and phone), that cancelling stops future charges, and the refund terms, before payment. The billing checkbox wording says "automatically charge … every month until I cancel." |
+| Auto-renewal (ROSCA) and 30-day free trial | Every new monthly membership starts with a **30-day free trial**; a card is collected at signup, but nothing is charged during the trial. The enrollment page now states, before the billing consent: the 30-day trial, the $19.99/month price after the trial, that the first $19.99 charge happens automatically when the trial ends (day 31), that the membership renews monthly at $19.99 until cancelled, how to cancel (email, phone and, where configured, the billing portal), and that cancelling during the trial means no charge. The billing checkbox authorizes the charge at trial end and the monthly renewal after that. The summary shows "$0.00 due today", and the success panel says the free trial has started (no payment confirmation). The Terms, Refund Policy, Membership Agreement (§§1 and 9), FAQ and help-center billing answers were updated to match; the 30-day refund window is now tied to fees paid after the trial. |
 | Unsupported claims | Removed "Protección completa / Complete protection" (inaccurate, given the cap and exclusions), "Sin sorpresas / no surprises," and the "within one business day" response promise. Changed "$10,000 in professional representation" to "$10,000 maximum in representation services" and "La mayoría / Most people" to "Muchas / Many." Replaced "don't reply to the IRS until we've reviewed the notice" with "send it as soon as possible; IRS deadlines keep running." |
 | Reviews and testimonials | **None exist on the site.** Nothing to remove. The membership and timeline cards on the homepage are illustrations of the interface, not customer claims. |
 | IRS marks (31 U.S.C. §333) | Removed the IRS eagle emblem, the "IRS" wordmark and the "Department of the Treasury / Internal Revenue Service" text from the hero image and the envelope image. Removed the IRS building photo, which showed "Internal Revenue Service" in stone, from the call-to-action panel. Regenerated the social share images. |
@@ -24,6 +24,18 @@ authoritative summary. Items marked *unverified* could not be confirmed.
 | Business details | Legal name, address, phone, fax, email and hours appear on the contact page, in the footer and in the structured data. |
 
 ## 2. Risks that need the business or an attorney (by priority)
+
+> **30-day free trial (billing rule added 2026-10-29).** The site copy assumes the
+> dashboard is configured with **`STRIPE_TRIAL_DAYS=30`**: Stripe Checkout collects
+> a card, starts a 30-day free trial, and makes the first $19.99 charge
+> automatically when the trial ends, then renews monthly. If that setting changes
+> (or the dashboard ships a different trial length), the enrollment, Terms,
+> Refund Policy, Membership Agreement and FAQ copy in `js/i18n.js` and the legal
+> pages must be updated in the same change and the site rebuilt. These revised
+> trial and auto-renewal disclosures **still need a human/legal review** (the
+> Florida/FTC subscription-law points in section E below apply; the refund window
+> is now described as the first 30 days of *paid* membership, which counsel should
+> confirm is the intended policy).
 
 ### A. Possible classification as insurance or a legal expense plan: **attorney before launch**
 - Fla. Stat. §624.02 defines insurance as a contract to "pay or allow a specified amount or a determinable benefit upon determinable contingencies."
@@ -64,18 +76,19 @@ authoritative summary. Items marked *unverified* could not be confirmed.
 - Source: [31 CFR 10.30](https://www.law.cornell.edu/cfr/text/31/10.30).
 
 ### E. Subscription and cancellation: **business**
-- ROSCA (15 U.S.C. §8403) requires clear terms before billing, express consent and a simple way to stop charges. The site now covers the first two.
+- ROSCA (15 U.S.C. §8403) requires clear terms before billing, express consent and a simple way to stop charges. The site now covers the first two, including the 30-day free trial, the first charge at trial end and the monthly renewal.
 - **Action:**
   - Offer a self-service online cancellation. _Done: Stripe's customer portal (cancel at the end of the period, update the card), listed on `/refund-policy`, linked from `/login` and in the welcome email; email and phone still work._
-  - Send an email confirming enrollment terms and how to cancel.
+  - Send an email confirming enrollment terms and how to cancel, including the free-trial end date.
   - Keep consent records. _Since the dashboard connection, each Stripe subscription carries the moment the three enrollment boxes were accepted (`consent_at` in its metadata) and the visitor's language._
+  - Confirm the dashboard's `STRIPE_TRIAL_DAYS=30` matches the site's 30-day disclosure, and have counsel review the revised trial, auto-renewal and refund-window wording (ROSCA and, if selling to CA residents, AB 2863).
 - California's automatic renewal law (if you sell to CA residents; AB 2863, effective July 1, 2025) adds online cancellation in the same medium, an acknowledgment, annual reminders and keeping consent records for 3 years.
 - The FTC "click-to-cancel" rule was vacated (8th Cir., July 8, 2025). ROSCA still applies.
 - Fla. Stat. §501.165 most likely does not apply to a month-to-month plan (attorney to confirm).
 - Sources: [15 U.S.C. §8403](https://www.law.cornell.edu/uscode/text/15/8403), [Latham summary](https://www.lw.com/en/insights/eighth-circuit-vacates-ftc-click-to-cancel-rule), [§501.165](http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0500-0599/0501/Sections/0501.165.html).
 
 ### F. Membership Agreement wording: **attorney**
-- §9: "fees … *may* be refundable" is vague. State exactly when a refund is given.
+- §9: the 30-day refund window is now tied to fees paid after the free trial (the first charge); confirm that is the intended policy and state the exact refund mechanics.
 - §13: "dispute-resolution procedures agreed upon by the parties" names no procedure.
 - Legal name: Florida Sunbiz shows "Best Vision Accounting Corp"; the site says "LLC." Confirm.
 - Have the Spanish translations of all legal pages reviewed.

@@ -75,3 +75,25 @@ client's Stripe account and records members and payments in GoHighLevel.
 | Online cancellation | `/refund-policy` lists Stripe's customer portal as the online way to cancel (first in the list), and `/login` links it for card changes and cancellation. | `refund-policy.html`, `login.html`, `js/config.js`, `js/site.js`, `js/i18n.js` |
 | Legal | Privacy and Cookie Policies name the real providers (Vercel incl. Blob, Neon, Stripe, GoHighLevel, Resend). **Counsel to review.** | `privacy.html`, `cookie-policy.html` |
 | Build | Fails when the Spanish and English dictionaries define different keys. | `scripts/build.mjs` |
+
+# 30-day free trial — enrollment and legal copy (2026-10-29)
+
+Every new monthly membership now starts with a **30-day free trial** (the
+dashboard's `STRIPE_TRIAL_DAYS=30`): a card is collected on Stripe Checkout,
+nothing is charged during the trial, the first $19.99 charge happens
+automatically when the trial ends (day 31), and the membership renews monthly
+until cancelled. Cancelling during the trial means no charge.
+
+| Area | Change | Files |
+| --- | --- | --- |
+| Enrollment | The consent step discloses the trial, the $19.99 price after it, the automatic first charge and monthly renewal, how to cancel, and that cancelling during the trial is free. The summary shows a free-trial row and "$0.00 due today"; the billing checkbox authorizes the charge at trial end; the success panel says the trial has started (no payment confirmation). | `enroll.html`, `js/i18n.js` |
+| Legal pages | Terms §5, Refund Policy §§1 and 3, and Membership Agreement §§1 and 9 now describe the trial, the first charge, and the 30-day refund window as applying to fees paid after the trial. "Last updated" dates bumped to October 29, 2026. | `terms.html`, `refund-policy.html`, `membership-agreement.html`, `js/i18n.js` |
+| Homepage / help | The refund and billing wording in the plan note, FAQ and help-center answers is trial-aware. | `js/i18n.js` |
+| SEO / structured data | Enrollment meta/OG description updated; the JSON-LD `Offer` now carries the trial terms. | `js/i18n.js`, `scripts/build.mjs` |
+| Docs | Trial disclosure, the `STRIPE_TRIAL_DAYS=30` dependency and the pending legal review recorded. | `COMPLIANCE.md`, `HANDOFF.md`, `README.md` |
+
+**Dependency:** the site assumes the dashboard sets `STRIPE_TRIAL_DAYS=30`. If
+the dashboard changes the trial length, update `js/i18n.js` and the legal pages
+together and run the build. **Needs counsel review** (as with the other
+subscription/refund wording, see `COMPLIANCE.md`).
+

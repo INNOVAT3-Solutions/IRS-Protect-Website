@@ -22,7 +22,7 @@
 
       /* Meta descriptions (search results), ~155 characters max */
       desc_index: 'Membresía de representación ante el IRS: revisamos tus cartas del IRS y te ayudamos en auditorías y cobros. Hasta $10,000 en servicios por $19.99 al mes.',
-      desc_enroll: 'Inscríbete en IRS Protect Plus en unos dos minutos: representación profesional ante el IRS por $19.99 al mes. Cancela cuando quieras.',
+      desc_enroll: 'Inscríbete en IRS Protect Plus en unos dos minutos: 30 días de prueba gratis y después $19.99 al mes. Cancela cuando quieras.',
       desc_contact: '¿Preguntas sobre la membresía IRS Protect Plus, la facturación o un aviso del IRS? Contacta al equipo de Best Vision Accounting en Miami.',
       desc_help: 'Respuestas sobre la membresía IRS Protect Plus, cobertura, facturación, cancelación y qué hacer cuando llega una carta del IRS.',
       desc_notice: 'Miembros de IRS Protect Plus: sube tu aviso o carta del IRS y el equipo de Best Vision Accounting lo revisará y te dirá qué sigue.',
@@ -36,11 +36,11 @@
 
       title_cookies: 'Política de cookies | IRS Protect Plus', title_refund: 'Reembolsos y cancelación | IRS Protect Plus', title_accessibility: 'Accesibilidad | IRS Protect Plus',
       desc_cookies: 'Qué guarda el sitio de IRS Protect Plus en tu navegador: solo tu preferencia de idioma. Analítica sin cookies y sin seguimiento entre sitios.',
-      desc_refund: 'Cómo cancelar IRS Protect Plus ($19.99 al mes, renovación automática) y cuándo las cuotas pueden ser reembolsables, según el contrato de membresía.',
+      desc_refund: 'Cómo cancelar IRS Protect Plus tras la prueba gratuita de 30 días y cuándo las cuotas de $19.99 al mes pueden ser reembolsables, según el contrato.',
       desc_accessibility: 'Compromiso de accesibilidad de IRS Protect Plus: objetivo WCAG 2.1 AA, lo que hemos hecho, limitaciones conocidas y cómo pedir ayuda.',
       cookies: 'Política de cookies', refund: 'Reembolsos y cancelación', accessibility: 'Accesibilidad',
       legal_cookies_title: 'Política de cookies', legal_refund_title: 'Política de reembolsos y cancelación', legal_accessibility_title: 'Declaración de accesibilidad',
-      legal_updated_privacy: 'Última actualización: 9 de octubre de 2026', legal_updated_terms: 'Última actualización: 9 de octubre de 2026', legal_updated_cookies: 'Última actualización: 9 de octubre de 2026', legal_updated_refund: 'Última actualización: 9 de octubre de 2026', legal_updated_accessibility: 'Última actualización: 9 de octubre de 2026',
+      legal_updated_privacy: 'Última actualización: 9 de octubre de 2026', legal_updated_terms: 'Última actualización: 29 de octubre de 2026', legal_updated_cookies: 'Última actualización: 9 de octubre de 2026', legal_updated_refund: 'Última actualización: 29 de octubre de 2026', legal_updated_accessibility: 'Última actualización: 9 de octubre de 2026',
 
       /* Hero */
       hero_title: 'El IRS es complicado. Tu protección no debería serlo.',
@@ -80,7 +80,9 @@
         ['Ayuda en exámenes y auditorías', 'Asistencia durante exámenes o auditorías del IRS, con representación profesional autorizada.'],
         ['Cobro y resolución', 'Asistencia con asuntos elegibles de cobro o resolución del IRS.']
       ],
-      plans_note: 'Los $10,000 representan el valor de los servicios profesionales prestados por Best Vision Accounting, LLC. No es un pago en efectivo al miembro y no paga tu deuda fiscal. Cancela cuando quieras; las cuotas pagadas durante los primeros 30 días pueden ser reembolsables si no se ha solicitado, recibido o iniciado ningún beneficio del programa.',
+      plans_note: 'Los $10,000 representan el valor de los servicios profesionales prestados por Best Vision Accounting, LLC. No es un pago en efectivo al miembro y no paga tu deuda fiscal. Los primeros 30 días son una prueba gratuita: no se cobra nada. Terminada la prueba, las cuotas pagadas durante los primeros 30 días de membresía pagada pueden ser reembolsables si no se ha solicitado, recibido o iniciado ningún beneficio del programa.',
+
+      offer_desc: 'Prueba gratuita de 30 días; después $19.99 al mes hasta que canceles.',
 
       /* Coverage rules */
       coverage_title: 'Cómo funciona la cobertura', coverage_sub: 'Reglas claras, tomadas directamente del contrato de membresía.',
@@ -114,7 +116,7 @@
         ['¿Los $10,000 pagan mi deuda con el IRS?', 'No. Los $10,000 representan el valor de los servicios profesionales de representación prestados por Best Vision Accounting. No es un pago en efectivo al miembro y no paga impuestos, multas ni intereses.'],
         ['¿Qué años fiscales están cubiertos?', 'Los asuntos elegibles de años fiscales futuros, sin un límite fijo de años, mientras mantengas tu membresía activa y al corriente. Cada asunto califica cuando su primer aviso del IRS está fechado en o después de tu fecha efectiva de inscripción.'],
         ['¿Quién me representa ante el IRS?', 'El equipo de Best Vision Accounting. La representación puede estar a cargo de un Agente Inscrito (EA), un CPA, un abogado u otro profesional autorizado a representarte ante el IRS en el asunto correspondiente.'],
-        ['¿Puedo cancelar? ¿Y si dejo de pagar durante un asunto?', 'Puedes cancelar en cualquier momento. Las cuotas de los primeros 30 días pueden ser reembolsables si no has solicitado, recibido o iniciado ningún beneficio; después, las cuotas pagadas no son reembolsables salvo que la ley lo exija. Si cancelas o tu membresía queda inactiva mientras atendemos un asunto, Best Vision puede suspender la representación y los demás beneficios.']
+        ['¿Puedo cancelar? ¿Y si dejo de pagar durante un asunto?', 'Puedes cancelar en cualquier momento. Si cancelas durante la prueba gratuita de 30 días, no se te cobra nada. Terminada la prueba, las cuotas pagadas durante los primeros 30 días de membresía pagada pueden ser reembolsables si no has solicitado, recibido o iniciado ningún beneficio; después, las cuotas pagadas no son reembolsables salvo que la ley lo exija. Si cancelas o tu membresía queda inactiva mientras atendemos un asunto, Best Vision puede suspender la representación y los demás beneficios.']
       ],
 
       /* Final CTA and footer */
@@ -140,20 +142,20 @@
       privacy_short: 'Solo usamos tu información para crear y administrar tu membresía. Consulta nuestra Política de privacidad.',
 
       /* Enrollment */
-      enroll_kicker: 'Inscripción', enroll_title: 'Protégete en unos dos minutos.', enroll_sub: 'Revisa y acepta los términos de la membresía; después completarás tus datos y el pago en la página segura de Stripe. Tu protección comienza en tu fecha efectiva de inscripción.',
+      enroll_kicker: 'Inscripción', enroll_title: 'Protégete en unos dos minutos.', enroll_sub: 'Revisa y acepta los términos de la membresía; después registrarás tus datos y tu método de pago en la página segura de Stripe. Tu prueba gratuita de 30 días y tu protección comienzan en tu fecha efectiva de inscripción; el primer cobro de $19.99 se hace automáticamente cuando termina la prueba.',
       step_details: 'Tus datos', step_review: 'Revisar y confirmar', step_pay: 'Pago',
       details_title: '¿A quién protegemos?', details_sub: 'Usa el nombre exactamente como aparece en tu declaración federal de impuestos.',
-      review_title: 'Revisa y confirma', review_sub: 'Revisa los términos de la membresía y acéptalos. Después te llevaremos a la página de pago segura de Stripe para completar tus datos y el pago.',
-      checkout_note: 'El pago se procesa en la página segura de Stripe. Tu membresía se activa en cuanto se confirma el pago y te enviaremos un correo de bienvenida con tu número de miembro.',
-      checkout_canceled: 'No se completó el pago y no se te cobró nada. Puedes intentarlo de nuevo cuando quieras.',
+      review_title: 'Revisa y confirma', review_sub: 'Revisa los términos de la membresía y acéptalos. Después te llevaremos a la página segura de Stripe para registrar tu método de pago: hoy no se te cobra nada y tu prueba gratuita de 30 días comienza al completar el proceso.',
+      checkout_note: 'Tus datos de pago se registran en la página segura de Stripe. Con la inscripción comienza tu prueba gratuita de 30 días, sin cobro hoy, y te enviaremos un correo de bienvenida con tu número de miembro. La primera cuota de $19.99 se cobrará automáticamente cuando termine la prueba.',
+      checkout_canceled: 'No se completó la inscripción y no se te cobró nada. Puedes intentarlo de nuevo cuando quieras.',
       checkout_failed: 'No pudimos abrir la página de pago. Revisa tu conexión e inténtalo de nuevo en un momento.',
       checkout_unavailable: 'La inscripción en línea no está disponible por el momento. Llámanos al (305) 220-9616 y con gusto te inscribimos.',
-      summary_plan: 'Membresía', summary_price: 'Cuota mensual', summary_name: 'Miembro', summary_email: 'Correo', summary_phone: 'Teléfono', summary_zip: 'Código postal', summary_fs: 'Estado civil fiscal', summary_start: 'Fecha efectiva de inscripción', summary_total: 'A pagar hoy', billed_monthly: 'Tu membresía se renueva automáticamente cada mes y se cobran $19.99 al mes hasta que la canceles. Puedes cancelar en cualquier momento escribiendo a info@bvaccounting.com o llamando al (305) 220-9616; la cancelación detiene los cobros futuros. Reembolsos: las cuotas de los primeros 30 días pueden ser reembolsables si no has solicitado, recibido ni iniciado ningún beneficio.',
+      summary_plan: 'Membresía', summary_price: 'Cuota mensual después de la prueba', summary_name: 'Miembro', summary_email: 'Correo', summary_phone: 'Teléfono', summary_zip: 'Código postal', summary_fs: 'Estado civil fiscal', summary_start: 'Fecha efectiva de inscripción', summary_total: 'A pagar hoy', summary_trial: 'Prueba gratuita', summary_trial_value: '30 días', summary_due_today: '$0.00', billed_monthly: 'Prueba gratuita de 30 días. Hoy solo registras tu tarjeta y no se te cobra nada. Al terminar la prueba (día 31) se cobra automáticamente la primera cuota de $19.99 y, después, la membresía se renueva cada mes a $19.99 hasta que la canceles. Puedes cancelar en cualquier momento escribiendo a info@bvaccounting.com, llamando al (305) 220-9616 o desde tu portal de facturación; si cancelas durante la prueba, no se te cobra nada. Reembolsos: no se paga nada durante el mes gratis; consulta las condiciones para los cargos posteriores a la prueba.',
       agree_pre: 'He leído, entiendo y acepto el ', agree_mid: ', los ', agree_mid2: ' y la ', agree_post: '.',
       agree_notice: 'Entiendo que IRS Protect Plus es un programa de membresía y no un seguro; que solo son elegibles los asuntos cuyo primer aviso del IRS esté fechado en o después de mi fecha efectiva de inscripción; y que debo mantener mi membresía activa y al corriente durante todo el asunto cubierto para seguir recibiendo beneficios.',
-      agree_billing: 'Autorizo a Best Vision Accounting, LLC a cobrar automáticamente la cuota de membresía de $19.99 cada mes hasta que cancele.',
+      agree_billing: 'Autorizo a Best Vision Accounting, LLC a cobrar $19.99 al terminar mi prueba gratuita de 30 días y, después, automáticamente cada mes hasta que cancele.',
       pay_btn: 'Continuar al pago seguro', request_btn: 'Enviar inscripción',
-      enroll_success_t: '¡Gracias por inscribirte!', enroll_success_b: 'En cuanto se confirme tu pago (normalmente al instante), recibirás un correo de bienvenida con tu número de miembro y el enlace a tu portal. Si no llega en unos minutos, revisa tu carpeta de correo no deseado.',
+      enroll_success_t: '¡Tu prueba gratuita ha comenzado!', enroll_success_b: 'Tu prueba gratuita de 30 días ya está activa y no se te ha cobrado nada hoy. Cuando termine la prueba, se te cobrará automáticamente $19.99 y después cada mes hasta que canceles. Revisa tu correo: te enviamos un mensaje de bienvenida con tu número de miembro y el enlace a tu portal. Si no llega en unos minutos, revisa tu carpeta de correo no deseado.',
       enroll_redirect: 'Te llevamos al pago seguro…',
       your_plan: 'Tu membresía', includes: 'Incluye',
       member_q: '¿Ya eres miembro y recibiste un aviso?', member_q_b: 'Envíanos la carta directamente. La revisaremos y te diremos qué sigue.',
@@ -193,15 +195,15 @@
       help_topics_title: 'Cómo usar tu membresía',
       help_topics: [
         ['¿Cómo envío un aviso del IRS?', 'Usa la página Enviar un aviso. Sube una foto o PDF de todas las páginas, indícanos el número de aviso y la fecha impresa, y el equipo de Best Vision Accounting se encarga del resto.'],
-        ['¿Cómo se cobra mi membresía?', 'La membresía se cobra mensualmente al método de pago registrado: $19.99 al mes. Puedes cancelar cuando quieras.'],
-        ['¿Cómo cancelo mi membresía?', 'Contáctanos en cualquier momento. Las cuotas pagadas durante los primeros 30 días pueden ser reembolsables si no se ha solicitado, recibido o iniciado ningún beneficio. Después de eso, las cuotas pagadas no son reembolsables salvo que la ley lo exija. La cancelación termina la elegibilidad para beneficios futuros.'],
+        ['¿Cómo se cobra mi membresía?', 'Los primeros 30 días son una prueba gratuita: no se cobra nada, aunque se registra una tarjeta. Al terminar la prueba se cobra automáticamente $19.99 y después la membresía se renueva cada mes a $19.99 hasta que la canceles.'],
+        ['¿Cómo cancelo mi membresía?', 'Contáctanos en cualquier momento por correo, teléfono o desde tu portal de facturación. Si cancelas durante la prueba gratuita de 30 días, no se te cobra nada. Terminada la prueba, las cuotas pagadas durante los primeros 30 días de membresía pagada pueden ser reembolsables si no se ha solicitado, recibido o iniciado ningún beneficio. Después de eso, las cuotas pagadas no son reembolsables salvo que la ley lo exija. La cancelación termina la elegibilidad para beneficios futuros.'],
         ['¿Qué pasa si mi membresía queda inactiva durante un asunto?', 'Best Vision puede suspender o terminar la representación y los beneficios. Reactivar la membresía no restaura la cobertura de un asunto surgido mientras estaba inactiva.'],
         ['¿IRS Protect Plus cubre avisos de impuestos estatales?', 'IRS Protect Plus cubre asuntos federales elegibles del IRS. Para avisos de impuestos estatales, contacta directamente a Best Vision Accounting.']
       ],
       still_need: '¿Aún necesitas ayuda?', still_need_b: 'Envíanos un mensaje y te responderemos en horario de oficina.',
 
       /* Legal */
-      legal_kicker: 'Legal', legal_agreement_title: 'Contrato de membresía', legal_terms_title: 'Términos del servicio', legal_privacy_title: 'Política de privacidad', legal_updated: 'Última actualización: 3 de septiembre de 2026',
+      legal_kicker: 'Legal', legal_agreement_title: 'Contrato de membresía', legal_terms_title: 'Términos del servicio', legal_privacy_title: 'Política de privacidad', legal_updated: 'Última actualización: 29 de octubre de 2026',
 
       /* 404 */
       nf_title: 'No encontramos esa página.', nf_body: 'Puede que el enlace esté desactualizado. Vuelve al inicio o contáctanos si necesitas ayuda.'
@@ -218,7 +220,7 @@
 
       /* Meta descriptions (search results), ~155 characters max */
       desc_index: 'IRS representation membership: we review your IRS letters and help with audits and collections. Up to $10,000 in professional services for $19.99 a month.',
-      desc_enroll: 'Join IRS Protect Plus in about two minutes: professional IRS representation for $19.99 a month. Cancel anytime.',
+      desc_enroll: 'Join IRS Protect Plus in about two minutes: 30 days free, then $19.99 a month. Cancel anytime.',
       desc_contact: 'Questions about IRS Protect Plus membership, billing or an IRS notice? Contact the Best Vision Accounting team in Miami, in English or Spanish.',
       desc_help: 'Answers about IRS Protect Plus membership, coverage, billing, cancellation, and what to do when an IRS letter arrives.',
       desc_notice: 'IRS Protect Plus members: upload your IRS notice or letter and the Best Vision Accounting team will review it and tell you what comes next.',
@@ -232,11 +234,11 @@
 
       title_cookies: 'Cookie Policy | IRS Protect Plus', title_refund: 'Refunds and Cancellation | IRS Protect Plus', title_accessibility: 'Accessibility | IRS Protect Plus',
       desc_cookies: 'What the IRS Protect Plus site stores in your browser: only your language choice. Cookieless analytics and no cross-site tracking.',
-      desc_refund: 'How to cancel IRS Protect Plus ($19.99 a month, renews automatically) and when fees may be refundable, under the Membership Agreement.',
+      desc_refund: 'How to cancel IRS Protect Plus after the 30-day free trial and when the $19.99 monthly fees may be refundable, under the Membership Agreement.',
       desc_accessibility: 'IRS Protect Plus accessibility commitment: WCAG 2.1 AA goal, what we have done, known limitations and how to get help.',
       cookies: 'Cookie Policy', refund: 'Refunds and Cancellation', accessibility: 'Accessibility',
       legal_cookies_title: 'Cookie Policy', legal_refund_title: 'Refund and Cancellation Policy', legal_accessibility_title: 'Accessibility Statement',
-      legal_updated_privacy: 'Last updated: October 9, 2026', legal_updated_terms: 'Last updated: October 9, 2026', legal_updated_cookies: 'Last updated: October 9, 2026', legal_updated_refund: 'Last updated: October 9, 2026', legal_updated_accessibility: 'Last updated: October 9, 2026',
+      legal_updated_privacy: 'Last updated: October 9, 2026', legal_updated_terms: 'Last updated: October 29, 2026', legal_updated_cookies: 'Last updated: October 9, 2026', legal_updated_refund: 'Last updated: October 29, 2026', legal_updated_accessibility: 'Last updated: October 9, 2026',
 
       hero_title: 'The IRS is complicated. Your protection shouldn’t be.',
       hero_sub: 'IRS Protect Plus is an IRS representation membership: the Best Vision Accounting team reviews your IRS letters, responds for you, and helps with eligible audits and collections.',
@@ -272,8 +274,9 @@
         ['Examination and audit help', 'Assistance during IRS examinations or audits, with authorized professional representation.'],
         ['Collection and resolution', 'Assistance with eligible IRS collection or resolution matters.']
       ],
-      plans_note: 'The $10,000 represents the value of professional services provided by Best Vision Accounting, LLC. It is not a cash payment to the member and does not pay your tax bill. Cancel anytime; fees paid during the first 30 days may be refundable if no program benefit has been requested, received, or initiated.',
+      plans_note: 'The $10,000 represents the value of professional services provided by Best Vision Accounting, LLC. It is not a cash payment to the member and does not pay your tax bill. The first 30 days are a free trial: nothing is charged. After the trial, fees paid during the first 30 days of paid membership may be refundable if no program benefit has been requested, received, or initiated.',
 
+      offer_desc: '30-day free trial; then $19.99 a month until you cancel.',
       coverage_title: 'How coverage works', coverage_sub: 'Clear rules, taken straight from the membership agreement.',
       rules_t: 'Coverage rules',
       rules: [
@@ -303,7 +306,7 @@
         ['Does the $10,000 pay my IRS bill?', 'No. The $10,000 represents the value of professional representation services provided by Best Vision Accounting. It is not a cash payment to the member and does not pay tax, penalties or interest.'],
         ['Which tax years are covered?', 'Eligible matters for future tax years, with no fixed limit on the number of years, for as long as you keep your membership active and in good standing. Each matter qualifies when its first IRS notice is dated on or after your effective enrollment date.'],
         ['Who represents me before the IRS?', 'The Best Vision Accounting team. Representation may be provided by an Enrolled Agent (EA), a CPA, an attorney, or another professional authorized to represent you before the IRS for the matter.'],
-        ['Can I cancel? What if I stop paying during a matter?', 'You can cancel at any time. Fees paid during the first 30 days may be refundable if you haven’t requested, received, or initiated a benefit; after that, paid fees are non-refundable except where required by law. If you cancel or your membership becomes inactive while we are handling a matter, Best Vision may discontinue the representation and other benefits.']
+        ['Can I cancel? What if I stop paying during a matter?', 'You can cancel at any time. If you cancel during the 30-day free trial, you are not charged. After the trial, fees paid during the first 30 days of paid membership may be refundable if you haven’t requested, received, or initiated a benefit; after that, paid fees are non-refundable except where required by law. If you cancel or your membership becomes inactive while we are handling a matter, Best Vision may discontinue the representation and other benefits.']
       ],
 
       cta_title: 'Don’t wait for the letter. Get IRS protection in place today.', cta_sub: 'IRS Protect Plus · $19.99 a month · cancel anytime',
@@ -326,20 +329,20 @@
       no_delivery: 'Online submission isn’t available right now. Please contact Best Vision Accounting directly and we’ll take care of you.',
       privacy_short: 'We only use your information to set up and service your membership. See our Privacy Policy.',
 
-      enroll_kicker: 'Enrollment', enroll_title: 'Get protected in about two minutes.', enroll_sub: 'Review and accept the membership terms; next you’ll enter your details and payment on Stripe’s secure page. Your protection starts on your effective enrollment date.',
+      enroll_kicker: 'Enrollment', enroll_title: 'Get protected in about two minutes.', enroll_sub: 'Review and accept the membership terms; next you’ll enter your details and payment method on Stripe’s secure page. Your 30-day free trial and your protection start on your effective enrollment date; the first $19.99 charge happens automatically when the trial ends.',
       step_details: 'Your details', step_review: 'Review & confirm', step_pay: 'Payment',
       details_title: 'Who are we protecting?', details_sub: 'Use the name exactly as it appears on your federal tax return.',
-      review_title: 'Review and confirm', review_sub: 'Review the membership terms and accept them. Then we’ll take you to Stripe’s secure payment page to enter your details and payment.',
-      checkout_note: 'Payment is processed on Stripe’s secure page. Your membership starts as soon as payment is confirmed, and we’ll email you a welcome message with your membership number.',
-      checkout_canceled: 'Payment wasn’t completed and you weren’t charged. You can try again whenever you’re ready.',
+      review_title: 'Review and confirm', review_sub: 'Review the membership terms and accept them. Then we’ll take you to Stripe’s secure page to enter your payment method: you are not charged today, and your 30-day free trial starts when you finish checkout.',
+      checkout_note: 'Your payment details are entered on Stripe’s secure page. Enrollment starts your 30-day free trial, with no charge today, and we’ll email you a welcome message with your membership number. The first $19.99 charge happens automatically when the trial ends.',
+      checkout_canceled: 'Enrollment wasn’t completed and you weren’t charged. You can try again whenever you’re ready.',
       checkout_failed: 'We couldn’t open the payment page. Check your connection and try again in a moment.',
       checkout_unavailable: 'Online enrollment isn’t available right now. Call us at (305) 220-9616 and we’ll be glad to enroll you.',
-      summary_plan: 'Membership', summary_price: 'Monthly fee', summary_name: 'Member', summary_email: 'Email', summary_phone: 'Phone', summary_zip: 'ZIP', summary_fs: 'Filing status', summary_start: 'Effective enrollment date', summary_total: 'Due today', billed_monthly: 'Your membership renews automatically every month and is billed $19.99 a month until you cancel. You can cancel anytime by emailing info@bvaccounting.com or calling (305) 220-9616; cancelling stops future charges. Refunds: fees paid in the first 30 days may be refundable if no benefit has been requested, received or initiated.',
+      summary_plan: 'Membership', summary_price: 'Monthly fee after the trial', summary_name: 'Member', summary_email: 'Email', summary_phone: 'Phone', summary_zip: 'ZIP', summary_fs: 'Filing status', summary_start: 'Effective enrollment date', summary_total: 'Due today', summary_trial: 'Free trial', summary_trial_value: '30 days', summary_due_today: '$0.00', billed_monthly: '30-day free trial. Today you only enter your card and you are not charged. When the trial ends (day 31), the first $19.99 charge is made automatically, and then the membership renews every month at $19.99 until you cancel. You can cancel at any time by emailing info@bvaccounting.com, calling (305) 220-9616, or using your billing portal; if you cancel during the trial, you are not charged. Refunds: nothing is paid during the free month; see the terms for charges after the trial.',
       agree_pre: 'I have read, understand and agree to the ', agree_mid: ', the ', agree_mid2: ' and the ', agree_post: '.',
       agree_notice: 'I understand that IRS Protect Plus is a membership program and not insurance; that only matters whose first IRS notice is dated on or after my effective enrollment date are eligible; and that I must remain active and in good standing throughout any covered matter to continue receiving benefits.',
-      agree_billing: 'I authorize Best Vision Accounting, LLC to automatically charge the $19.99 membership fee every month until I cancel.',
+      agree_billing: 'I authorize Best Vision Accounting, LLC to charge $19.99 when my 30-day free trial ends and then automatically each month until I cancel.',
       pay_btn: 'Continue to secure payment', request_btn: 'Submit enrollment',
-      enroll_success_t: 'Thanks for enrolling!', enroll_success_b: 'As soon as your payment is confirmed (usually right away), you’ll get a welcome email with your membership number and the link to your portal. If it doesn’t arrive within a few minutes, check your spam folder.',
+      enroll_success_t: 'Your free trial has started!', enroll_success_b: 'Your 30-day free trial is active and you have not been charged anything today. When the trial ends, $19.99 will be charged automatically and then every month until you cancel. Check your email: we sent a welcome message with your membership number and the link to your portal. If it doesn’t arrive within a few minutes, check your spam folder.',
       enroll_redirect: 'Taking you to secure checkout…',
       your_plan: 'Your membership', includes: 'Includes',
       member_q: 'Already a member with a notice?', member_q_b: 'Send us the letter directly. We’ll review it and tell you what happens next.',
@@ -375,14 +378,14 @@
       help_topics_title: 'Using your membership',
       help_topics: [
         ['How do I submit an IRS notice?', 'Use the Submit a notice page. Upload a photo or PDF of every page, tell us the notice number and the date printed on it, and the Best Vision Accounting team takes it from there.'],
-        ['How is my membership billed?', 'Membership is billed monthly to your payment method on file: $19.99 a month. You can cancel anytime.'],
-        ['How do I cancel my membership?', 'Contact us anytime. Fees paid during the first 30 days may be refundable if no benefit has been requested, received, or initiated. After that, paid fees are non-refundable except where required by law. Cancellation ends eligibility for future benefits.'],
+        ['How is my membership billed?', 'The first 30 days are a free trial: nothing is charged, though a card is collected. When the trial ends, $19.99 is charged automatically, and the membership renews every month at $19.99 until you cancel.'],
+        ['How do I cancel my membership?', 'Contact us anytime by email, phone or through your billing portal. If you cancel during the 30-day free trial, you are not charged. After the trial, fees paid during the first 30 days of paid membership may be refundable if no benefit has been requested, received, or initiated. After that, paid fees are non-refundable except where required by law. Cancellation ends eligibility for future benefits.'],
         ['What happens if my membership becomes inactive during a matter?', 'Best Vision may suspend or discontinue the representation and benefits. Reactivating the membership does not restore coverage for a matter that arose while it was inactive.'],
         ['Does IRS Protect Plus cover state tax notices?', 'IRS Protect Plus covers eligible federal IRS matters. For state tax notices, contact Best Vision Accounting directly.']
       ],
       still_need: 'Still need help?', still_need_b: 'Send us a message and we’ll get back to you during business hours.',
 
-      legal_kicker: 'Legal', legal_agreement_title: 'Membership Agreement', legal_terms_title: 'Terms of Service', legal_privacy_title: 'Privacy Policy', legal_updated: 'Last updated: September 3, 2026',
+      legal_kicker: 'Legal', legal_agreement_title: 'Membership Agreement', legal_terms_title: 'Terms of Service', legal_privacy_title: 'Privacy Policy', legal_updated: 'Last updated: October 29, 2026',
 
       nf_title: 'We can’t find that page.', nf_body: 'The link may be out of date. Head back home or contact us if you need a hand.'
     }

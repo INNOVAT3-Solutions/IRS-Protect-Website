@@ -340,11 +340,12 @@
   }
 
   /* ---- Enrollment: accept the terms, then pay on Stripe's page ----
-     Step 1 shows the price, auto-renewal and cancellation terms with three
-     required boxes. Continuing asks the dashboard for a Stripe Checkout page
-     in the visitor's language and goes there; Stripe takes the member's
-     details and payment, and the dashboard makes the member from Stripe's
-     payment. Stripe sends the visitor back here with ?checkout=success or
+     Step 1 shows the 30-day free trial, the price after it, auto-renewal and
+     the cancellation terms with three required boxes. Continuing asks the
+     dashboard for a Stripe Checkout page in the visitor's language and goes
+     there; Stripe collects the card details and starts the trial, and the
+     dashboard creates the member when checkout completes (no charge until the
+     trial ends). Stripe sends the visitor back here with ?checkout=success or
      ?checkout=canceled. */
   var CHECKOUT_ERRORS = { rate_limited: 'err_notice_busy', checkout_unavailable: 'checkout_unavailable', origin_not_allowed: 'checkout_unavailable', unavailable: 'checkout_unavailable' };
 

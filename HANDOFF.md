@@ -60,7 +60,7 @@ Put these values in `js/config.js` unless noted, then rebuild.
 | Item | Where it goes | Status |
 | --- | --- | --- |
 | Notice uploads | `dashboardUrl` | **Done.** Notices upload privately to the IRS Protect Plus dashboard (`https://app.irsprotect.us`), which emails the receipt and alerts the team. |
-| Checkout | `dashboardUrl` | **Done.** Once the terms are accepted, `/enroll` sends the visitor to a Stripe Checkout page (the client's Stripe account) in their language; the dashboard activates the membership from Stripe's payment and records it in GoHighLevel. |
+| Checkout | `dashboardUrl` + dashboard env `STRIPE_TRIAL_DAYS` | **Done.** Once the terms are accepted, `/enroll` sends the visitor to a Stripe Checkout page (the client's Stripe account) in their language. The dashboard must keep **`STRIPE_TRIAL_DAYS=30`**: the site discloses a 30-day free trial (a card is collected at signup, nothing is charged during the trial, the first $19.99 charge is automatic on day 31, then monthly renewal). The dashboard activates the membership when checkout completes (trial start) and records it in GoHighLevel. |
 | Member portal sign-in URL | `memberPortalUrl` | **Done:** `https://app.irsprotect.us`. |
 | Online cancellation | `billingPortalUrl` | **Done.** Stripe's customer portal (cancel at the end of the period, update the card, see invoices), linked from `/refund-policy` and `/login`. |
 | Contact form | `dashboardUrl` | **Done.** Messages go to the dashboard, which emails the office's inbox (its `CONTACT_FORM_EMAIL`; Reply answers the visitor) and notes the person in GoHighLevel. Until that inbox is set, or if the dashboard can't be reached, the form opens the visitor's email app to info@bvaccounting.com (or posts to `forms.endpoint`, if one is set). |
@@ -92,6 +92,10 @@ reviews them.
 ## 5. Legal and compliance review (counsel)
 
 **Start with `COMPLIANCE.md`.** It lists what was fixed on 2026-10-09 and every remaining legal risk in priority order, with sources. The most urgent items: whether the membership counts as insurance in Florida; the "IRS" brand name and logo (31 U.S.C. §333); a written security plan and an encrypted upload provider (FTC Safeguards Rule); and confirming credentialed representatives.
+
+The pages also now disclose a **30-day free trial**: a card is collected at signup, nothing is charged during the trial, the first $19.99 charge happens automatically when the trial ends (day 31), and it renews monthly until cancelled. That copy assumes the dashboard is configured with **`STRIPE_TRIAL_DAYS=30`**. These revised trial/auto-renewal disclosures still need a human and counsel review along with the Florida/FTC subscription items below.
+
+- [ ] **Free-trial disclosures:** confirm the dashboard sets `STRIPE_TRIAL_DAYS=30` (matching the 30 days in the site copy), and have counsel review the revised trial, auto-renewal and refund-window wording on `/enroll`, `/terms`, `/refund-policy` and the Membership Agreement.
 
 
 - [ ] **Legal name:** the site says "Best Vision Accounting, LLC". Florida's Sunbiz shows "Best Vision Accounting Corp" (name change 03/11/2024). Confirm which is correct. If it's the Corp, update `company.legalName` and the legal pages.

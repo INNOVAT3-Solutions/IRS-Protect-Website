@@ -205,6 +205,8 @@ function service(lang, dict) {
       price: String(CONFIG.plan.price),
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
+      /* The trial terms: the price above is what is charged after the trial. */
+      description: dict.offer_desc,
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
         price: String(CONFIG.plan.price),
