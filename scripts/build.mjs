@@ -40,7 +40,6 @@ const PAGES = [
   { file: 'cookie-policy.html', slug: 'cookie-policy', key: 'cookies', priority: '0.2' },
   { file: 'refund-policy.html', slug: 'refund-policy', key: 'refund', priority: '0.3' },
   { file: 'accessibility.html', slug: 'accessibility', key: 'accessibility', priority: '0.2' },
-  { file: 'login.html', slug: 'login', key: 'login', noindex: true },
   { file: '404.html', slug: '404', key: '404', noindex: true, notFound: true }
 ];
 
@@ -78,8 +77,8 @@ async function buildImages() {
     await sharp(rel(src)).webp({ quality: 80, alphaQuality: 90 }).toFile(rel(out));
   }
   const og = {
-    es: { h: 'Protección ante el IRS por $19.99 al mes', s: ['Hasta $10,000 en representación', 'profesional · Best Vision Accounting'] },
-    en: { h: 'IRS notice &amp; audit protection for $19.99 a month', s: ['Up to $10,000 in professional', 'representation · Best Vision Accounting'] }
+    es: { h: 'Protección ante el IRS: primer mes gratis', s: ['Luego $19.99 al mes · hasta $10,000 en', 'representación · Best Vision Accounting'] },
+    en: { h: 'IRS notice &amp; audit protection, first month free', s: ['Then $19.99 a month · up to $10,000 in', 'representation · Best Vision Accounting'] }
   };
   fs.mkdirSync(rel('assets/og'), { recursive: true });
   for (const [lang, t] of Object.entries(og)) {
@@ -205,13 +204,24 @@ function service(lang, dict) {
       price: String(CONFIG.plan.price),
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
-      priceSpecification: {
-        '@type': 'UnitPriceSpecification',
-        price: String(CONFIG.plan.price),
-        priceCurrency: 'USD',
-        unitCode: 'MON',
-        referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' }
-      }
+      priceSpecification: [
+        ...(Number(CONFIG.plan.freeMonths) > 0 ? [{
+          '@type': 'UnitPriceSpecification',
+          name: lang === 'en' ? 'First month free' : 'Primer mes gratis',
+          price: '0',
+          priceCurrency: 'USD',
+          unitCode: 'MON',
+          billingDuration: { '@type': 'QuantitativeValue', value: Number(CONFIG.plan.freeMonths), unitCode: 'MON' }
+        }] : []),
+        {
+          '@type': 'UnitPriceSpecification',
+          price: String(CONFIG.plan.price),
+          priceCurrency: 'USD',
+          unitCode: 'MON',
+          billingStart: Number(CONFIG.plan.freeMonths) || 0,
+          referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' }
+        }
+      ]
     }
   };
 }
@@ -343,6 +353,18 @@ function writeBody(doc, page) {
       if (/phone$/.test(key)) n.setAttribute('href', 'tel:+1' + String(v).replace(/\D/g, ''));
     }
   });
+
+  /* Promotion bar above the header on every page while the free month runs. */
+  doc.querySelectorAll('.promo-bar').forEach((n) => n.remove());
+  if (Number(CONFIG.plan.freeMonths) > 0) {
+    const bar = el(doc, 'div', { class: 'promo-bar', role: 'region', 'aria-label': 'Oferta', 'data-i18n-attr': 'aria-label:promo_label' });
+    const p = el(doc, 'p', {});
+    p.append(el(doc, 'b', { 'data-i18n': 'promo_bar_b' }, 'Oferta: tu primer mes es gratis.'), ' ',
+      el(doc, 'span', { 'data-i18n': 'promo_bar' }, 'Luego $19.99 al mes. Cancela cuando quieras.'), ' ');
+    if (page.slug !== 'enroll') p.append(el(doc, 'a', { href: '/enroll', 'data-i18n': 'promo_bar_cta' }, 'Empieza gratis'));
+    bar.append(p);
+    doc.querySelector('header.site-header').before(bar);
+  }
 
   /* Legal documents: the same list in the legal-page tabs and the footer. */
   const LEGAL = [['/membership-agreement', 'agreement', 'Contrato de membresía'], ['/terms', 'terms', 'Términos del servicio'],
@@ -504,14 +526,14 @@ const GUIDE_EN_PATH = new Map(GUIDES.map((g) => [g.es.path, g.en.path]));
 const GUIDE_TEXT = {
   es: { home: 'Inicio', hub: 'Avisos del IRS', updated: 'Actualizado', source: 'Basado en información de IRS.gov', general: 'Información general, no es asesoría fiscal.', reviewedBy: 'Revisado por',
     ctaTitle: 'Que la próxima carta del IRS no te tome por sorpresa.',
-    ctaBody: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS por $19.99 al mes. Si ya recibiste este aviso, la membresía no lo cubre, pero puedes hablar con Best Vision Accounting sobre tu caso.',
-    ctaBodyHub: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS por $19.99 al mes. Si ya recibiste un aviso, puedes hablar con Best Vision Accounting sobre tu caso.',
-    ctaJoin: 'Obtén protección', ctaContact: 'Hablar con Best Vision Accounting' },
+    ctaBody: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS, con tu primer mes gratis y luego $19.99 al mes. Si ya recibiste este aviso, la membresía no lo cubre, pero puedes hablar con Best Vision Accounting sobre tu caso.',
+    ctaBodyHub: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS, con tu primer mes gratis y luego $19.99 al mes. Si ya recibiste un aviso, puedes hablar con Best Vision Accounting sobre tu caso.',
+    ctaJoin: 'Empieza tu mes gratis', ctaContact: 'Hablar con Best Vision Accounting' },
   en: { home: 'Home', hub: 'IRS notices', updated: 'Updated', source: 'Based on information from IRS.gov', general: 'General information, not tax advice.', reviewedBy: 'Reviewed by',
     ctaTitle: 'Don’t let the next IRS letter catch you off guard.',
-    ctaBody: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS for $19.99 a month. If you already received this notice, the membership doesn’t cover it, but you can talk to Best Vision Accounting about your case.',
-    ctaBodyHub: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS for $19.99 a month. If you already received a notice, you can talk to Best Vision Accounting about your case.',
-    ctaJoin: 'Get protected', ctaContact: 'Talk to Best Vision Accounting' }
+    ctaBody: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS, with your first month free and then $19.99 a month. If you already received this notice, the membership doesn’t cover it, but you can talk to Best Vision Accounting about your case.',
+    ctaBodyHub: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS, with your first month free and then $19.99 a month. If you already received a notice, you can talk to Best Vision Accounting about your case.',
+    ctaJoin: 'Start your free month', ctaContact: 'Talk to Best Vision Accounting' }
 };
 
 function longDate(iso, lang) {

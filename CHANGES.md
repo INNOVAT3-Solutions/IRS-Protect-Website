@@ -52,7 +52,7 @@ connector could not access. Check it while logged in (list in the handoff).
 
 - `index.html`: "Who represents you" section with real credentialed staff (name,
   EA/CPA credential, photo). Only real people and credentials (Circular 230 §10.30).
-- `js/config.js`: `forms.endpoint`, `checkoutUrl` and `memberPortalUrl` are still blank.
+- `js/config.js`: `forms.endpoint` and `checkoutUrl` are still blank. (The member login page and `memberPortalUrl` were removed on 2026-10-29; old `/login` links redirect to the homepage.)
   Until a form endpoint is set, forms open the visitor's email app addressed to
   info@bvaccounting.com.
 - Legal name: Florida Sunbiz shows "Best Vision Accounting Corp"; the site uses

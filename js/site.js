@@ -22,10 +22,6 @@
      Config wiring — fills contact details and links from SITE_CONFIG
      ------------------------------------------------------------------------ */
   function wireConfig() {
-    var portal = C.memberPortalUrl;
-    $$('[data-link="login"]').forEach(function (a) {
-      if (portal) { a.href = portal; a.target = '_blank'; a.rel = 'noopener'; }
-    });
     $$('[data-link="company"]').forEach(function (a) {
       var u = get(C, 'company.url');
       if (u) { a.href = u; a.target = '_blank'; a.rel = 'noopener'; } else { a.href = pageUrl('contact'); }
@@ -290,7 +286,16 @@
     form.addEventListener('input', function started() { track('enroll_start'); form.removeEventListener('input', started); });
     liveValidate(form);
     var panels = $$('.step-panel', form); var steps = $$('.steps .step', form); var cur = 0;
-    var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99 };
+    var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99, freeMonths: 1 };
+    var freeMonths = Math.max(0, Number(plan.freeMonths) || 0);
+    /* First charge: the same day of the month after the free period (clamped to month end). */
+    function firstChargeDate() {
+      var d = new Date(); var day = d.getDate();
+      d.setDate(1); d.setMonth(d.getMonth() + freeMonths);
+      var last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+      d.setDate(Math.min(day, last)); return d;
+    }
+    function longDate(d) { return d.toLocaleDateString(I && I.lang === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }); }
     var link = C.checkoutUrl || '';
 
     function fmt(n) { return '$' + Number(n).toFixed(2); }
@@ -299,12 +304,15 @@
       var set = function (k, v) { var el = $('[data-sum="' + k + '"]', form); if (el) el.textContent = v || '—'; };
       set('plan', plan.name);
       set('price', plan.price != null ? fmt(plan.price) + t('per_month') : '');
-      set('total', plan.price != null ? fmt(plan.price) : '');
+      set('total', plan.price != null ? fmt(freeMonths ? 0 : plan.price) : '');
+      var fc = $('.summary-next', form);
+      if (fc) fc.hidden = !freeMonths;
+      if (freeMonths) set('first_charge', t('first_charge_on', { date: longDate(firstChargeDate()) }));
       set('name', [f.first_name, f.last_name].filter(Boolean).join(' '));
       set('email', f.email); set('phone', f.phone); set('zip', f.zip);
       var fs = form.querySelector('select[name="filing_status"]');
       set('fs', fs && fs.value ? fs.options[fs.selectedIndex].textContent : '');
-      set('start', new Date().toLocaleDateString(I && I.lang === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+      set('start', longDate(new Date()));
     }
     function updateSubmitLabel() {
       var btn = $('[data-submit]', form); if (btn && !btn.disabled) btn.textContent = t(link ? 'pay_btn' : 'request_btn');
@@ -335,6 +343,11 @@
       var f = collect(form);
       f.plan_name = plan.name; f.monthly_fee = plan.price != null ? fmt(plan.price) : '';
       f.effective_enrollment_date = new Date().toISOString().slice(0, 10);
+      if (freeMonths) {
+        var fcd = firstChargeDate();
+        f.promotion = 'first_month_free'; f.due_today = fmt(0);
+        f.first_charge_date = fcd.getFullYear() + '-' + String(fcd.getMonth() + 1).padStart(2, '0') + '-' + String(fcd.getDate()).padStart(2, '0');
+      }
       var fs = form.querySelector('select[name="filing_status"]');
       if (fs && fs.value) f.filing_status = fs.options[fs.selectedIndex].textContent;
       var btn = $('[data-submit]', form); setBusy(btn, true);

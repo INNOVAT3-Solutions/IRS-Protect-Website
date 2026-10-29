@@ -34,8 +34,14 @@ window.SITE_CONFIG = {
     postalCode: '33165'
   },
 
-  /* The single membership offered. Shown in the enrollment summary. */
-  plan: { name: 'IRS Protect Plus', price: 19.99 },
+  /* The single membership offered. Shown in the enrollment summary.
+     freeMonths: promotional free period at the start of a new membership.
+     1 = "first month free": the enrollment summary shows $0.00 due today and
+     the date of the first $19.99 charge, and the build adds the offer banner
+     to every page. Set it to 0 to end the promotion (the marketing copy in
+     js/i18n.js that mentions the free month must then be edited too; see
+     README). If you use a Stripe Payment Link, set its free trial to match. */
+  plan: { name: 'IRS Protect Plus', price: 19.99, freeMonths: 1 },
 
   /* Hosted checkout link. A Stripe Payment Link works out of the box (the
      member's email and a reference ID are appended). When set, enrollment
@@ -52,8 +58,6 @@ window.SITE_CONFIG = {
     endpoint: ''      // e.g. 'https://formspree.io/f/abcdwxyz'
   },
 
-  /* Member portal / login. When set, every "Iniciar sesión" link opens it. */
-  memberPortalUrl: '',
 
   /* Largest single file a member may attach when submitting a notice. */
   maxUploadMb: 10,

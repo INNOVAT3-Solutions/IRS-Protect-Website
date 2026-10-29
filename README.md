@@ -21,7 +21,6 @@ IRS Protect Plus Membership Agreement.
 | `submit-notice.html` | Members upload an IRS notice (photos/PDF, drag & drop, validation) |
 | `contact.html` | Contact form + contact details |
 | `help.html` | Help center: FAQ + how-to topics |
-| `login.html` | Member sign-in (links to your portal when configured) |
 | `membership-agreement.html` | The Membership Agreement, verbatim in English, with a Spanish courtesy translation |
 | `terms.html`, `privacy.html` | Terms of Service and Privacy Policy, Spanish and English |
 | `404.html` | Not-found page (set it as the custom 404 page on your host) |
@@ -43,7 +42,6 @@ blank values degrade gracefully.
 | `company.streetAddress`, `city`, `region`, `postalCode` | The same address split into parts for search engines (structured data). Keep it identical to your Google Business Profile. |
 | `forms.endpoint` | Where form submissions are POSTed (multipart/form-data, notice uploads as `attachments`). Works with **Formspree**, Basin, Getform, Netlify Forms or your own API. If blank, forms open the visitor's email app addressed to `company.email`. If that is blank too, visitors are asked to contact you directly. |
 | `checkoutUrl` | Hosted checkout for the $19.99/month membership. A **Stripe Payment Link** works out of the box (the member's email and a reference ID are appended). When set, enrollment sends members to checkout after they confirm; when blank, the enrollment is delivered as a form and your team completes it. |
-| `memberPortalUrl` | Your client-portal sign-in URL. When set, every "Iniciar sesión / Log in" link opens it. |
 | `maxUploadMb` | Max size per uploaded notice file (default 10). |
 
 ### Fastest production setup (about 10 minutes)

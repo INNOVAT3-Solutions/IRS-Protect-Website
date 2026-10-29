@@ -61,7 +61,6 @@ Put these values in `js/config.js` unless noted, then rebuild.
 | --- | --- | --- |
 | Form service endpoint (e.g. Formspree), used for enrollment, contact and notice uploads | `forms.endpoint` | **Needed.** Until it's set, forms open the visitor's email app to info@bvaccounting.com and **notice file uploads can't be sent**. |
 | Stripe Payment Link for the $19.99/month plan | `checkoutUrl` | **Needed.** Without it, enrollments arrive as email and no payment is collected. |
-| Member portal sign-in URL | `memberPortalUrl` | **Needed** if members have a portal. The login page currently says to contact the team. |
 | Names, credentials (EA / CPA / attorney) and photos of the people who represent members | New "Quién te representa / Who represents you" section on the homepage (marked `TODO(client)` in `index.html`) | **Needed.** This is the biggest trust signal Google looks for on tax and money sites. Use only real people and real credentials (Circular 230 §10.30). |
 | Name and credential of the EA/CPA who reviews the IRS notice guides | `"reviewer"` in each file in `content/guides/` | **Needed** (see section 4) |
 | Yelp profile URL (optional) | `company.social` | Optional |

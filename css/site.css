@@ -112,8 +112,6 @@ button{font-family:inherit}
 .lang-toggle{display:flex;padding:3px;border-radius:999px;background:var(--blue-soft);border:1px solid rgba(38,72,181,.12);margin-right:4px}
 .lang-toggle button{padding:6px 10px;border-radius:999px;border:0;cursor:pointer;font-size:12px;font-weight:800;letter-spacing:.04em;background:transparent;color:var(--ink-55);box-shadow:none;transition:background .25s,color .25s,box-shadow .25s}
 .lang-toggle button[aria-pressed="true"]{background:#fff;color:var(--navy);box-shadow:0 2px 6px rgba(16,25,63,.14)}
-.nav-login{padding:12px 20px;border-radius:999px;font-size:16px;font-weight:700;color:var(--navy)}
-.nav-login:hover{color:var(--blue)}
 .nav-cta{padding:13px 24px;font-size:16px}
 .cta-short{display:none}
 .nav-toggle{display:none;flex:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(16,25,63,.12);background:#fff;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}
@@ -557,7 +555,6 @@ body.menu-open::before{content:"";position:fixed;inset:0;z-index:30;background:r
    -------------------------------------------------------------------------- */
 @media (max-width:1120px){
   .nav-links{gap:22px}
-  .nav-login{display:none}
 }
 
 /* ---- Phones and small tablets: a composed mobile layout, not a collapsed desktop ---- */
@@ -568,7 +565,7 @@ body.menu-open::before{content:"";position:fixed;inset:0;z-index:30;background:r
   .nav-bar{gap:12px}
   .nav-brand{display:none}
   .nav-brand--mobile{display:flex}
-  .nav-links,.lang-toggle--header,.nav-login,.nav-cta{display:none}
+  .nav-links,.lang-toggle--header,.nav-cta{display:none}
   .nav-toggle{display:inline-flex;width:44px;height:44px}
   .mobile-nav{padding:8px 14px 20px}
   .mobile-nav a{min-height:48px;display:flex;align-items:center;font-size:17px}
@@ -770,3 +767,56 @@ body.menu-open::before{content:"";position:fixed;inset:0;z-index:30;background:r
 .prose .faq-list{margin:0 0 24px}
 .guide-cta-actions{justify-content:center;flex-wrap:wrap}
 .table-scroll:focus-visible{outline:3px solid rgba(38,72,181,.45);outline-offset:3px}
+
+/* --------------------------------------------------------------------------
+   Promotion: first month free
+   -------------------------------------------------------------------------- */
+.promo-bar{background:var(--navy);color:#fff;font-size:14px;line-height:1.4}
+.promo-bar p{margin:0;padding:9px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 10px;text-align:center}
+.promo-bar b{color:var(--gold-2);font-weight:800}
+.promo-bar span{color:rgba(255,255,255,.85)}
+.promo-bar a{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:rgba(227,194,94,.7);text-underline-offset:3px;white-space:nowrap}
+.promo-bar a:hover{color:var(--gold-2)}
+.promo-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin:0;padding:7px 14px 7px 10px;border-radius:999px;background:var(--gold-3);border:1px solid rgba(201,162,39,.55);color:#6B5310;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.promo-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.22)}
+.price-promo{position:relative;margin:-12px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:14.5px;color:rgba(255,255,255,.8)}
+.promo-pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;background:linear-gradient(90deg,#C9A227,#E3C25E);color:var(--navy-deep);font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.promo-pill--dark{margin-top:6px;align-self:flex-start}
+.plan-mini > div{display:flex;flex-direction:column}
+.promo-why{margin:14px 0 0;font-size:14px;line-height:1.5;color:rgba(255,255,255,.78)}
+.summary-next span:last-child{color:var(--navy);font-weight:700}
+@media (max-width:900px){
+  .promo-bar{font-size:13px}
+  .promo-bar p{padding:7px 14px;flex-wrap:nowrap;gap:8px}
+  .promo-bar span{display:none}
+  .hero-copy .promo-badge{display:none}
+  .price-promo{margin-top:-8px;font-size:13.5px}
+}
+
+/* Membership card offer block (replaces corner ribbon) */
+.offer{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px 28px;padding:24px 26px;border-radius:22px;background:linear-gradient(135deg,rgba(201,162,39,.18),rgba(201,162,39,.05) 60%,rgba(255,255,255,.03));border:1px solid rgba(227,194,94,.55);box-shadow:inset 0 1px 0 rgba(255,241,184,.18),0 18px 40px -24px rgba(201,162,39,.55)}
+.offer-main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.offer-pill{align-self:flex-start;gap:8px;padding:6px 14px;font-size:12px}
+.offer-pill .promo-badge-dot{background:var(--navy-deep);box-shadow:none}
+.offer-row{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.offer-now{display:flex;align-items:baseline;gap:10px}
+.offer-now b{font-size:76px;line-height:.9;font-weight:800;letter-spacing:-.03em;background:linear-gradient(90deg,#FFF6D6,#E3C25E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.offer-now span{font-size:18px;font-weight:700;color:#FFF1B8}
+.offer-then{display:inline-flex;align-items:baseline;gap:6px;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);font-size:15px}
+.offer-then b{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em}
+.offer-note{margin:0;font-size:14px;color:rgba(255,255,255,.75)}
+.offer-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 26px;border-radius:999px;background:linear-gradient(90deg,#C9A227,#E3C25E);color:var(--navy-deep);font-weight:800;white-space:nowrap;text-decoration:none;box-shadow:0 16px 34px -14px rgba(201,162,39,.8);transition:transform .2s ease,background .2s ease}
+.offer-cta:hover{background:var(--gold-3);transform:translateY(-1px)}
+@media (max-width:900px){
+  .offer{grid-template-columns:1fr;justify-items:center;text-align:center;padding:24px 18px 20px;border-radius:20px;gap:18px}
+  .offer-main{align-items:center;gap:10px;width:100%}
+  .offer-pill{align-self:center}
+  .offer-row{flex-direction:column;align-items:center;gap:6px}
+  .offer-now{flex-direction:column;align-items:center;gap:4px}
+  .offer-now b{font-size:84px}
+  .offer-now span{font-size:17px;letter-spacing:.02em}
+  .offer-then{padding:6px 14px;font-size:14px}
+  .offer-then b{font-size:20px}
+  .offer-note{font-size:13px;max-width:30ch}
+  .offer-cta{width:100%;padding:15px 20px;white-space:normal}
+}
