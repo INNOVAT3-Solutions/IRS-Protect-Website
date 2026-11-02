@@ -42,6 +42,12 @@ Commit the build output.
       project dashboard. The tags are already in every page. Custom events
       (`enroll_start`, `enroll_checkout_open`, `enroll_complete`, `contact_submit`, `notice_submit`,
       `lang_switch`; `enrollment_submit` is gone: payment happens on Stripe's page) need a Vercel Pro plan to show up.
+- [ ] **Microsoft Clarity**: create the project for `irsprotect.us` at
+      https://clarity.microsoft.com/, put its Project ID in `js/config.js`
+      (`clarityProjectId`), set **Settings › Masking to Strict**, then run the
+      build and deploy. The tag is deliberately left off localhost and Vercel
+      preview URLs. Review the first week of recordings for accidentally
+      captured personal data.
 - [ ] **Google Search Console**:
   1. Add a **Domain** property for `irsprotect.us`, verified with a DNS TXT record at GoDaddy.
   2. Submit `https://irsprotect.us/sitemap.xml`.

@@ -35,12 +35,12 @@
       guides_link: 'Guías de avisos del IRS',
 
       title_cookies: 'Política de cookies | IRS Protect Plus', title_refund: 'Reembolsos y cancelación | IRS Protect Plus', title_accessibility: 'Accesibilidad | IRS Protect Plus',
-      desc_cookies: 'Qué guarda el sitio de IRS Protect Plus en tu navegador: solo tu preferencia de idioma. Analítica sin cookies y sin seguimiento entre sitios.',
+      desc_cookies: 'Qué guarda el sitio de IRS Protect Plus en tu navegador: tu preferencia de idioma y las cookies de analítica de Vercel y Microsoft Clarity, y cómo controlarlas.',
       desc_refund: 'Cómo cancelar IRS Protect Plus tras la prueba gratuita de 30 días y cuándo las cuotas de $19.99 al mes pueden ser reembolsables, según el contrato.',
       desc_accessibility: 'Compromiso de accesibilidad de IRS Protect Plus: objetivo WCAG 2.1 AA, lo que hemos hecho, limitaciones conocidas y cómo pedir ayuda.',
       cookies: 'Política de cookies', refund: 'Reembolsos y cancelación', accessibility: 'Accesibilidad',
       legal_cookies_title: 'Política de cookies', legal_refund_title: 'Política de reembolsos y cancelación', legal_accessibility_title: 'Declaración de accesibilidad',
-      legal_updated_privacy: 'Última actualización: 9 de octubre de 2026', legal_updated_terms: 'Última actualización: 29 de octubre de 2026', legal_updated_cookies: 'Última actualización: 9 de octubre de 2026', legal_updated_refund: 'Última actualización: 29 de octubre de 2026', legal_updated_accessibility: 'Última actualización: 9 de octubre de 2026',
+      legal_updated_privacy: 'Última actualización: 2 de noviembre de 2026', legal_updated_terms: 'Última actualización: 29 de octubre de 2026', legal_updated_cookies: 'Última actualización: 2 de noviembre de 2026', legal_updated_refund: 'Última actualización: 29 de octubre de 2026', legal_updated_accessibility: 'Última actualización: 9 de octubre de 2026',
 
       /* Hero */
       hero_title: 'El IRS es complicado. Tu protección no debería serlo.',
@@ -233,12 +233,12 @@
       guides_link: 'IRS notice guides',
 
       title_cookies: 'Cookie Policy | IRS Protect Plus', title_refund: 'Refunds and Cancellation | IRS Protect Plus', title_accessibility: 'Accessibility | IRS Protect Plus',
-      desc_cookies: 'What the IRS Protect Plus site stores in your browser: only your language choice. Cookieless analytics and no cross-site tracking.',
+      desc_cookies: 'What the IRS Protect Plus site stores in your browser: your language choice and analytics cookies from Vercel and Microsoft Clarity.',
       desc_refund: 'How to cancel IRS Protect Plus after the 30-day free trial and when the $19.99 monthly fees may be refundable, under the Membership Agreement.',
       desc_accessibility: 'IRS Protect Plus accessibility commitment: WCAG 2.1 AA goal, what we have done, known limitations and how to get help.',
       cookies: 'Cookie Policy', refund: 'Refunds and Cancellation', accessibility: 'Accessibility',
       legal_cookies_title: 'Cookie Policy', legal_refund_title: 'Refund and Cancellation Policy', legal_accessibility_title: 'Accessibility Statement',
-      legal_updated_privacy: 'Last updated: October 9, 2026', legal_updated_terms: 'Last updated: October 29, 2026', legal_updated_cookies: 'Last updated: October 9, 2026', legal_updated_refund: 'Last updated: October 29, 2026', legal_updated_accessibility: 'Last updated: October 9, 2026',
+      legal_updated_privacy: 'Last updated: November 2, 2026', legal_updated_terms: 'Last updated: October 29, 2026', legal_updated_cookies: 'Last updated: November 2, 2026', legal_updated_refund: 'Last updated: October 29, 2026', legal_updated_accessibility: 'Last updated: October 9, 2026',
 
       hero_title: 'The IRS is complicated. Your protection shouldn’t be.',
       hero_sub: 'IRS Protect Plus is an IRS representation membership: the Best Vision Accounting team reviews your IRS letters, responds for you, and helps with eligible audits and collections.',

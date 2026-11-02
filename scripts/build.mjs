@@ -320,6 +320,20 @@ function writeHead(doc, m, version) {
   add(el(doc, 'script', { defer: '', src: '/_vercel/insights/script.js' }));
   add(el(doc, 'script', { defer: '', src: '/_vercel/speed-insights/script.js' }));
 
+  /* Microsoft Clarity (session recordings + heatmaps), when configured in
+     js/config.js. Uses Clarity's own loader, limited to the production
+     hostnames so local servers and Vercel preview deployments don't create
+     recordings. Personal data is masked in the page markup (data-clarity-mask)
+     and Clarity itself always masks what visitors type into form fields. */
+  if (CONFIG.clarityProjectId) {
+    const clarityId = String(CONFIG.clarityProjectId).trim();
+    if (!/^[a-z0-9]{6,20}$/i.test(clarityId)) {
+      throw new Error('js/config.js: clarityProjectId does not look like a Clarity Project ID: ' + CONFIG.clarityProjectId);
+    }
+    const clarityHost = SITE.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+    add(el(doc, 'script', {}, `if(location.hostname==='${clarityHost}'||location.hostname==='www.${clarityHost}'){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${clarityId}");}`));
+  }
+
   head.querySelectorAll('link[href], script[src]').forEach((n) => {
     const a = n.hasAttribute('href') ? 'href' : 'src';
     let v = n.getAttribute(a);

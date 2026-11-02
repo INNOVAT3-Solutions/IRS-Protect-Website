@@ -46,6 +46,7 @@ blank values degrade gracefully.
 | `dashboardUrl` | The IRS Protect Plus dashboard (`https://app.irsprotect.us`). The notice form uploads each file privately to it, then it records the notice, emails the receipt in the visitor's language and alerts the team; `/enroll` asks it for the Stripe Checkout page; the contact form posts each message to it, and it emails the office (Reply answers the visitor) and notes it in GoHighLevel. On `localhost` the site uses a dashboard on port 3000 instead. The dashboard must list this site's origin in its `MARKETING_SITE_ORIGIN`. |
 | `memberPortalUrl` | The member portal (`https://app.irsprotect.us`, the same app). Every "Iniciar sesión / Log in" link opens it. |
 | `billingPortalUrl` | Stripe's customer portal login link. Members update their card or cancel there; `/refund-policy` lists it as the online way to cancel and `/login` links it. Blank hides both links. |
+| `clarityProjectId` | Microsoft Clarity project ID (anonymous session recordings and heatmaps). Create the project for `irsprotect.us` at clarity.microsoft.com, paste its ID here and run the build. Blank = no Clarity tag. The tag loads only on the production hostnames (`irsprotect.us`, `www.irsprotect.us`), so localhost and Vercel preview URLs are not recorded; set the Clarity project's masking to **Strict**. |
 | `forms.endpoint` | Optional, contact form only, and only when the dashboard can't take a message (not set up, unreachable): where it POSTs instead (multipart/form-data, e.g. Formspree). If blank, it opens the visitor's email app addressed to `company.email`. |
 | `maxUploadMb`, `maxFiles` | Notice upload limits, matching the dashboard's (25 MB per file, 10 files). |
 
@@ -76,7 +77,8 @@ The build (`scripts/build.mjs`):
 
 - writes the head of every page: title, description, canonical URL,
   hreflang language links, Open Graph share tags, structured data
-  (JSON-LD) and the Vercel analytics tags
+  (JSON-LD), the Vercel analytics tags and the Microsoft Clarity tag
+  (when `clarityProjectId` is set in `js/config.js`)
 - generates the English pages in `en/` from `js/i18n.js`
 - converts images to WebP and makes the share images in `assets/og/`
 - writes `sitemap.xml`, `robots.txt` and the IndexNow key file
