@@ -523,7 +523,9 @@
         var body = {
           typedName: (f.first_name + ' ' + f.last_name).trim(),
           typedEmail: f.email,
-          typedPhone: f.phone,
+          /* A2P review: the phone field is temporarily hidden. The dashboard
+             still requires a value, so send an explicit placeholder. */
+          typedPhone: f.phone || (C.hidePhoneCapture ? '(not provided)' : ''),
           note: f.notes || '',
           lang: I ? I.lang : 'es',
           consent: true,

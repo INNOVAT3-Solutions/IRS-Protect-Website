@@ -398,6 +398,32 @@ function writeBody(doc, page) {
       bottom.insertBefore(nap, meta);
     }
   }
+
+  /* TEMPORARY (A2P registration review): hide the phone-number capture
+     fields. The markup keeps them, so setting hidePhoneCapture back to false
+     and rebuilding restores them. Disabling the input also takes it out of
+     the form's FormData and out of the script's validation. */
+  doc.querySelectorAll('[data-phone-capture]').forEach((n) => {
+    const input = n.matches('input') ? n : n.querySelector('input');
+    if (CONFIG.hidePhoneCapture) {
+      n.setAttribute('hidden', '');
+      if (input) input.disabled = true;
+    } else {
+      n.removeAttribute('hidden');
+      if (input) input.disabled = false;
+    }
+  });
+
+  /* GoHighLevel / LeadConnector chat widget. Remove any loader left by an
+     earlier build first, so repeated builds never add it twice. */
+  doc.querySelectorAll('script[data-widget-id], script[src*="widgets.leadconnectorhq.com"]').forEach((n) => n.remove());
+  if (CONFIG.leadConnectorWidgetId) {
+    const widget = doc.createElement('script');
+    widget.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    widget.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    widget.setAttribute('data-widget-id', String(CONFIG.leadConnectorWidgetId).trim());
+    doc.body.appendChild(widget);
+  }
 }
 
 /* ---- English pass ------------------------------------------------------- */
