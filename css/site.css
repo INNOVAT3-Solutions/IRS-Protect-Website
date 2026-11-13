@@ -820,3 +820,36 @@ body.menu-open::before{content:"";position:fixed;inset:0;z-index:30;background:r
   .offer-note{font-size:13px;max-width:30ch}
   .offer-cta{width:100%;padding:15px 20px;white-space:normal}
 }
+
+/* Money-back guarantee + card-on-file notice */
+.g-icon{flex:none}
+.guarantee-line{display:flex;align-items:center;gap:8px;margin:14px 0 0;font-size:14.5px;line-height:1.4;color:var(--ink-2,#3b4463)}
+.guarantee-line .g-icon{color:#1F8A4C}
+.guarantee-line b{color:var(--navy,#10193F)}
+.guarantee-line--dark{margin:0;color:rgba(255,255,255,.8)}
+.guarantee-line--dark .g-icon{color:#E3C25E}
+.guarantee-line--dark b{color:#FFF1B8}
+.card-notice{margin:18px 0 6px;padding:16px 18px;border-radius:16px;background:#FFF8E1;border:2px solid #C9A227;color:#3a2f06}
+.card-notice-head{display:flex;align-items:center;gap:10px;font-size:16px;color:#10193F}
+.card-notice-head .g-icon{color:#8C6A12}
+.card-notice p{margin:8px 0 0;font-size:14.5px;line-height:1.5}
+.card-notice-guarantee{display:flex;align-items:flex-start;gap:8px;padding-top:10px;border-top:1px solid rgba(140,106,18,.25)}
+.card-notice-guarantee .g-icon{color:#1F8A4C;margin-top:1px}
+@media (max-width:900px){
+  .offer .guarantee-line--dark{justify-content:center}
+  .hero-copy .guarantee-line{order:4;justify-content:center;margin:0;max-width:340px;font-size:13.5px;text-align:left}
+}
+.plan-mini .promo-pill{color:var(--navy-deep)}
+@media (max-width:900px){.offer-cta{padding:15px 14px;font-size:15.5px}.offer-cta span[aria-hidden]{display:none}}
+
+/* "Free" emphasis: hero highlight + struck-through price */
+.free-word{padding:0 .1em;margin:0 -.06em 0 -.02em;color:var(--navy);background:linear-gradient(180deg,transparent 0 48%,#F3D774 48% 92%,transparent 92%);border-radius:.1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.offer-now{flex-wrap:wrap;column-gap:14px;row-gap:2px}
+.offer-was{flex-basis:100%;font-size:22px;font-weight:700;color:rgba(255,255,255,.6);text-decoration:line-through;text-decoration-color:#FF6B6B;text-decoration-thickness:3px}
+.offer-was span{color:inherit;font-size:inherit;font-weight:inherit;letter-spacing:0}
+.offer-now b.offer-free{font-size:72px;text-transform:uppercase;letter-spacing:-.02em;padding:.04em .2em .02em;border:3px solid rgba(227,194,94,.85);border-radius:16px;line-height:1}
+@media (max-width:900px){
+  .offer-was{flex-basis:auto;font-size:20px}
+  .offer-was span{color:inherit;font-size:inherit;font-weight:inherit;letter-spacing:0}
+.offer-now b.offer-free{font-size:56px}
+}

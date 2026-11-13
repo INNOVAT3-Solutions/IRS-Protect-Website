@@ -361,7 +361,7 @@ function writeBody(doc, page) {
     const p = el(doc, 'p', {});
     p.append(el(doc, 'b', { 'data-i18n': 'promo_bar_b' }, 'Oferta: tu primer mes es gratis.'), ' ',
       el(doc, 'span', { 'data-i18n': 'promo_bar' }, 'Luego $19.99 al mes. Cancela cuando quieras.'), ' ');
-    if (page.slug !== 'enroll') p.append(el(doc, 'a', { href: '/enroll', 'data-i18n': 'promo_bar_cta' }, 'Empieza gratis'));
+    if (page.slug !== 'enroll') p.append(el(doc, 'a', { href: '/enroll', 'data-i18n': 'promo_bar_cta' }, 'Reclama tu mes gratis'));
     bar.append(p);
     doc.querySelector('header.site-header').before(bar);
   }
@@ -528,12 +528,12 @@ const GUIDE_TEXT = {
     ctaTitle: 'Que la próxima carta del IRS no te tome por sorpresa.',
     ctaBody: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS, con tu primer mes gratis y luego $19.99 al mes. Si ya recibiste este aviso, la membresía no lo cubre, pero puedes hablar con Best Vision Accounting sobre tu caso.',
     ctaBodyHub: 'IRS Protect Plus cubre asuntos cuyo primer aviso del IRS esté fechado después de tu inscripción: revisión, respuesta y representación ante el IRS, con tu primer mes gratis y luego $19.99 al mes. Si ya recibiste un aviso, puedes hablar con Best Vision Accounting sobre tu caso.',
-    ctaJoin: 'Empieza tu mes gratis', ctaContact: 'Hablar con Best Vision Accounting' },
+    ctaJoin: 'Reclama tu mes gratis ahora', ctaContact: 'Hablar con Best Vision Accounting' },
   en: { home: 'Home', hub: 'IRS notices', updated: 'Updated', source: 'Based on information from IRS.gov', general: 'General information, not tax advice.', reviewedBy: 'Reviewed by',
     ctaTitle: 'Don’t let the next IRS letter catch you off guard.',
     ctaBody: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS, with your first month free and then $19.99 a month. If you already received this notice, the membership doesn’t cover it, but you can talk to Best Vision Accounting about your case.',
     ctaBodyHub: 'IRS Protect Plus covers matters whose first IRS notice is dated after you enroll: review, response and representation before the IRS, with your first month free and then $19.99 a month. If you already received a notice, you can talk to Best Vision Accounting about your case.',
-    ctaJoin: 'Start your free month', ctaContact: 'Talk to Best Vision Accounting' }
+    ctaJoin: 'Claim your free month now', ctaContact: 'Talk to Best Vision Accounting' }
 };
 
 function longDate(iso, lang) {

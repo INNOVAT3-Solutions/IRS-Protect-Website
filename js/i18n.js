@@ -12,10 +12,10 @@
     es: {
       /* Navigation and shared */
       nav_how: 'Cómo funciona', nav_plans: 'Membresía', nav_coverage: 'Cobertura', nav_faq: 'Preguntas frecuentes', faq_short: 'Preguntas',
-      promo_label: 'Oferta', promo_badge: 'Primer mes gratis', promo_bar_b: 'Oferta: tu primer mes es gratis.', promo_bar: 'Luego $19.99 al mes. Cancela cuando quieras.', promo_bar_cta: 'Empieza gratis',
-      cta_free: 'Empieza tu mes gratis', cta_free_short: 'Empieza gratis', price_promo: 'Tu primer mes es gratis. Después, $19.99 al mes.', offer_free_unit: 'el primer mes', offer_then: 'Después', offer_note: 'Cancela cuando quieras. Si cancelas durante tu mes gratis, no pagas nada.', promo_mini: 'Primer mes gratis',
+      promo_label: 'Oferta', promo_badge: 'Primer mes gratis', promo_bar_b: 'Oferta: tu primer mes es gratis.', promo_bar: 'Luego $19.99 al mes. Cancela cuando quieras.', promo_bar_cta: 'Reclama tu mes gratis',
+      cta_free: 'Reclama tu mes gratis ahora', cta_free_short: 'Reclama tu mes gratis', price_promo: 'Tu primer mes es gratis. Después, $19.99 al mes.', offer_free_unit: 'el primer mes', offer_free: 'Gratis', offer_was_sr: 'Precio regular:', offer_then: 'Después', offer_note: 'Cancela cuando quieras. Si cancelas durante tu mes gratis, no pagas nada.', guarantee_badge: 'Garantía de devolución del 100%', guarantee_short: 'Si no estás satisfecho, te devolvemos tu primer pago.', guarantee_terms: 'Garantía de devolución del 100%: te devolvemos tu primer pago completo si lo pides dentro de los 30 días siguientes a ese pago y no has usado ningún beneficio.', card_req_t: 'Se requiere una tarjeta en archivo', card_req_d: 'Hoy no se te cobra nada. Al terminar tu mes gratis, cobramos automáticamente $19.99 al mes a tu tarjeta hasta que canceles. Si cancelas antes, no pagas nada.', promo_mini: 'Primer mes gratis',
       stat_after_free: 'después de tu primer mes gratis', stat_month_promo: 'al mes · primer mes gratis', promo_why: 'Tu primer mes es gratis. Si cancelas antes de que termine, no pagas nada.',
-      cta: 'Obtén protección', cta_short: 'Únete', cta_join: 'Empieza tu mes gratis', per_month: '/mes',
+      cta: 'Obtén protección', cta_short: 'Únete', cta_join: 'Reclama tu mes gratis ahora', per_month: '/mes',
       by_bva: 'de Best Vision Accounting', language: 'Idioma', skip: 'Saltar al contenido', menu_open: 'Abrir menú', menu_close: 'Cerrar menú',
       submit_notice_link: 'Enviar un aviso', contact: 'Contáctanos', help: 'Centro de ayuda', agreement: 'Contrato de membresía', terms: 'Términos del servicio', privacy: 'Política de privacidad',
       from_price: 'Primer mes gratis, luego $19.99/mes', go_contact: 'Contáctanos', go_home: 'Volver al inicio', optional: '(opcional)',
@@ -42,11 +42,11 @@
       desc_accessibility: 'Compromiso de accesibilidad de IRS Protect Plus: objetivo WCAG 2.1 AA, lo que hemos hecho, limitaciones conocidas y cómo pedir ayuda.',
       cookies: 'Política de cookies', refund: 'Reembolsos y cancelación', accessibility: 'Accesibilidad',
       legal_cookies_title: 'Política de cookies', legal_refund_title: 'Política de reembolsos y cancelación', legal_accessibility_title: 'Declaración de accesibilidad',
-      legal_updated_privacy: 'Última actualización: 9 de octubre de 2026', legal_updated_terms: 'Última actualización: 29 de octubre de 2026', legal_updated_cookies: 'Última actualización: 9 de octubre de 2026', legal_updated_refund: 'Última actualización: 29 de octubre de 2026', legal_updated_accessibility: 'Última actualización: 9 de octubre de 2026',
+      legal_updated_privacy: 'Última actualización: 9 de octubre de 2026', legal_updated_terms: 'Última actualización: 29 de octubre de 2026', legal_updated_cookies: 'Última actualización: 9 de octubre de 2026', legal_updated_refund: 'Última actualización: 13 de noviembre de 2026', legal_updated_accessibility: 'Última actualización: 9 de octubre de 2026',
 
       /* Hero */
-      hero_title: 'El IRS es complicado. Tu protección no debería serlo.',
-      hero_sub: 'IRS Protect Plus es una membresía de representación ante el IRS: el equipo de Best Vision Accounting revisa tus cartas del IRS, responde por ti y te ayuda en auditorías y cobros elegibles.',
+      hero_title: 'Tu primer mes de protección ante el IRS es gratis.', hero_title_a: 'Tu primer mes de protección ante el IRS es ', hero_title_free: 'gratis', hero_title_end: '.',
+      hero_sub: 'Empieza hoy sin pagar nada. El equipo de Best Vision Accounting revisa tus cartas del IRS, responde por ti y te ayuda en auditorías y cobros elegibles. Después, solo $19.99 al mes; cancela cuando quieras.',
       stat_rep: 'máximo en servicios de representación', cancel_anytime: 'Cancela cuando quieras.', hero_backed: 'Respaldado por Best Vision Accounting',
       hero_disclaimer: 'IRS Protect Plus es un programa de membresía y no es un seguro. Aplican requisitos de elegibilidad, limitaciones y exclusiones.',
       alt_hero: 'Una mujer sonriente señala una carta del IRS mientras sostiene un sobre del IRS con el sello Resuelto y un escudo azul detrás',
@@ -82,7 +82,7 @@
         ['Ayuda en exámenes y auditorías', 'Asistencia durante exámenes o auditorías del IRS, con representación profesional autorizada.'],
         ['Cobro y resolución', 'Asistencia con asuntos elegibles de cobro o resolución del IRS.']
       ],
-      plans_note: 'Los $10,000 representan el valor de los servicios profesionales prestados por Best Vision Accounting, LLC. No es un pago en efectivo al miembro y no paga tu deuda fiscal. Cancela cuando quieras; las cuotas pagadas durante los primeros 30 días pueden ser reembolsables si no se ha solicitado, recibido o iniciado ningún beneficio del programa.',
+      plans_note: 'Los $10,000 representan el valor de los servicios profesionales prestados por Best Vision Accounting, LLC. No es un pago en efectivo al miembro y no paga tu deuda fiscal. Cancela cuando quieras; tienes garantía de devolución del 100%: te devolvemos tu primer pago completo si lo pides dentro de los 30 días siguientes a ese pago y no se ha solicitado, recibido ni iniciado ningún beneficio del programa.',
 
       /* Coverage rules */
       coverage_title: 'Cómo funciona la cobertura', coverage_sub: 'Reglas claras, tomadas directamente del contrato de membresía.',
@@ -117,7 +117,7 @@
         ['¿Qué años fiscales están cubiertos?', 'Los asuntos elegibles de años fiscales futuros, sin un límite fijo de años, mientras mantengas tu membresía activa y al corriente. Cada asunto califica cuando su primer aviso del IRS está fechado en o después de tu fecha efectiva de inscripción.'],
         ['¿Quién me representa ante el IRS?', 'El equipo de Best Vision Accounting. La representación puede estar a cargo de un Agente Inscrito (EA), un CPA, un abogado u otro profesional autorizado a representarte ante el IRS en el asunto correspondiente.'],
         ['¿Cómo funciona el primer mes gratis?', 'Al inscribirte no pagas nada. Tu membresía y tu protección empiezan en tu fecha efectiva de inscripción, igual que una membresía pagada, así que los avisos del IRS fechados desde ese día pueden ser elegibles. Al terminar el primer mes se cobran automáticamente $19.99 y luego cada mes hasta que canceles. Si cancelas antes de que termine el mes gratis, no se te cobra nada.'],
-        ['¿Puedo cancelar? ¿Y si dejo de pagar durante un asunto?', 'Puedes cancelar en cualquier momento. Las cuotas de los primeros 30 días pueden ser reembolsables si no has solicitado, recibido o iniciado ningún beneficio; después, las cuotas pagadas no son reembolsables salvo que la ley lo exija. Si cancelas o tu membresía queda inactiva mientras atendemos un asunto, Best Vision puede suspender la representación y los demás beneficios.']
+        ['¿Puedo cancelar? ¿Y si dejo de pagar durante un asunto?', 'Puedes cancelar en cualquier momento. Con nuestra garantía de devolución del 100%, te devolvemos tu primer pago completo si lo pides dentro de los 30 días siguientes a ese pago y no has solicitado, recibido ni iniciado ningún beneficio; después, las cuotas pagadas no son reembolsables salvo que la ley lo exija. Si cancelas o tu membresía queda inactiva mientras atendemos un asunto, Best Vision puede suspender la representación y los demás beneficios.']
       ],
 
       /* Final CTA and footer */
@@ -144,11 +144,11 @@
       step_details: 'Tus datos', step_review: 'Revisar y confirmar',
       details_title: '¿A quién protegemos?', details_sub: 'Usa el nombre exactamente como aparece en tu declaración federal de impuestos.',
       review_title: 'Revisa y confirma', review_sub: 'Verifica tus datos y acepta los términos de la membresía. Al enviar, aceptas el contrato electrónicamente.',
-      summary_plan: 'Membresía', summary_price: 'Cuota mensual', summary_name: 'Miembro', summary_email: 'Correo', summary_phone: 'Teléfono', summary_zip: 'Código postal', summary_fs: 'Estado civil fiscal', summary_start: 'Fecha efectiva de inscripción', summary_total: 'A pagar hoy', summary_first_charge: 'Primer cobro', first_charge_on: '$19.99 el {date}', billed_monthly: 'Tu primer mes es gratis. Si no cancelas antes de que termine, tu membresía se renueva automáticamente y se cobran $19.99 al mes a partir de la fecha de tu primer cobro, hasta que la canceles; si cancelas durante el mes gratis, no se te cobra nada. Puedes cancelar en cualquier momento escribiendo a info@bvaccounting.com o llamando al (305) 220-9616; la cancelación detiene los cobros futuros. Reembolsos: las cuotas de los primeros 30 días pueden ser reembolsables si no has solicitado, recibido ni iniciado ningún beneficio.',
+      summary_plan: 'Membresía', summary_price: 'Cuota mensual', summary_name: 'Miembro', summary_email: 'Correo', summary_phone: 'Teléfono', summary_zip: 'Código postal', summary_fs: 'Estado civil fiscal', summary_start: 'Fecha efectiva de inscripción', summary_total: 'A pagar hoy', summary_first_charge: 'Primer cobro', first_charge_on: '$19.99 el {date}', billed_monthly: 'Tu primer mes es gratis. Si no cancelas antes de que termine, tu membresía se renueva automáticamente y se cobran $19.99 al mes a partir de la fecha de tu primer cobro, hasta que la canceles; si cancelas durante el mes gratis, no se te cobra nada. Puedes cancelar en cualquier momento escribiendo a info@bvaccounting.com o llamando al (305) 220-9616; la cancelación detiene los cobros futuros. Garantía de devolución del 100%: te devolvemos tu primer pago completo si lo pides dentro de los 30 días siguientes a ese pago y no has solicitado, recibido ni iniciado ningún beneficio.',
       agree_pre: 'He leído, entiendo y acepto el ', agree_mid: ', los ', agree_mid2: ' y la ', agree_post: '.',
       agree_notice: 'Entiendo que IRS Protect Plus es un programa de membresía y no un seguro; que solo son elegibles los asuntos cuyo primer aviso del IRS esté fechado en o después de mi fecha efectiva de inscripción; y que debo mantener mi membresía activa y al corriente durante todo el asunto cubierto para seguir recibiendo beneficios.',
       agree_billing: 'Entiendo que mi primer mes es gratis y autorizo a Best Vision Accounting, LLC a cobrar automáticamente la cuota de membresía de $19.99 cada mes a partir del final de mi mes gratis, hasta que cancele.',
-      pay_btn: 'Continuar al pago seguro', request_btn: 'Enviar inscripción', secure_note: 'El pago se procesa de forma segura. Puedes cancelar cuando quieras.',
+      pay_btn: 'Reclama tu mes gratis ahora', request_btn: 'Reclama tu mes gratis ahora', secure_note: 'El pago se procesa de forma segura. Puedes cancelar cuando quieras.',
       enroll_success_t: '¡Ya casi estás protegido!', enroll_success_b: 'Gracias, {name}. Recibimos tu inscripción a {plan}. Un miembro del equipo de Best Vision Accounting te contactará en {email} para activar tu membresía.',
       enroll_redirect: 'Te llevamos al pago seguro…',
       your_plan: 'Tu membresía', includes: 'Incluye',
@@ -185,7 +185,7 @@
       help_topics: [
         ['¿Cómo envío un aviso del IRS?', 'Usa la página Enviar un aviso. Sube una foto o PDF de todas las páginas, indícanos el número de aviso y la fecha impresa, y el equipo de Best Vision Accounting se encarga del resto.'],
         ['¿Cómo se cobra mi membresía?', 'Tu primer mes es gratis. Después, la membresía se cobra mensualmente al método de pago registrado: $19.99 al mes. Puedes cancelar cuando quieras; si cancelas durante el mes gratis, no se te cobra nada.'],
-        ['¿Cómo cancelo mi membresía?', 'Contáctanos en cualquier momento. Las cuotas pagadas durante los primeros 30 días pueden ser reembolsables si no se ha solicitado, recibido o iniciado ningún beneficio. Después de eso, las cuotas pagadas no son reembolsables salvo que la ley lo exija. La cancelación termina la elegibilidad para beneficios futuros.'],
+        ['¿Cómo cancelo mi membresía?', 'Contáctanos en cualquier momento. Con nuestra garantía de devolución del 100%, te devolvemos tu primer pago completo si lo pides dentro de los 30 días siguientes a ese pago y no se ha solicitado, recibido ni iniciado ningún beneficio. Después de eso, las cuotas pagadas no son reembolsables salvo que la ley lo exija. La cancelación termina la elegibilidad para beneficios futuros.'],
         ['¿Qué pasa si mi membresía queda inactiva durante un asunto?', 'Best Vision puede suspender o terminar la representación y los beneficios. Reactivar la membresía no restaura la cobertura de un asunto surgido mientras estaba inactiva.'],
         ['¿IRS Protect Plus cubre avisos de impuestos estatales?', 'IRS Protect Plus cubre asuntos federales elegibles del IRS. Para avisos de impuestos estatales, contacta directamente a Best Vision Accounting.']
       ],
@@ -200,10 +200,10 @@
 
     en: {
       nav_how: 'How it works', nav_plans: 'Membership', nav_coverage: 'Coverage', nav_faq: 'FAQ', faq_short: 'FAQ',
-      promo_label: 'Offer', promo_badge: 'First month free', promo_bar_b: 'Offer: your first month is free.', promo_bar: 'Then $19.99 a month. Cancel anytime.', promo_bar_cta: 'Start free',
-      cta_free: 'Start your free month', cta_free_short: 'Start free', price_promo: 'Your first month is free. After that, $19.99 a month.', offer_free_unit: 'first month', offer_then: 'Then', offer_note: 'Cancel anytime. If you cancel during your free month, you pay nothing.', promo_mini: 'First month free',
+      promo_label: 'Offer', promo_badge: 'First month free', promo_bar_b: 'Offer: your first month is free.', promo_bar: 'Then $19.99 a month. Cancel anytime.', promo_bar_cta: 'Claim your free month',
+      cta_free: 'Claim your free month now', cta_free_short: 'Claim free month', price_promo: 'Your first month is free. After that, $19.99 a month.', offer_free_unit: 'first month', offer_free: 'Free', offer_was_sr: 'Regular price:', offer_then: 'Then', offer_note: 'Cancel anytime. If you cancel during your free month, you pay nothing.', guarantee_badge: '100% money-back guarantee', guarantee_short: 'Not satisfied? We refund your first payment.', guarantee_terms: '100% money-back guarantee: we refund your first payment in full if you ask within 30 days of that payment and haven’t used any benefit.', card_req_t: 'A card on file is required', card_req_d: 'You pay nothing today. When your free month ends, we automatically charge your card $19.99 a month until you cancel. Cancel before then and you pay nothing.', promo_mini: 'First month free',
       stat_after_free: 'after your free first month', stat_month_promo: 'a month · first month free', promo_why: 'Your first month is free. Cancel before it ends and you pay nothing.',
-      cta: 'Get Protected', cta_short: 'Join', cta_join: 'Start your free month', per_month: '/month',
+      cta: 'Get Protected', cta_short: 'Join', cta_join: 'Claim your free month now', per_month: '/month',
       by_bva: 'by Best Vision Accounting', language: 'Language', skip: 'Skip to content', menu_open: 'Open menu', menu_close: 'Close menu',
       submit_notice_link: 'Submit a notice', contact: 'Contact us', help: 'Help center', agreement: 'Membership Agreement', terms: 'Terms of Service', privacy: 'Privacy Policy',
       from_price: 'First month free, then $19.99/mo', go_contact: 'Contact us', go_home: 'Back to home', optional: '(optional)',
@@ -229,10 +229,10 @@
       desc_accessibility: 'IRS Protect Plus accessibility commitment: WCAG 2.1 AA goal, what we have done, known limitations and how to get help.',
       cookies: 'Cookie Policy', refund: 'Refunds and Cancellation', accessibility: 'Accessibility',
       legal_cookies_title: 'Cookie Policy', legal_refund_title: 'Refund and Cancellation Policy', legal_accessibility_title: 'Accessibility Statement',
-      legal_updated_privacy: 'Last updated: October 9, 2026', legal_updated_terms: 'Last updated: October 29, 2026', legal_updated_cookies: 'Last updated: October 9, 2026', legal_updated_refund: 'Last updated: October 29, 2026', legal_updated_accessibility: 'Last updated: October 9, 2026',
+      legal_updated_privacy: 'Last updated: October 9, 2026', legal_updated_terms: 'Last updated: October 29, 2026', legal_updated_cookies: 'Last updated: October 9, 2026', legal_updated_refund: 'Last updated: November 13, 2026', legal_updated_accessibility: 'Last updated: October 9, 2026',
 
-      hero_title: 'The IRS is complicated. Your protection shouldn’t be.',
-      hero_sub: 'IRS Protect Plus is an IRS representation membership: the Best Vision Accounting team reviews your IRS letters, responds for you, and helps with eligible audits and collections.',
+      hero_title: 'Your first month of IRS protection is free.', hero_title_a: 'Your first month of IRS protection is ', hero_title_free: 'free', hero_title_end: '.',
+      hero_sub: 'Start today and pay nothing. The Best Vision Accounting team reviews your IRS letters, responds for you, and helps with eligible audits and collections. After that, just $19.99 a month; cancel anytime.',
       stat_rep: 'maximum in representation services', cancel_anytime: 'Cancel anytime.', hero_backed: 'Backed by Best Vision Accounting',
       hero_disclaimer: 'IRS Protect Plus is a membership program and is not insurance. Eligibility requirements, limitations and exclusions apply.',
       alt_hero: 'A smiling woman points at an IRS letter while holding an IRS envelope stamped Resolved, with a blue shield behind her',
@@ -265,7 +265,7 @@
         ['Examination and audit help', 'Assistance during IRS examinations or audits, with authorized professional representation.'],
         ['Collection and resolution', 'Assistance with eligible IRS collection or resolution matters.']
       ],
-      plans_note: 'The $10,000 represents the value of professional services provided by Best Vision Accounting, LLC. It is not a cash payment to the member and does not pay your tax bill. Cancel anytime; fees paid during the first 30 days may be refundable if no program benefit has been requested, received, or initiated.',
+      plans_note: 'The $10,000 represents the value of professional services provided by Best Vision Accounting, LLC. It is not a cash payment to the member and does not pay your tax bill. Cancel anytime; you’re covered by our 100% money-back guarantee: we refund your first payment in full if you ask within 30 days of that payment and no program benefit has been requested, received, or initiated.',
 
       coverage_title: 'How coverage works', coverage_sub: 'Clear rules, taken straight from the membership agreement.',
       rules_t: 'Coverage rules',
@@ -297,7 +297,7 @@
         ['Which tax years are covered?', 'Eligible matters for future tax years, with no fixed limit on the number of years, for as long as you keep your membership active and in good standing. Each matter qualifies when its first IRS notice is dated on or after your effective enrollment date.'],
         ['Who represents me before the IRS?', 'The Best Vision Accounting team. Representation may be provided by an Enrolled Agent (EA), a CPA, an attorney, or another professional authorized to represent you before the IRS for the matter.'],
         ['How does the free first month work?', 'You pay nothing when you enroll. Your membership and protection start on your effective enrollment date, just like a paid membership, so IRS notices dated from that day on can be eligible. When the first month ends, $19.99 is charged automatically and then every month until you cancel. If you cancel before the free month ends, you are not charged anything.'],
-        ['Can I cancel? What if I stop paying during a matter?', 'You can cancel at any time. Fees paid during the first 30 days may be refundable if you haven’t requested, received, or initiated a benefit; after that, paid fees are non-refundable except where required by law. If you cancel or your membership becomes inactive while we are handling a matter, Best Vision may discontinue the representation and other benefits.']
+        ['Can I cancel? What if I stop paying during a matter?', 'You can cancel at any time. With our 100% money-back guarantee, we refund your first payment in full if you ask within 30 days of that payment and haven’t requested, received, or initiated a benefit; after that, paid fees are non-refundable except where required by law. If you cancel or your membership becomes inactive while we are handling a matter, Best Vision may discontinue the representation and other benefits.']
       ],
 
       cta_title: 'Don’t wait for the letter. Get IRS protection in place today.', cta_sub: 'IRS Protect Plus · first month free, then $19.99 a month · cancel anytime',
@@ -321,11 +321,11 @@
       step_details: 'Your details', step_review: 'Review & confirm',
       details_title: 'Who are we protecting?', details_sub: 'Use the name exactly as it appears on your federal tax return.',
       review_title: 'Review and confirm', review_sub: 'Check your details and agree to the membership terms. Submitting accepts the agreement electronically.',
-      summary_plan: 'Membership', summary_price: 'Monthly fee', summary_name: 'Member', summary_email: 'Email', summary_phone: 'Phone', summary_zip: 'ZIP', summary_fs: 'Filing status', summary_start: 'Effective enrollment date', summary_total: 'Due today', summary_first_charge: 'First charge', first_charge_on: '$19.99 on {date}', billed_monthly: 'Your first month is free. Unless you cancel before it ends, your membership renews automatically and is billed $19.99 a month starting on your first charge date, until you cancel; if you cancel during the free month, you are not charged anything. You can cancel anytime by emailing info@bvaccounting.com or calling (305) 220-9616; cancelling stops future charges. Refunds: fees paid in the first 30 days may be refundable if no benefit has been requested, received or initiated.',
+      summary_plan: 'Membership', summary_price: 'Monthly fee', summary_name: 'Member', summary_email: 'Email', summary_phone: 'Phone', summary_zip: 'ZIP', summary_fs: 'Filing status', summary_start: 'Effective enrollment date', summary_total: 'Due today', summary_first_charge: 'First charge', first_charge_on: '$19.99 on {date}', billed_monthly: 'Your first month is free. Unless you cancel before it ends, your membership renews automatically and is billed $19.99 a month starting on your first charge date, until you cancel; if you cancel during the free month, you are not charged anything. You can cancel anytime by emailing info@bvaccounting.com or calling (305) 220-9616; cancelling stops future charges. 100% money-back guarantee: we refund your first payment in full if you ask within 30 days of that payment and no benefit has been requested, received or initiated.',
       agree_pre: 'I have read, understand and agree to the ', agree_mid: ', the ', agree_mid2: ' and the ', agree_post: '.',
       agree_notice: 'I understand that IRS Protect Plus is a membership program and not insurance; that only matters whose first IRS notice is dated on or after my effective enrollment date are eligible; and that I must remain active and in good standing throughout any covered matter to continue receiving benefits.',
       agree_billing: 'I understand my first month is free, and I authorize Best Vision Accounting, LLC to automatically charge the $19.99 membership fee every month starting when my free month ends, until I cancel.',
-      pay_btn: 'Continue to secure payment', request_btn: 'Submit enrollment', secure_note: 'Payment is processed securely. You can cancel anytime.',
+      pay_btn: 'Claim your free month now', request_btn: 'Claim your free month now', secure_note: 'Payment is processed securely. You can cancel anytime.',
       enroll_success_t: 'You’re almost protected!', enroll_success_b: 'Thanks, {name}. We received your enrollment in {plan}. A Best Vision Accounting team member will contact you at {email} to activate your membership.',
       enroll_redirect: 'Taking you to secure checkout…',
       your_plan: 'Your membership', includes: 'Includes',
@@ -358,7 +358,7 @@
       help_topics: [
         ['How do I submit an IRS notice?', 'Use the Submit a notice page. Upload a photo or PDF of every page, tell us the notice number and the date printed on it, and the Best Vision Accounting team takes it from there.'],
         ['How is my membership billed?', 'Your first month is free. After that, membership is billed monthly to your payment method on file: $19.99 a month. You can cancel anytime; if you cancel during the free month, you are not charged anything.'],
-        ['How do I cancel my membership?', 'Contact us anytime. Fees paid during the first 30 days may be refundable if no benefit has been requested, received, or initiated. After that, paid fees are non-refundable except where required by law. Cancellation ends eligibility for future benefits.'],
+        ['How do I cancel my membership?', 'Contact us anytime. With our 100% money-back guarantee, we refund your first payment in full if you ask within 30 days of that payment and no benefit has been requested, received, or initiated. After that, paid fees are non-refundable except where required by law. Cancellation ends eligibility for future benefits.'],
         ['What happens if my membership becomes inactive during a matter?', 'Best Vision may suspend or discontinue the representation and benefits. Reactivating the membership does not restore coverage for a matter that arose while it was inactive.'],
         ['Does IRS Protect Plus cover state tax notices?', 'IRS Protect Plus covers eligible federal IRS matters. For state tax notices, contact Best Vision Accounting directly.']
       ],
