@@ -85,12 +85,15 @@ window.SITE_CONFIG = {
      Masking to Strict: IRS notices and tax details must never be recorded. */
   clarityProjectId: 'z7g4as3shr',
 
-  /* TEMPORARY (A2P registration review): hide the phone-number capture fields
-     in the forms. true hides the fields and disables their inputs; set it back
-     to false and run the build to restore them. The notice form still submits:
-     while the field is hidden it sends the dashboard a "(not provided)" phone
-     placeholder (the dashboard requires one). */
-  hidePhoneCapture: true,
+  /* Phone-number capture in the forms. The A2P registration review that paused
+     it was approved on 2026-11-18, so the fields are shown again (the notice
+     form's phone is required, the contact form's is optional, and the enroll
+     form's is required so the number can prefill Stripe Checkout and tag the
+     lead in GoHighLevel). Set this back to true only if phone capture has to
+     pause again: it hides and disables every [data-phone-capture] field, and
+     the notice form then sends the dashboard a "(not provided)" placeholder.
+     Run the build after changing it. */
+  hidePhoneCapture: false,
 
   /* GoHighLevel / LeadConnector chat widget (the ID is in the widget's embed
      code). Blank = the widget is not loaded. */

@@ -157,3 +157,19 @@ idempotent (`v=db440f8418`). No `js/i18n.js` changes were needed — the keys
 (`step_details`, `details_title`, `details_sub`, `summary_name/email/phone`,
 `continue_btn`, `privacy_enroll`, `consent_phone`) already existed in both
 languages.
+
+# A2P approved — phone fields restored (2026-11-18)
+
+The A2P registration review is over, so `hidePhoneCapture` is back to `false`
+in `js/config.js` and the build shows the phone fields again:
+
+- **/enroll**: phone is required on the details step and travels with the
+  checkout request, so Stripe Checkout arrives prefilled with it and the
+  dashboard tags the GoHighLevel contact as an abandoned-checkout lead.
+- **/submit-notice**: phone is required and sent with the notice.
+- **/contact**: phone is optional and sent when filled.
+
+The switch stays as a kill switch: set `hidePhoneCapture: true` and rebuild to
+hide and disable every `[data-phone-capture]` field again (the notice form then
+sends the dashboard a "(not provided)" placeholder, which it requires). Build
+version: `v=142f16ec52`.
