@@ -34,8 +34,15 @@ window.SITE_CONFIG = {
     postalCode: '33165'
   },
 
-  /* The single membership offered. Shown in the enrollment summary. */
-  plan: { name: 'IRS Protect Plus', price: 19.99 },
+  /* The single membership offered. Shown in the enrollment summary.
+     freeMonths: promotional free period at the start of a new membership;
+     1 = "first month free". The build shows the promotion bar on every page,
+     the free-month hero/offer copy and the $0.00-due-today enrollment summary,
+     and the price schema tells search engines the first month is free. The
+     actual billing must match: the dashboard starts Stripe Checkout with the
+     same free period (STRIPE_TRIAL_DAYS there). Set it to 0 to end the
+     promotion, and edit the marketing copy in js/i18n.js that mentions it. */
+  plan: { name: 'IRS Protect Plus', price: 19.99, freeMonths: 1 },
 
   /* The IRS Protect Plus dashboard (also the member portal). Notices
      submitted on /submit-notice upload straight to it, privately, /enroll

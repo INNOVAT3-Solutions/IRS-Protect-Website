@@ -354,16 +354,31 @@
     form.addEventListener('input', function started() { track('enroll_start'); form.removeEventListener('input', started); });
     liveValidate(form);
     var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99 };
+    var freeMonths = Math.max(0, Number(plan.freeMonths) || 0);
     var lang = function () { return I ? I.lang : 'es'; };
     var btn = $('button[type="submit"]', form);
 
     function fmt(n) { return '$' + Number(n).toFixed(2); }
+    function longDate(d) { return d.toLocaleDateString(lang() === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }); }
+    /* First charge: the same day of the month after the free period (clamped to month end). */
+    function firstChargeDate() {
+      var d = new Date(); var day = d.getDate();
+      d.setDate(1); d.setMonth(d.getMonth() + freeMonths);
+      var last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+      d.setDate(Math.min(day, last)); return d;
+    }
     function updateSummary() {
       var set = function (k, v) { var el = $('[data-sum="' + k + '"]', form); if (el) el.textContent = v || '—'; };
       set('plan', plan.name);
       set('price', plan.price != null ? fmt(plan.price) + t('per_month') : '');
-      set('total', plan.price != null ? fmt(plan.price) : '');
-      set('start', new Date().toLocaleDateString(lang() === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+      set('start', longDate(new Date()));
+      /* While the free-month promotion runs, nothing is due today and the
+         summary shows when the first $19.99 charge happens. */
+      if (freeMonths && plan.price != null) {
+        set('total', fmt(0));
+        var next = $('.summary-next', form); if (next) next.hidden = false;
+        set('first_charge', t('first_charge_on', { date: longDate(firstChargeDate()) }));
+      }
     }
     /* The Checkout page's address, from the dashboard; the accepted terms go with the request. */
     function checkoutUrl() {

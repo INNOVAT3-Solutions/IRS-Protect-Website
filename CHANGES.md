@@ -52,9 +52,10 @@ connector could not access. Check it while logged in (list in the handoff).
 
 - `index.html`: "Who represents you" section with real credentialed staff (name,
   EA/CPA credential, photo). Only real people and credentials (Circular 230 §10.30).
-- `js/config.js`: `forms.endpoint`, `checkoutUrl` and `memberPortalUrl` are still blank.
-  Until a form endpoint is set, forms open the visitor's email app addressed to
-  info@bvaccounting.com.
+- `js/config.js`: `forms.endpoint` and `checkoutUrl` are blank because the
+  dashboard handles every form and the payment (`dashboardUrl`); the member
+  sign-in links open `memberPortalUrl`. (This paragraph was written on the SEO
+  branch, which had deleted the login page; the 2026-11-18 merge restored it.)
 - Legal name: Florida Sunbiz shows "Best Vision Accounting Corp"; the site uses
   "LLC" as confirmed. Worth confirming with the registered agent.
 - Yelp profile link for structured data, if you want it listed alongside Facebook and Instagram.
@@ -96,4 +97,33 @@ until cancelled. Cancelling during the trial means no charge.
 the dashboard changes the trial length, update `js/i18n.js` and the legal pages
 together and run the build. **Needs counsel review** (as with the other
 subscription/refund wording, see `COMPLIANCE.md`).
+
+# Marketing campaign on the dashboard-integrated site (2026-11-18)
+
+Production had been serving `seo/audit-20260929` since its preview was promoted
+to production in the Vercel UI on 2026-11-13. That branch forked from `main` on
+2026-10-09, so the promotion silently removed the 2026-10-27 → 2026-11-04
+dashboard connection: enrollment fell back to opening an email and notice
+uploads went nowhere. This branch merges both sides instead of rolling the
+campaign back:
+
+| Area | Merge decision | Files |
+| --- | --- | --- |
+| Campaign copy | Kept the Nov 13 free-first-month campaign: free-month hero/offer, "Claim your free month now" CTAs, promotion bar, card-on-file notice, 100% money-back guarantee, and the refund policy's guarantee wording (dated November 13). | `js/i18n.js`, `index.html`, `enroll.html`, `help.html`, `terms.html`, `refund-policy.html`, `css/site.css` |
+| Promotion switch | New `plan.freeMonths: 1` in the config drives the promotion bar, the JSON-LD free-month price specification, the share images and the $0.00-due-today enrollment summary with its computed first-charge date. Set it to 0 to end the promotion. | `js/config.js`, `js/site.js`, `scripts/build.mjs` |
+| Dashboard connection | Kept from `main`: enrollment through the dashboard's Stripe Checkout (`/api/checkout/session`), notice intake (one-file token → private Blob upload → `/api/intake/submissions`), contact intake, portal sign-in links and the `/login` page, Clarity, the GoHighLevel widget, the A2P `hidePhoneCapture` switch, the 25 MB / 10-file limits and `vendor/`. | `js/site.js`, `js/config.js`, `enroll.html`, `submit-notice.html`, `contact.html`, `login.html`, `vercel.json`, `vendor/` |
+| Login page | Restored (the SEO branch had deleted it and redirected `/login`). The header sign-in links on every page open the member portal. | `login.html`, `en/login.html`, all pages |
+| Generated pages | The build regenerated every page pair and its output is idempotent; all marketing text comes from `js/i18n.js`. The guide CTAs and Open Graph images carry the free-month wording. | `scripts/build.mjs`, `en/**`, `avisos-irs/**`, `assets/og/`, `sitemap.xml` |
+
+Verified before publishing: headless-browser checks of the ES and EN pages and
+of both dashboard flows (checkout POST + redirect, notice upload + schema-valid
+submission, contact intake) against stubbed endpoints, and the production
+dashboard's Stripe Checkout rendered "30 días gratis" with the same first-charge
+date the site computes.
+
+**Needs counsel review:** the campaign advertises a 100% money-back guarantee
+but `membership-agreement.html` was not amended (the Nov 13 commit said it
+"must be amended to match"). Amend the agreement or remove the claim; see
+`COMPLIANCE.md` section F.
+
 
