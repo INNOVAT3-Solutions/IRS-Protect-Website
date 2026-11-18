@@ -99,6 +99,17 @@ with `http://localhost:8000` in its `MARKETING_SITE_ORIGIN`).
 
 ## 4. Deploy
 
+Production deploys from `main`: open a pull request, run the build locally
+first if anything under `js/`, `css/`, `content/`, `scripts/` or a Spanish
+page changed, then merge. Vercel serves the committed files as they are (there
+is no build step on Vercel), so the build output must be committed.
+
+**Do not publish with Vercel's "Promote to production" on a branch preview.**
+On 2026-11-13 the `seo/audit-20260929` preview was promoted that way and
+replaced the dashboard-integrated site with an older branch; enrollment and
+notice intake fell back to email for days. See `CHANGES.md` (2026-11-18) and
+`HANDOFF.md` for the deployment rules.
+
 The site is deployed on Vercel from GitHub. `vercel.json` turns on clean
 URLs (`/enroll` instead of `/enroll.html`, with automatic redirects from the
 old addresses) and sets security and caching headers. `.vercelignore` keeps

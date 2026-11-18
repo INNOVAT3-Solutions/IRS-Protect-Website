@@ -90,6 +90,12 @@ authoritative summary. Items marked *unverified* could not be confirmed.
 
 ### F. Membership Agreement wording: **attorney**
 - §9: the 30-day refund window is now tied to fees paid after the free trial (the first charge); confirm that is the intended policy and state the exact refund mechanics.
+- **100% money-back guarantee (marketing campaign, 2026-11-13):** the homepage,
+  enrollment page, help answers and Refund Policy now advertise a 100% money-back
+  guarantee (first payment refunded in full if requested within 30 days of that
+  payment and no benefit used). `membership-agreement.html` §9 still describes the
+  older discretionary refund window; amend the agreement to match the guarantee
+  (or remove the guarantee claim) before relying on it.
 - §13: "dispute-resolution procedures agreed upon by the parties" names no procedure.
 - Legal name: Florida Sunbiz shows "Best Vision Accounting Corp"; the site says "LLC." Confirm.
 - Have the Spanish translations of all legal pages reviewed.

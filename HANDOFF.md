@@ -24,11 +24,19 @@ Commit the build output.
   3. At GoDaddy DNS, replace the apex A records with the value Vercel shows (usually `A @ 76.76.21.21`). Keep the `www` CNAME Vercel gives.
   4. Unpublish or disconnect the GoDaddy Website Builder site.
   5. Check that `https://irsprotect.us/` serves the Vercel site and that `https://www.irsprotect.us/` redirects to it.
-- [ ] **Merge the branch.** Merge `seo/audit-20260929` into the production
-      branch. Production has been deploying from `add-site-pages`, while
-      `main` is still the initial commit. Decide which one is production
-      going forward and set it in Vercel → Settings → Git.
-- [ ] **Check the preview, logged into Vercel**, before promoting:
+- [x] **Production branch is `main`.** Vercel → project `irs-protect-website` →
+      Settings → Git: production branch `main`, auto-assign production domains on.
+      Pushing/merging to `main` deploys production; that is the only supported
+      way to publish.
+- [ ] **Never publish with Vercel's "Promote to production" on a feature
+      branch.** On 2026-11-13 the `seo/audit-20260929` preview was promoted to
+      production and replaced the dashboard-integrated site for ~5 days:
+      `/enroll` fell back to an email request and `/submit-notice` uploaded
+      nothing. Marketing work must be merged into `main` and rebuilt (see the
+      2026-11-18 section in `CHANGES.md`).
+- [ ] **Check the preview, logged into Vercel**, before merging to `main`
+      (previews are behind Vercel Authentication; only the custom domains are
+      public):
   - `/enroll.html` redirects to `/enroll`
   - `/en` loads the English homepage
   - `/avisos-irs` and `/en/irs-notices` load
