@@ -383,6 +383,11 @@
       set('name', [value('first_name'), value('last_name')].filter(Boolean).join(' '));
       set('email', value('email'));
       set('phone', value('phone'));
+      /* Optional details: the ZIP typed on step 1 and the filing status's
+         visible label (the empty option leaves both rows as '—'). */
+      set('zip', value('zip'));
+      var fs = form.querySelector('select[name="filing_status"]');
+      set('fs', fs && fs.value ? fs.options[fs.selectedIndex].textContent : '');
       /* While the free-month promotion runs, nothing is due today and the
          summary shows when the first $19.99 charge happens. */
       if (freeMonths && plan.price != null) {
@@ -408,7 +413,9 @@
     }
     /* The Checkout page's address, from the dashboard; the accepted terms and
        the details typed on step 1 go with the request so Stripe prefills the
-       contact fields. Empty optional fields are left out. */
+       contact fields and the dashboard saves the lead's ZIP and filing status
+       (the dashboard's field names: zip, filingStatus, with the code as its
+       value). Empty optional fields are left out. */
     function checkoutUrl() {
       var base = dashboardUrl();
       if (!base) return Promise.reject({ code: 'unavailable' });
@@ -417,6 +424,9 @@
       var last = value('last_name'); if (last) body.lastName = last;
       var email = value('email'); if (email) body.email = email;
       var phone = value('phone'); if (phone) body.phone = phone;
+      var zip = value('zip'); if (zip) body.zip = zip;
+      var fs = form.querySelector('select[name="filing_status"]');
+      if (fs && fs.value) body.filingStatus = fs.value;
       return fetch(base + '/api/checkout/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
         /* No answer at all -- offline, or a crash whose reply carried no CORS header. */
         .catch(function () { throw { code: 'network' }; })
