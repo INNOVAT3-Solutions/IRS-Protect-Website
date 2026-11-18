@@ -339,13 +339,15 @@
     return /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:3000' : (C.dashboardUrl || '');
   }
 
-  /* ---- Enrollment: accept the terms, then pay on Stripe's page ----
-     Step 1 shows the 30-day free trial, the price after it, auto-renewal and
-     the cancellation terms with three required boxes. Continuing asks the
-     dashboard for a Stripe Checkout page in the visitor's language and goes
-     there; Stripe collects the card details and starts the trial, and the
-     dashboard creates the member when checkout completes (no charge until the
-     trial ends). Stripe sends the visitor back here with ?checkout=success or
+  /* ---- Enrollment: details, review, then pay on Stripe's page ----
+     Step 1 asks who the membership protects. Step 2 shows those details and
+     the 30-day free trial, the price after it, auto-renewal and the
+     cancellation terms with three required boxes. Continuing asks the
+     dashboard for a Stripe Checkout page in the visitor's language -- passing
+     the details along so Stripe prefills them -- and goes there; Stripe
+     collects the card details and starts the trial, and the dashboard creates
+     the member when checkout completes (no charge until the trial ends).
+     Stripe sends the visitor back here with ?checkout=success or
      ?checkout=canceled. */
   var CHECKOUT_ERRORS = { rate_limited: 'err_notice_busy', checkout_unavailable: 'checkout_unavailable', origin_not_allowed: 'checkout_unavailable', unavailable: 'checkout_unavailable' };
 
@@ -353,10 +355,11 @@
     var form = document.getElementById('enroll-form'); if (!form) return;
     form.addEventListener('input', function started() { track('enroll_start'); form.removeEventListener('input', started); });
     liveValidate(form);
+    var panels = $$('.step-panel', form); var steps = $$('.steps .step', form); var cur = 0;
     var plan = C.plan || { name: 'IRS Protect Plus', price: 19.99 };
     var freeMonths = Math.max(0, Number(plan.freeMonths) || 0);
     var lang = function () { return I ? I.lang : 'es'; };
-    var btn = $('button[type="submit"]', form);
+    var btn = $('[data-submit]', form) || $('button[type="submit"]', form);
 
     function fmt(n) { return '$' + Number(n).toFixed(2); }
     function longDate(d) { return d.toLocaleDateString(lang() === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' }); }
@@ -367,11 +370,19 @@
       var last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
       d.setDate(Math.min(day, last)); return d;
     }
+    function value(name) {
+      var input = form.querySelector('[name="' + name + '"]');
+      return input && (input.value || '').trim() || '';
+    }
     function updateSummary() {
       var set = function (k, v) { var el = $('[data-sum="' + k + '"]', form); if (el) el.textContent = v || '—'; };
       set('plan', plan.name);
       set('price', plan.price != null ? fmt(plan.price) + t('per_month') : '');
       set('start', longDate(new Date()));
+      /* Who the membership protects: the details typed on step 1. */
+      set('name', [value('first_name'), value('last_name')].filter(Boolean).join(' '));
+      set('email', value('email'));
+      set('phone', value('phone'));
       /* While the free-month promotion runs, nothing is due today and the
          summary shows when the first $19.99 charge happens. */
       if (freeMonths && plan.price != null) {
@@ -380,11 +391,33 @@
         set('first_charge', t('first_charge_on', { date: longDate(firstChargeDate()) }));
       }
     }
-    /* The Checkout page's address, from the dashboard; the accepted terms go with the request. */
+    /* One panel at a time. Step 3 (payment) has no panel: it happens on Stripe. */
+    function show(i) {
+      cur = i;
+      panels.forEach(function (p, idx) { p.hidden = idx !== i; });
+      steps.forEach(function (s, idx) {
+        s.classList.toggle('is-active', idx === i); s.classList.toggle('is-done', idx < i);
+        if (idx === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current');
+      });
+      if (i > 0) {
+        updateSummary();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var focusable = $('input:not([type=hidden]):not([type=checkbox]), select, textarea', panels[i]) || $('button', panels[i]);
+        if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 350);
+      }
+    }
+    /* The Checkout page's address, from the dashboard; the accepted terms and
+       the details typed on step 1 go with the request so Stripe prefills the
+       contact fields. Empty optional fields are left out. */
     function checkoutUrl() {
       var base = dashboardUrl();
       if (!base) return Promise.reject({ code: 'unavailable' });
-      return fetch(base + '/api/checkout/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lang: lang(), consent: true }) })
+      var body = { lang: lang(), consent: true };
+      var first = value('first_name'); if (first) body.firstName = first;
+      var last = value('last_name'); if (last) body.lastName = last;
+      var email = value('email'); if (email) body.email = email;
+      var phone = value('phone'); if (phone) body.phone = phone;
+      return fetch(base + '/api/checkout/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
         /* No answer at all -- offline, or a crash whose reply carried no CORS header. */
         .catch(function () { throw { code: 'network' }; })
         .then(function (r) {
@@ -395,9 +428,18 @@
         });
     }
 
+    $$('[data-next]', form).forEach(function (b) {
+      b.addEventListener('click', function () { hideAlert(form); if (validateScope(panels[cur])) show(cur + 1); });
+    });
+    $$('[data-prev]', form).forEach(function (b) {
+      b.addEventListener('click', function () { hideAlert(form); show(cur - 1); });
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault(); hideAlert(form);
-      if (!validateScope(form)) return;
+      if (!validateScope(panels[cur])) return;
+      /* Pressing Enter on step 1 reviews the details instead of paying. */
+      if (cur < panels.length - 1) { show(cur + 1); return; }
       setBusy(btn, true);
       btn.innerHTML = '<span class="spinner" aria-hidden="true"></span>' + esc(t('enroll_redirect'));
       checkoutUrl()
@@ -420,6 +462,7 @@
     }
 
     document.addEventListener('langchange', updateSummary);
+    show(0);
     updateSummary();
   }
 
