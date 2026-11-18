@@ -127,3 +127,33 @@ but `membership-agreement.html` was not amended (the Nov 13 commit said it
 `COMPLIANCE.md` section F.
 
 
+
+# Member details step before payment (2026-11-18)
+
+The enroll page asks for the member's details before payment again (the
+dashboard integration had moved them onto Stripe's page): step 1 `Tus datos`
+collects first name, last name, email and — when the temporary A2P phone-capture
+switch is off — phone; step 2 `Revisar y confirmar` shows those details in the
+summary with the trial/price/first-charge rows and the three consent boxes;
+step 3 `Pago` is Stripe's page, which the dashboard creates.
+
+The checkout request now carries the details:
+
+```json
+{ "lang": "es", "consent": true, "firstName": "Ana", "lastName": "Pérez", "email": "ana@example.com" }
+```
+
+(plus `"phone"` when the field is shown and filled; empty optional fields are
+omitted). The dashboard's `api/checkout/session` turns them into a Stripe
+customer and passes it to Checkout, so email, full name and phone arrive
+prefilled and editable there. The prefill is best-effort on the dashboard side:
+a Stripe failure never blocks the sale, and the visitor just types the details
+on Stripe's page. While `hidePhoneCapture` is on, the phone field is hidden and
+absent from the request (same A2P switch as the other forms); when the review
+ends, set it to false and rebuild.
+
+Files: `enroll.html`, `js/site.js`, generated `en/**` pages. Build is
+idempotent (`v=db440f8418`). No `js/i18n.js` changes were needed — the keys
+(`step_details`, `details_title`, `details_sub`, `summary_name/email/phone`,
+`continue_btn`, `privacy_enroll`, `consent_phone`) already existed in both
+languages.
